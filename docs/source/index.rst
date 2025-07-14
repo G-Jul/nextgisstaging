@@ -1,5 +1,3 @@
-:html_theme.sidebar_secondary.remove:
-
 Welcome to NextGIS documentation!
 ===================================
 
