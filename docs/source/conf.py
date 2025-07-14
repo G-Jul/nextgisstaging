@@ -33,14 +33,13 @@ html_theme = 'furo'
 
 html_theme_options = {
     "light_css_variables": {
-        "color-brand-primary": "#7C4DFF",
+        "color-brand-primary": "#0c65af",
         "color-brand-content": "#7C4DFF",
         "color-header-background": "#0c65af",
         "color-header-text": "#FFFFFF",
-        "color-sidebar-background": "#0c65af",
-        "color-sidebar-brand-text": "#FFFFFF",
-        "color-sidebar-caption-text": "#404040",
-        "color-sidebar-link-text": "#999797"
+        "color-sidebar-background": "#bcd3e6",
+        "color-sidebar-brand-text": "#0c65af",
+
     },
 }
 
