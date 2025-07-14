@@ -42,6 +42,7 @@ html_theme_options = {
         "color-sidebar-background": "#bcd3e6",
         "color-sidebar-brand-text": "#0c65af",
     },
+    'display_version': False
 }
 
 # -- Options for EPUB output
