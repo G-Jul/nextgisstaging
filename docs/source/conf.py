@@ -27,7 +27,7 @@ intersphinx_disabled_domains = ['std']
 
 templates_path = ['_templates']
 
-#html_additional_pages = {"index": "homepage2.html"}
+html_additional_pages = {"index": "homepage2.html"}
 
 # -- Options for HTML output
 
