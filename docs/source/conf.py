@@ -41,7 +41,6 @@ extensions = [
     'sphinx.ext.imgmath',
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
-    'edit_on_github',
     # 'javasphinx',
     #'swift_domain',
     'kotlin_domain',
