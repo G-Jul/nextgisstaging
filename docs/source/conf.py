@@ -36,8 +36,10 @@ html_theme_options = {
         "color-brand-primary": "#7C4DFF",
         "color-brand-content": "#7C4DFF",
         "color-header-background": "#0c65af",
-        "color-toc-background": "#0c65af",
-        "color-toc-title-text": "#FFFFFF"
+        "color-header-text": "#FFFFFF",
+        "color-sidebar-background": "#0c65af",
+        "color-sidebar-brand-text": "#FFFFFF"
+
     },
 }
 
