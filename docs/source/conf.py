@@ -1,4 +1,4 @@
-t# Configuration file for the Sphinx documentation builder.
+# Configuration file for the Sphinx documentation builder.
 
 # -- Project information
 
