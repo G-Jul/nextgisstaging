@@ -43,7 +43,7 @@ extensions = [
     'sphinx.ext.viewcode',
     # 'javasphinx',
     #'swift_domain',
-    'kotlin_domain',
+    #'kotlin_domain',
     #'sphinxcontrib.spelling',
 ]
 
