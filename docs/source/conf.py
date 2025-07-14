@@ -35,7 +35,9 @@ html_theme_options = {
     "light_css_variables": {
         "color-brand-primary": "#7C4DFF",
         "color-brand-content": "#7C4DFF",
-        "color-header-background": "#cec2f0"
+        "color-header-background": "#0c65af",
+        "color-toc-background": "#0c65af",
+        "color-toc-title-text": "#FFFFFF"
     },
 }
 
