@@ -27,6 +27,8 @@ intersphinx_disabled_domains = ['std']
 
 templates_path = ['_templates']
 
+html_additional_pages = {"index": "homepage.html"}
+
 # -- Options for HTML output
 
 html_theme = 'furo'
