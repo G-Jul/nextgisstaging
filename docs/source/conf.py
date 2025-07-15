@@ -26,7 +26,7 @@ intersphinx_mapping = {
 intersphinx_disabled_domains = ['std']
 
 templates_path = ['_templates']
-#html_additional_pages = {"index": "index_rtd.html"}
+html_additional_pages = {"index": "index_rtd.html"}
 
 # -- Options for HTML output
 
