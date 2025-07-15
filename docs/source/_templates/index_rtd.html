@@ -12,36 +12,67 @@
 
   <style>
 
-
-body {
-  border: 0px;
-  margin-top: 100px;
-  margin-bottom: 100px;
-  margin-right: 150px;
-  margin-left: 80px;
-  background-color: white;
-}
-
 header {
     margin-top: 0px;
     position: sticky;
     top: 0;
-    padding-top: 50px;
+    padding-top: 20px;
     padding-right: 30px;
-    padding-bottom: 50px;
+    padding-bottom: 20px;
     padding-left: 80px;
     text-align: center;
     background-color: #0c65af;
     color: white;
     font-weight: bold;
-    font-family: 'Roboto Slab';
+    font-family: Lato, sans-serif;
     overflow: auto;
     
 }
 
+body {
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+footer {
+    padding-left: 10px;
+    background-color: #d8e5f0;
+    position: absolute;
+    margin-bottom: 0;
+    width: 100vw;
+}
+
+h1 {
+    font-family: 'Roboto Slab';
+}
+
 p {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Lato, sans-serif;
     font-size: 18px;
+}
+
+section {
+    font-family: Lato, sans-serif;
+    padding-top: 10px;
+    padding-right: 100px;
+    padding-left: 100px;
+    padding-bottom: 20px;
+}
+
+
+td {
+    padding:10px;
+}
+
+th {
+    padding:10px;
+    font-size:20px;
+}
+
+a {
+  color: #0c65af;
+  text-decoration: none;
 }
 </style>
 
@@ -50,33 +81,42 @@ p {
 </header>
 
 <body>
-    <p></p>
-    <p>This is body.</p> 
-    <p>Div added.</p> 
-    <p>Page navigation removed.</p> 
-    <p>Footer added. wy-nav-content removed. table added</p>
-    <p>added p tag, align center, width not working for div</p>
-    <p>add margin</p>
-    <p>remove top part</p>
-    <p>add body css</p>
-    <p>add header</p>
-    <p>header edit. now bold</p>
-    <p>fonts, try roboto, exchange</p>
-    <p>overflow</p>
-</body>
 
-
-
-
-    <div align="center" margin-left="100px">
-             
-<section id="contents">
-    <h1>Welcome to NextGIS<a class="headerlink" href="#contents" title="Permalink to this heading"></a></h1>
+           
+<section id="main">
+    <h1>Welcome to NextGIS</h1>
     <hr/>
     <p>Here is where we test the themes and other cool features to make our documentation easier to use!</p>
 </section>
 
 <section>
+    <h1>Мне нужно...</h1>
+
+       <table>
+     <tbody>
+       <tr>
+         <td style="border: 2px outset rgb(255, 255, 255);"><div><a href="https://docs.nextgis.ru/docs_ngcom/source/index.html"><b>Знакомство с платформой</b><br>Регистрация, первые шаги<br></a></div></td>
+         <td style="border: 2px outset rgb(255, 255, 255);"><div><a href="https://docs.nextgis.ru/docs_ngcom/source/tracking.html"><b>Треки</b><br>Отслеживать местоположение, записывать перемещения<br><font color=#ffffff>...</font><br> </a></div></td>
+       </tr>
+       <tr>
+         <td style="border: 2px outset rgb(255, 255, 255);"><div><a href="https://docs.nextgis.ru/docs_ngweb/source/general.html"><b>Веб ГИС</b><br>Хранить, организовывать и публиковать геоданные через веб-карты и сервисы<br><font color=#ffffff>...</font><br> </a></div></td>
+         <td style="border: 2px outset rgb(255, 255, 255);"><div><a href="https://docs.nextgis.ru/docs_ngcom/source/collector.html"><b>Сбор данных</b><br>формы сбора данных, работа оффлайн<br> </a></div></td>
+       </tr>
+       <tr>
+         <td style="border: 2px outset rgb(255, 255, 255);"><div><a href="https://docs.nextgis.ru/docs_ngcom/source/ngqgis_connect.html"><b>QGIS</b><br>Редактирование, загрузка в Веб ГИС, подключение сервисов<br> </a></div></td>
+         <td style="border: 2px outset rgb(255, 255, 255);"><div><a href="https://docs.nextgis.ru/docs_geoservices/source/basemap_tiles.html"><b>Кастомные подложки</b><br>Создавайте, настраивайте, подключайте на веб-карты и в приложения<br><font color=#ffffff>...</font><br> </a></div></td>
+       </tr>
+       <tr>
+         <td style="border: 2px outset rgb(255, 255, 255);"><div><a href="https://data.nextgis.com/ru/howto/order/"><b>Данные</b><br>Закажите геоданные для ваших проектов</a></div></td>
+         <td style="border: 2px outset rgb(255, 255, 255);"><div><b>Мигрировать с других платформ</b><br>Поможем перейти с <a href="https://nextgis.ru/services/arcgis-to-nextgis/">ArcGIS</a>, <a href="https://nextgis.ru/services/mapinfo-to-nextgis/">MapInfo</a>, <a href="https://nextgis.ru/services/geomixer-to-nextgis/">GeoMixer</a><br></div></td>
+       </tr>
+     </tbody>
+   </table>
+</section>
+
+<section>
+    <h1>Подробные руководства ПО</h1>
+    <h2>Пользователям</h2>
   <table align=center style="border: rgb(255, 255, 255);">
 	  <tr>
 		<th colspan="3">Онлайн-сервисы</th>
@@ -121,26 +161,64 @@ p {
 	  </tr>
 	</table>
 </section>
+<section>
+    <h2>Разработчикам</h2>
 
+   <table align=center>
+     <tbody>
+       <tr>
+         <td><div align = center><a href="https://docs.nextgis.ru/docs_ngweb_dev/doc/toc.html"><img src="http://nextgis.com/wp-content/uploads/2015/02/NGCloud_logo.png" alt="" width="45" height="45"><br>NextGIS&nbsp;Web</a></div></td>
+         <td><font color=#ffffff>...</font></td>
+         <td><div align = center><a href="https://docs.nextgis.ru/qms_srv_dev/doc/api.html"><img src="https://nextgis.ru/wp-content/uploads/2015/02/QMS_logo.png" alt="" width="45" height="45"><br>NextGIS QMS&nbsp;Service&nbsp;API</a></div></td>
+         <td><font color=#ffffff>...</font></td>
+         <td><div align = center><a href="https://docs.nextgis.ru/ngmobile_dev/source/toc.html"><img src="https://nextgis.ru/wp-content/uploads/2015/02/ngm_45.png" alt="" width="45" height="45"><br>NextGIS Mobile</a></div></td>
+       </tr>
+       <tr><td colspan="5"><font color=#ffffff>...</font></td></tr>
+       <tr>
+         <td><div align = center><a href="https://docs.nextgis.ru/docs_formbuilder_dev/doc/toc.html"><img width="45" height="45" src="https://nextgis.ru/wp-content/uploads/2015/02/NGFormbuilder_logo_45.png" alt="NGFormbuilder"><br>NextGIS Formbuilder</a></div></td>
+         <td><font color=#ffffff>...</font></td>
+         <td><div align = center><a href="https://docs.nextgis.ru/tracker_hub_dev/source/main.html"><img src="https://nextgis.ru/wp-content/uploads/2025/01/ngtracker_logo.png" alt="NGTracker_logo" width="45" height="45"><br>NextGIS Tracker&nbsp;Hub</a></div></td>
+         <td><font color=#ffffff>...</font></td>
+         <td><div align = center><a href="https://docs.nextgis.ru/docs_ngwdocker/doc/index.html"><img src="http://nextgis.com/wp-content/uploads/2015/02/NGWeb_logo.png" alt="" width="45" height="45"><br>NextGIS&nbsp;Docker</a></div></td>
+       </tr>
+       </tr>
+     </tbody>
+   </table>
+</section>
+
+<section id="versions">
+
+    <h1>Log</h1>
+    <p>This is body.</p> 
+    <p>Div added.</p> 
+    <p>Page navigation removed.</p> 
+    <p>Footer added. wy-nav-content removed. table added</p>
+    <p>added p tag, align center, width not working for div</p>
+    <p>add margin</p>
+    <p>remove top part</p>
+    <p>add body css</p>
+    <p>add header</p>
+    <p>header edit. now bold</p>
+    <p>fonts, try roboto, exchange</p>
+    <p>overflow</p>
+    <p>contents + css</p>
+</section>
+
+</body>
 
 <footer>
 
-  <hr/>
+    <hr/>
 
-  <div role="contentinfo">
     <p>&#169; Copyright .</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <p>Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.</p>
    
 
 </footer>
-        </div>
-      </div>
-    </section>
-  </div>
+
+
   <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
