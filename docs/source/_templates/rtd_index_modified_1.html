@@ -7,7 +7,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NextGIS 1.12 documentation</title>
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-
+  <style>
+    body {
+      --color-code-background: #f8f8f8;
+    --color-code-foreground: black;
+    --color-brand-primary: #0c65af;
+    --color-brand-content: #7C4DFF;
+    --color-header-background: #0c65af;
+    --color-header-text: #FFFFFF;
+    --color-sidebar-background: #bcd3e6;
+    --color-sidebar-brand-text: #0c65af;
+    
+    }
+    @media not print {
+      body[data-theme="dark"] {
+        --color-code-background: #202020;
+    --color-code-foreground: #d0d0d0;
+    
+      }
+      @media (prefers-color-scheme: dark) {
+        body:not([data-theme="light"]) {
+          --color-code-background: #202020;
+    --color-code-foreground: #d0d0d0;
+    
+        }
+      }
+    }
+  </style>
 </head>
 
 
