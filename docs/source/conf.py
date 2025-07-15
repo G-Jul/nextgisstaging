@@ -44,8 +44,6 @@ html_theme_options = {
         "color-header-text": "#FFFFFF",
         "color-sidebar-background": "#bcd3e6",
         "color-sidebar-brand-text": "#0c65af",
-        "font-size--normal": 25px;
-        "admonition-font-size" 20px:
     },
 }
 
