@@ -29,6 +29,9 @@ templates_path = ['_templates']
 
 html_additional_pages = {"index": "index_modified.html"}
 
+html_static_path = ['_static']
+html_css_files = ['styles/styles.css']
+
 # -- Options for HTML output
 
 html_theme = 'furo'
