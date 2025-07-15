@@ -1,0 +1,6 @@
+    @media (min-width: 97em) {
+      :root {
+        --font-stack: 16px; /* Example: Set base font size to 16px */
+        --font-stack--monospace: 14px; /* Example: Set monospace font size to 14px */
+      }
+    }
