@@ -8,7 +8,6 @@ This part has a hint
 ----------------------
 
 .. warning:: A hint
-   :collapsible: closed
 
    This is a hint
 
