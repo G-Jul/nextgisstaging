@@ -50,7 +50,7 @@ How to enable Web Map annotations?
 
 You can enable creation of annotations and set the display options in the Settings tab of the "Create resource" or "Update resource" windows for the Web Map (see :ref:`Update resource <ngw_update_resource>`). By default the annotation tool is inactive.
 
-.. figure:: _static/ann_settings_eng_3.png
+.. figure:: _static/ann_settings_en.png
    :name: ann_settings
    :align: center
    :width: 16cm
