@@ -1,3 +1,12 @@
+Тестовая ветка для нового дизайна
+==================================
+
+Ветка new_design - копия ветки rtd. 
+Загружены шрифты: Lato-Bold, Lato-Regular, RobotoSlab-Bold, RobotoSlab-Regular
+
+Пример внутренней страницы - annotation.rst
+
+
 Template for the Read the Docs tutorial
 =======================================
 
