@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title|striptags|e }} - {{ docstitle|e }}</title>
+    <link rel="stylesheet" href="{{ pathto('_static/homepage.css', 1) }}?v={{ build_time|default(1) }}">
+    <link rel="stylesheet" href="{{ pathto('_static/custom.css', 1) }}?v={{ build_time|default(1) }}">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+</head>
+<body class="homepage">
+    <nav class="left-nav" id="leftNav">
+        <div class="left-nav-content">
+            {{ toctree(maxdepth=3, collapse=False, includehidden=True) }}
+        </div>
+    </nav>
+
+    <div class="homepage-wrapper">
+        <header class="homepage-header">
+            <div class="header-container">
+                <div class="header-left">
+
+                    <a  class="logo-link-main" href="{{ pathto('index.html', 1) }}">
+                        <img src="{{ pathto('_static/images/logo.svg', 1) }}" alt="NextGIS" class="logo">
+                        <span>NextGIS</span>
+                    </a>
+                    <a href="#" class="logo-link">
+                        <span class="logo-text">Документация</span>
+                        <span class="dropdown-arrow"><img src="{{ pathto('_static/icons/arrow_down_for_nav.svg', 1) }}" alt=""></span>
+                    </a>
+                </div>
+                <div class="header-right">
+                    <div class="search-container">
+                        <img src="{{ pathto('_static/icons/search-icon.svg', 1) }}" alt="Поиск" class="search-icon">
+                        <input type="search" placeholder="Поиск по документации..." class="search-input">
+                    </div>
+                    <button class="btn-login">Войти</button>
+                    <button class="burger-menu-toggle" id="burgerToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="homepage-main">
+            <section class="section section-need" id="section-need">
+                <h1 class="section-title">Мне нужно...</h1>
+                <p class="section-subtitle">Выберите то, что вам сейчас необходимо, чтобы быстро найти нужную информацию.</p>
+                <div class="cards-grid cards-type-1">
+                    <div class="card card-type-1">
+                        <div class="card-icon">
+                            <img src="{{ pathto('_static/icons/card-icon_play_button.svg', 1) }}" alt="">
+                        </div>
+                        <div class="card-type-1-text">
+                            <h3 class="card-title">Начало работы с платформой</h3>
+                            <p class="card-description">Быстрый старт с NextGIS платформой</p>
+                        </div>
+                    </div>
+                    <div class="card card-type-1">
+                        <div class="card-icon">
+                            <img src="{{ pathto('_static/icons/card-icon_question_sign.svg', 1) }}" alt="">
+                        </div>
+                        <div class="card-type-1-text">
+                        <h3 class="card-title">Самые частые вопросы</h3>
+                        <p class="card-description">Ответы на популярные вопросы</p>
+                        </div>
+                        
+                    </div>
+                    <div class="card card-type-1">
+                        <div class="card-icon">
+                            <img src="{{ pathto('_static/icons/card-icon_book.svg', 1) }}" alt="">
+                        </div>
+                        <div class="card-type-1-text">
+                            <h3 class="card-title">Подробные юзергиды по ПО</h3>
+                            <p class="card-description">Пошаговые инструкции по всем продуктам</p>
+                        </div>
+
+                    </div>
+                    <div class="card card-type-1">
+                        <div class="card-icon">
+                            <img src="{{ pathto('_static/icons/card-icon_map.svg', 1) }}" alt="">
+                        </div>
+                        <div class="card-type-1-text">
+                            <h3 class="card-title">Хранение и публикация геоданных</h3>
+                            <p class="card-description">Всё о работе с веб-картами и геоданными</p>
+                        </div>
+                        
+                    </div>
+                    <div class="card card-type-1">
+                        <div class="card-icon">
+                            <img src="{{ pathto('_static/icons/card-icon_pencil.svg', 1) }}" alt="">
+                        </div>
+                        <div class="card-type-1-text">
+                            <h3 class="card-title">Интеграция QGIS и Веб ГИС</h3>
+                        <p class="card-description">Связывание настольного и веб-приложения</p>
+                        </div>
+                        
+                    </div>
+                    <div class="card card-type-1">
+                        <div class="card-icon">
+                            <img src="{{ pathto('_static/icons/card-icon_papper_plane.svg', 1) }}" alt="">
+                        </div>
+                        <div class="card-type-1-text">
+                        <h3 class="card-title">Трекинг</h3>
+                        <p class="card-description">Отслеживание объектов на карте по GPS</p>
+                        </div>
+
+                    </div>
+                    <div class="card card-type-1">
+                        <div class="card-icon">
+                            <img src="{{ pathto('_static/icons/card-icon_location_marker.svg', 1) }}" alt="">
+                        </div>
+                        <div class="card-type-1-text">
+                            <h3 class="card-title">Сбор данных</h3>
+                        <p class="card-description">Мобильное приложение для сбора данных</p>
+                        </div>
+                        
+                    </div>
+                    <div class="card card-type-1">
+                        <div class="card-icon">
+                            <img src="{{ pathto('_static/icons/card-icon_cube.svg', 1) }}" alt="">
+                        </div>
+                            <div class="card-type-1-text">
+                                <h3 class="card-title">Автономные базовые карты</h3>
+                        <p class="card-description">Развёртывание карт на собственном сервере</p>
+                            </div>
+                            
+                        
+                    </div>
+                    <div class="card card-type-1">
+                        <div class="card-icon">
+                            <img src="{{ pathto('_static/icons/card-icon_geodata_package.svg', 1) }}" alt="">
+                        </div>
+                        <div class="card-type-1-text">
+                        <h3 class="card-title">Наборы геоданных</h3>
+                        <p class="card-description">Получение пространственных данных</p>
+                        </div>
+
+                    </div>
+                    <div class="card card-type-1">
+                        <div class="card-icon">
+                            <img src="{{ pathto('_static/icons/card-icon_platform_migration.svg', 1) }}" alt="">
+                        </div>
+                        <div class="card-type-1-text">
+                        <h3 class="card-title">Миграция с других платформ</h3>
+                        <p class="card-description">Переход на NextGIS с других систем</p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section class="section section-guides" id="section-guides">
+                <h2 class="section-title">Подробные юзергиды по ПО и сервисам</h2>
+                <p class="section-subtitle">Выберите продукт для получения подробных инструкций и документации.</p>
+                
+                <div class="subsection" id="subsection-users">
+                    <h3 class="subsection-title">
+                        <img src="{{ pathto('_static/icons/subheader-icon_screen_for_users.svg', 1) }}" alt="">
+                        Для пользователей</h3>
+                    <div class="cards-grid cards-type-2">
+                        <div class="card card-type-2">
+                            <div class="card-icon-small">
+                                <img src="{{ pathto('_static/icons/card-icon-large_web.svg', 1) }}" alt="">
+                            </div>
+                            <h4 class="card-title">NextGIS Web</h4>
+                            <div class="card-tags">
+                                <span class="tag">Веб</span>
+                                <span class="tag">Серверные</span>
+                            </div>
+                            <p class="card-par">Платформа для карт и геоданных</p>
+                        </div>
+                        <div class="card card-type-2">
+                            <div class="card-icon-small">
+                                <img src="{{ pathto('_static/icons/card-icon-large_toolbox.svg', 1) }}" alt="">
+                            </div>
+                            <h4 class="card-title">NextGIS Toolbox</h4>
+                            <div class="card-tags">
+                                <span class="tag">Веб</span>
+                                <span class="tag">Серверные</span>
+                            </div>
+                            <p class="card-par">Инструменты геообработки</p>
+                        </div>
+                        <div class="card card-type-2">
+                            <div class="card-icon-small">
+                                <img src="{{ pathto('_static/icons/card-icon-large_geoservices.svg', 1) }}" alt="">
+                            </div>
+                            <h4 class="card-title">NextGIS GeoServices</h4>
+                            <div class="card-tags">
+                                <span class="tag">Веб</span>
+                                <span class="tag">Серверные</span>
+                            </div>
+                            <p class="card-par">Автономные базовые карты</p>
+                        </div>
+                        <div class="card card-type-2">
+                            <div class="card-icon-small">
+                                <img src="{{ pathto('_static/icons/card-icon-large_data.svg', 1) }}" alt="">
+                            </div>
+                            <h4 class="card-title">NextGIS Data</h4>
+                            <div class="card-tags">
+                                <span class="tag">Веб</span>
+                                <span class="tag">Данные</span>
+                            </div>
+                            <p class="card-par">Наборы пространственных данных</p>
+                        </div>
+                        <div class="card card-type-2">
+                            <div class="card-icon-small">
+                                <img src="{{ pathto('_static/icons/card-icon-large-qgis.svg', 1) }}" alt="">
+                            </div>
+                            <h4 class="card-title">NextGIS QGIS</h4>
+                            <div class="card-tags">
+                                <span class="tag">Настольные</span>
+                            </div>
+                            <p class="card-par">Отечественная ГИС с расширениями</p>
+                        </div>
+                        <div class="card card-type-2">
+                            <div class="card-icon-small">
+                                <img src="{{ pathto('_static/icons/card-icon-large_connect.svg', 1) }}" alt="">
+                            </div>
+                            <h4 class="card-title">NextGIS Connect</h4>
+                            <div class="card-tags">
+                                <span class="tag">Настольные</span>
+                            </div>
+                            <p class="card-par">Модуль QGIS для интеграции с Веб ГИС</p>
+                        </div>
+                        <div class="card card-type-2">
+                            <div class="card-icon-small">
+                                <img src="{{ pathto('_static/icons/card-icon-large_quickmapservices.svg', 1) }}" alt="">
+                            </div>
+                            <h4 class="card-title">QuickMapServices</h4>
+                            <div class="card-tags">
+                                <span class="tag">Веб</span>
+                                <span class="tag">Настольные</span>
+                                <span class="tag">Серверные</span>
+                            </div>
+                            <p class="card-par">Публичный каталог геоданных для ГИС</p>
+                        </div>
+                        <div class="card card-type-2">
+                            <div class="card-icon-small">
+                                <img src="{{ pathto('_static/icons/card-icon-large_ngq.svg', 1) }}" alt="">
+                            </div>
+                            <h4 class="card-title">NGQ Rosreestr Tools</h4>
+                            <div class="card-tags">
+                                <span class="tag">Настольные</span>
+                                <span class="tag">Веб</span>
+                            </div>
+                            <p class="card-par">Работа с данными НСПД в QGIS</p>
+                        </div>
+                        <div class="card card-type-2">
+                            <div class="card-icon-small">
+                                <img src="{{ pathto('_static/icons/card-icon-large_formbuilder.svg', 1) }}" alt="">
+                            </div>
+                            <h4 class="card-title">NextGIS Formbuilder</h4>
+                            <div class="card-tags">
+                                <span class="tag">Веб</span>
+                                <span class="tag">Настольные</span>
+                            </div>
+                            <p class="card-par">Создание форм для сбора данных</p>
+                        </div>
+                        <div class="card card-type-2">
+                            <div class="card-icon-small">
+                                <img src="{{ pathto('_static/icons/card-icon-large_mobile.svg', 1) }}" alt="">
+                            </div>
+                            <h4 class="card-title">NextGIS Mobile</h4>
+                            <div class="card-tags">
+                                <span class="tag">Мобильные</span>
+                            </div>
+                            <p class="card-par">Приложение для сбора данных</p>
+                        </div>
+                        <div class="card card-type-2">
+                            <div class="card-icon-small">
+                                <img src="{{ pathto('_static/icons/card-icon-large_collector.svg', 1) }}" alt="">
+                            </div>
+                            <h4 class="card-title">NextGIS Collector</h4>
+                            <div class="card-tags">
+                                <span class="tag">Мобильные</span>
+                            </div>
+                            <p class="card-par">Приложение для работы в команде</p>
+                        </div>
+                        <div class="card card-type-2">
+                            <div class="card-icon-small">
+                                <img src="{{ pathto('_static/icons/card-icon-large_tracker.svg', 1) }}" alt="">
+                            </div>
+                            <h4 class="card-title">NextGIS Tracker</h4>
+                            <div class="card-tags">
+                                <span class="tag">Мобильные</span>
+                            </div>
+                            <p class="card-par">GPS-трекинг объектов</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection" id="subsection-developers">
+                    <h3 class="subsection-title">
+                        <img src="{{ pathto('_static/icons/for_developers_icon.svg', 1) }}" alt="">
+                        Для разработчиков</h3>
+                    <div class="cards-grid cards-type-1">
+                        <div class="card card-type-1">
+                            <div class="card-icon">
+                                <img src="{{ pathto('_static/icons/card-icon_web.svg', 1) }}" alt="">
+                            </div>
+                            <div class="card-type-1-text">
+                                                            <h3 class="card-title">NextGIS Web</h3>
+                            <p class="card-description">Документация API</p>
+                            </div>
+
+                        </div>
+                        <div class="card card-type-1">
+                            <div class="card-icon">
+                                <img src="{{ pathto('_static/icons/card-icon_mobile.svg', 1) }}" alt="">
+                            </div>
+                            <div class="card-type-1-text">
+                                                            <h3 class="card-title">NextGIS Mobile</h3>
+                            <p class="card-description">Инструменты для мобильной разработки</p>
+                            </div>
+
+                        </div>
+                        <div class="card card-type-1">
+                            <div class="card-icon">
+                                <img src="{{ pathto('_static/icons/card-icon_qms.svg', 1) }}" alt="">
+                            </div>
+                            <div class="card-type-1-text">
+                                                            <h3 class="card-title">NextGIS QMS Service API</h3>
+                            <p class="card-description">Для разработки приложений</p>
+                            </div>
+
+                        </div>
+                        <div class="card card-type-1">
+                            <div class="card-icon">
+                                <img src="{{ pathto('_static/icons/card-icon_formbuilder.svg', 1) }}" alt="">
+                            </div>
+                            <div class="card-type-1-text">
+                            <h3 class="card-title">NextGIS Formbuilder</h3>
+                            <p class="card-description">Инструменты для создания мобильных форм</p>
+                            </div>
+
+                        </div>
+                        <div class="card card-type-1">
+                            <div class="card-icon">
+                                <img src="{{ pathto('_static/icons/card-icon_tracker_hub.svg', 1) }}" alt="">
+                            </div>
+                            <div class="card-type-1-text">
+                            <h3 class="card-title">NextGIS Tracker Hub</h3>
+                            <p class="card-description">Модуль мониторинга движущихся объектов</p>
+                            </div>
+
+                        </div>
+                        <div class="card card-type-1">
+                            <div class="card-icon">
+                                <img src="{{ pathto('_static/icons/card-icon_docker.svg', 1) }}" alt="">
+                            </div>
+                            <div class="card-type-1-text">
+                            <h3 class="card-title">NextGIS Docker</h3>
+                            <p class="card-description">Для самостоятельной установки ПО</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section section-faq" id="section-faq">
+                <h2 class="section-title">Часто задаваемые вопросы</h2>
+                <p class="section-subtitle">Ответы на самые популярные вопросы, сгруппированные по категориям пользователей.</p>
+                <div class="faq-container">
+                    <div class="faq-container-1-block">
+                        <div class="faq-category">
+                            <button class="faq-category-header ">
+                                <img src="{{ pathto('_static/icons/card-icon_faq_account.svg', 1) }}" alt="">
+                                <span class="faq-category-title">Аккаунт</span>
+                                <span class="faq-toggle"><img src="{{ pathto('_static/icons/arrow_down_for_nav.svg', 1) }}" alt=""></span>
+                            </button>
+                            <div class="faq-category-content">
+                                <div class="faq-item">
+                                    <a href="#" class="faq-question">Как зарегистрироваться?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <a href="#" class="faq-question">Как узнать свой ID?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <a href="#" class="faq-question">Как оформить подписку?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <a href="#" class="faq-question">Какие документы об оплате/договор я могу получить?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <a href="#" class="faq-question">Как восстановить пароль?</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="faq-category">
+                            <button class="faq-category-header">
+                                <img src="{{ pathto('_static/icons/card-icon_faq_web.svg', 1) }}" alt="">
+                                <span class="faq-category-title">Веб ГИС</span>
+                                <span class="faq-toggle"><img src="{{ pathto('_static/icons/arrow_down_for_nav.svg', 1) }}" alt=""></span>
+                            </button>
+                            <div class="faq-category-content ">
+                                <div class="faq-item">
+                                    <a href="#" class="faq-question">Как войти в Веб ГИС?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <a href="#" class="faq-question">Как загрузить данные?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <a href="#" class="faq-question">Как создать веб-карту?</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="faq-category">
+                            <button class="faq-category-header  ">
+                                <img src="{{ pathto('_static/icons/card-icon_faq_users_team.svg', 1) }}" alt="">
+                                <span class="faq-category-title">Пользователи и команда</span>
+                                <span class="faq-toggle"><img src="{{ pathto('_static/icons/arrow_down_for_nav.svg', 1) }}" alt=""></span>
+                            </button>
+                            <div class="faq-category-content  ">
+                                <div class="faq-item">
+                                    <a href="#" class="faq-question">Как создать пользователя?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <a href="#" class="faq-question">Что такое команда?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <a href="#" class="faq-question">Как добавить пользователя в свою команду?</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-container-2-block">
+                        <div class="faq-category">
+                            <button class="faq-category-header  ">
+                                <img src="{{ pathto('_static/icons/card-icon_faq_qgis.svg', 1) }}" alt="">
+                                <span class="faq-category-title">QGIS + Веб ГИС</span>
+                                <span class="faq-toggle"><img src="{{ pathto('_static/icons/arrow_down_for_nav.svg', 1) }}" alt=""></span>
+                            </button>
+                            <div class="faq-category-content ">
+                                <div class="faq-item">
+                                    <a href="#" class="faq-question">Как привязать растр?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <a href="#" class="faq-question">Как настроить подписи?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <a href="#" class="faq-question">Как создать макет для печати?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <a href="#" class="faq-question">Как создать подключение в NextGIS Connect?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <a href="#" class="faq-question">Могут ли несколько пользователей редактировать один слой?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <a href="#" class="faq-question">Не загружаются данные, что делать?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <a href="#" class="faq-question">Как узнать длину/площадь объекта?</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="faq-category">
+                            <button class="faq-category-header  ">
+                                <img src="{{ pathto('_static/icons/card-icon_faq_sys_coord.svg', 1) }}" alt="">
+                                <span class="faq-category-title">Система координат</span>
+                                <span class="faq-toggle"><img src="{{ pathto('_static/icons/arrow_down_for_nav.svg', 1) }}" alt=""></span>
+                            </button>
+                            <div class="faq-category-content ">
+                                <div class="faq-item">
+                                    <a href="#" class="faq-question">Как изменить систему координат?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <a href="#" class="faq-question">Данные отображаются не там, как исправить?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <a href="#" class="faq-question">Как добавить систему координат</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+            </section>
+
+            <section class="section section-resources" id="section-resources">
+                <h2 class="section-title">Дополнительные ресурсы</h2>
+                <p class="section-subtitle">Дополнительные материалы, которые помогут вам в изучении платформы NextGIS.</p>
+                <div class="cards-grid cards-type-3">
+                    <div class="card card-type-3">
+                        <div class="card-icon-small">
+                            <img src="{{ pathto('_static/icons/card-icon_doc.svg', 1) }}" alt="">
+                        </div>
+                        <h4 class="card-title">Документация в PDF</h4>
+                        <p class="card-description">Скачайте полную документацию по отдельным продуктам в PDF для изучения офлайн.</p>
+                        <ul class="card-links text-under-line">
+                            <li><a href="#">NextGIS Web</a></li>
+                            <li><a href="#">NextGIS QGIS</a></li>
+                            <li><a href="#">NextGIS Mobile</a></li>
+                            <li><a href="#">NextGIS Formbuilder</a></li>
+                        </ul>
+                    </div>
+                    <div class="card card-type-3">
+                        <div class="card-icon-small">
+                            <img src="{{ pathto('_static/icons/card-icon_glossary.svg', 1) }}" alt="">
+                        </div>
+                        <h4 class="card-title">Глоссарий и алфавитный указатель</h4>
+                        <p class="card-description">Полный <a href="#">словарь терминов</a> и <a href="">алфавитный указатель</a> всех разделов документации.</p>
+                        <ul class="card-links">
+                            <li><a href="#">Общие термины ГИС и разработки</a></li>
+                            <li><a href="#">Термины NextGIS</a></li>
+                            <li><a href="#">Описание форматов данных</a></li>
+                            <li><a href="#">Расшифровка сокращений</a></li>
+                        </ul>
+                    </div>
+                    <div class="card card-type-3">
+                        <div class="card-icon-small">
+                            <img src="{{ pathto('_static/icons/card-icon_video.svg', 1) }}" alt="">
+                        </div>
+                        <h4 class="card-title">Видеоматериалы</h4>
+                        <p class="card-description">Обучающие видео на наших каналах <a href="#">YouTube</a>
+                            и <a href="#">RuTube</a>.</p>
+                        <ul class="card-links">
+                            <li><a href="#">Базовые уроки</a></li>
+                            <li><a href="#">Демо</a></li>
+                            <li><a href="#">Вебинары</a></li>
+                            <li><a href="#">Кейсы клиентов</a></li>
+                        </ul>
+                    </div>
+                    <div class="card card-type-3">
+                        <div class="card-icon-small">
+                            <img src="{{ pathto('_static/icons/card-icon_courses.svg', 1) }}" alt="">
+                        </div>
+                        <h4 class="card-title">Обучение и курсы</h4>
+                        <p class="card-description">Запишитесь на профессиональные курсы
+                            и получите сертификат NextGIS.</p>
+                        <ul class="card-links text-under-line">
+                            <li><a href="#">Курсы и стажировки</a></li>
+                            <li><a href="#">Консультации</a></li>
+                            <li><a href="#">Корпоративное обучение</a></li>
+                            <li><a href="#">Сертификация</a></li>
+                        </ul>
+                    </div>
+                    <div class="card card-type-3">
+                        <div class="card-icon-small">
+                            <img src="{{ pathto('_static/icons/card-icon_blog.svg', 1) }}" alt="">
+                        </div>
+                        <h4 class="card-title">Блог</h4>
+                        <p class="card-description">Последние новости, обновления продуктов, экспертные статьи.</p>
+                        <ul class="card-links">
+                            <li><a href="#">Обновления ПО</a></li>
+                            <li><a href="#">Новые продукты</a></li>
+                            <li><a href="#">Кейсы использования</a></li>
+                            <li><a href="#">Технические статьи</a></li>
+                        </ul>
+                    </div>
+                    <div class="card card-type-3">
+                        <div class="card-icon-small">
+                            <img src="{{ pathto('_static/icons/card-icon_events.svg', 1) }}" alt="">
+                        </div>
+                        <h4 class="card-title">Мероприятия</h4>
+                        <p class="card-description">Онлайн и офлайн мероприятия, которые
+                            мы организовываем или в которых участвуем.</p>
+                        <ul class="card-links">
+                            <li><a href="#">Вебинары</a></li>
+                            <li><a href="#">Обзоры обновлений</a></li>
+                            <li><a href="#">Конференции</a></li>
+                            <li><a href="#">Выставки</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="homepage-footer">
+            <div class="footer-container">
+                <div class="footer-logo">
+                    <img src="{{ pathto('_static/images/logo-large-footer.svg', 1) }}" alt="NextGIS" class="footer-logo-img">
+                    <button class="btn-login">Войти</button>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><img src="{{ pathto('_static/icons/Social_X.svg', 1) }}" alt=""></a>
+                        <a href="#" class="social-icon"><img src="{{ pathto('_static/icons/Social_instagram.svg', 1) }}" alt=""></a>
+                        <a href="#" class="social-icon"><img src="{{ pathto('_static/icons/Social_github.svg', 1) }}" alt=""></a>
+                        <a href="#" class="social-icon"><img src="{{ pathto('_static/icons/Social_inbox.svg', 1) }}" alt=""></a>
+                        <a href="#" class="social-icon"><img src="{{ pathto('_static/icons/Social_youtube.svg', 1) }}" alt=""></a>
+                        <a href="#" class="social-icon"><img src="{{ pathto('_static/icons/Social_discord.svg', 1) }}" alt=""></a>
+                    </div>
+                </div>
+                <div class="footer-content">
+                    <div class="footer-column">
+                        <h4 class="footer-title">ПРОДУКТЫ</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">NextGIS Web</a></li>
+                            <li><a href="#">NextGIS QGIS</a></li>
+                            <li><a href="#">NextGIS Mobile</a></li>
+                            <li><a href="#">NextGIS Data</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4 class="footer-title">РЕСУРСЫ</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">API документация</a></li>
+                            <li><a href="#">События</a></li>
+                            <li><a href="#">Видео</a></li>
+                            <li><a href="#">Блог</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4 class="footer-title">ПОДДЕРЖКА</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Техподдержка</a></li>
+                            <li><a href="#">Сообщество в Telegram</a></li>
+                            <li><a href="#">Консультации</a></li>
+                            <li><a href="#">Контакты</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">© 2025 NextGIS</p>
+            </div>
+        </footer>
+    </div>
+
+    <aside class="floating-toc" id="floatingToc">
+        <div class="floating-toc-content">
+            <ul class="floating-toc-list">
+                <li><a href="#section-need">Мне нужно</a></li>
+                <li>
+                    <a href="#section-guides">Подробные юзергиды по ПО и сервисам</a>
+                    <ul>
+                        <li><a href="#subsection-users">Для пользователей</a></li>
+                        <li><a href="#subsection-developers">Для разработчиков</a></li>
+                    </ul>
+                </li>
+                <li><a href="#section-faq">Часто задаваемые вопросы</a></li>
+                <li><a href="#section-resources">Дополнительные ресурсы</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <script src="{{ pathto('_static/homepage.js', 1) }}?v={{ build_time|default(1) }}"></script>
+    <script src="{{ pathto('_static/custom.js', 1) }}?v={{ build_time|default(1) }}"></script>
+</body>
+</html>

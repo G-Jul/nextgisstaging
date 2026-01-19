@@ -1,0 +1,1858 @@
+/* ============================================
+   Стили для главной страницы NextGIS Documentation
+   ============================================ */
+
+   :root {
+    --primary-blue: #2980b9;
+    --primary-blue-dark: #0C65AF;
+    --primary-blue-light: #3498db;
+    --secondary-gray: #34495e;
+    --text-dark: #1D1D1B;
+    --text-light: #56738F;
+    --bg-white: #ffffff;
+    --bg-light: #D1D9E0;
+    --border-color: #E0E6EB;
+    --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --border-radius: 8px;
+    --transition: all 0.3s ease;
+}
+
+/* ============================================
+   Базовые стили
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Добавляем box-sizing: border-box только к элементам, которым это необходимо */
+.left-nav,
+.left-nav-close,
+.left-nav-content,
+.header-container,
+.nav-toggle,
+.search-input,
+.btn-login,
+.card,
+.card-type-1,
+.card-type-2,
+.card-type-3,
+.tag,
+.faq-category,
+.faq-category-header,
+.homepage-header,
+.floating-toc,
+.floating-toc-header,
+.floating-toc-content,
+.floating-toc-list a,
+input,
+button,
+textarea,
+select {
+    box-sizing: border-box;
+}
+
+/* Подключение шрифта Roboto */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+html {
+    overflow-x: hidden !important;
+    width: 100%;
+    height: 100%;
+    position: static !important;
+}
+
+body {
+    overflow-x: hidden !important;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.homepage {
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    color: var(--text-dark);
+    background: var(--bg-white);
+    line-height: 1.6;
+    overflow-x: hidden !important;
+    width: 100%;
+    max-width: 100vw;
+}
+
+/* ============================================
+   Левое навигационное меню
+   ============================================ */
+
+.left-nav {
+    position: fixed;
+    left: -400px !important;
+    top: 66px !important;
+    width: 400px;
+    background: var(--bg-white);
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+}
+
+.left-nav.active {
+    top: 66px !important;
+    left: 0 !important;
+}
+
+.logo-link-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-dark);
+}
+
+.logo-link-main span{
+    margin-left: 20px;
+    color: #1D1D1B;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.left-nav-close {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--text-dark);
+    top: 72px;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.left-nav-content {
+    padding: 1rem;
+}
+
+/* ============================================
+   Хедер
+   ============================================ */
+
+.homepage-header {
+    background: var(--bg-white);
+    border-bottom: 1px solid var(--border-color);
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    padding: 1rem 0;
+    width: 100% !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+    will-change: auto !important;
+}
+
+/* Убеждаемся, что родительские контейнеры не блокируют sticky */
+body.homepage {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    width: 100%;
+    max-width: 100vw;
+    position: relative !important;
+    height: 100%;
+    min-height: 100vh;
+}
+
+/* Убираем min-height из RTD элементов на главной странице */
+body.homepage .wy-grid-for-nav,
+body.homepage .wy-body-for-nav {
+    min-height: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+    position: static !important;
+}
+
+body.homepage .wy-nav-content-wrap,
+body.homepage .wy-nav-content {
+    overflow: visible !important;
+    height: auto !important;
+    position: static !important;
+}
+
+/* Критично: homepage-wrapper не должен иметь overflow, который блокирует sticky */
+.homepage-wrapper {
+    overflow: visible !important;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: content-box;
+    position: relative !important;
+    transform: none !important;
+    filter: none !important;
+    perspective: none !important;
+    contain: none !important;
+    isolation: auto !important;
+    will-change: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+}
+
+/* Убеждаемся, что все родители header не блокируют sticky */
+body.homepage > *,
+.homepage-wrapper > * {
+    overflow: visible !important;
+}
+
+/* Критично: header должен быть sticky независимо от родительских контейнеров */
+.homepage-wrapper .homepage-header,
+body.homepage .homepage-header,
+.homepage .homepage-header {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+}
+
+.header-container {
+    max-width: 1880px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.nav-toggle span {
+    width: 24px;
+    height: 2px;
+    background: var(--text-dark);
+    transition: var(--transition);
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+}
+
+.logo-link:hover {
+    opacity: 0.8;
+}
+
+.dropdown-arrow {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropdown-arrow img {
+    width: 12px;
+    height: 12px;
+    margin-top: 4px;
+    transition: transform 0.3s ease;
+}
+
+/* Поворот стрелки при открытом меню */
+.left-nav.active ~ .homepage-wrapper .dropdown-arrow img,
+body.left-nav-open .homepage-header .dropdown-arrow img,
+.homepage-header .logo-link.active .dropdown-arrow img {
+    transform: rotate(180deg);
+}
+
+.logo {
+    height: 32px;
+    width: auto;
+}
+
+.logo-text {
+    font-size: 18px;
+    color: #56738F;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    width: 18px;
+    height: 18px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.search-input {
+    padding: 0.5rem 1rem 0.5rem 2.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    width: 300px;
+    transition: var(--transition);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--primary-blue-dark);
+    box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.1);
+}
+
+.btn-login {
+    padding: 0.5rem 1.5rem;
+    background: var(--primary-blue-dark);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.btn-login:hover {
+    background: var(--primary-blue);
+}
+
+/* ============================================
+   Бургер-меню
+   ============================================ */
+
+.burger-menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+    position: relative;
+    width: 32px;
+    height: 32px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* На десктопе бургер скрыт, dropdown показан */
+@media (min-width: 1281px) {
+    .burger-menu-toggle {
+        display: none !important;
+    }
+
+    .logo-link {
+        display: flex !important;
+    }
+
+    .left-nav-overlay {
+        display: none !important;
+    }
+}
+
+/* Показываем бургер на планшетах и мобильных */
+@media (max-width: 1280px) {
+    .burger-menu-toggle {
+        display: flex !important;
+    }
+
+}
+
+@media (max-width: 425px) {
+    .logo-text {
+        display: none;
+    }
+}
+
+.burger-menu-toggle span {
+    width: 24px;
+    height: 2px;
+    background: var(--text-dark);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: block;
+    transform-origin: center;
+}
+
+.burger-menu-toggle.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.burger-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.burger-menu-toggle.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ============================================
+   Главный контент
+   ============================================ */
+
+.homepage-main {
+    max-width: 1400px;
+    margin: 90px 0 0 120px;
+    padding-right: 1rem;
+    position: relative;
+}
+
+/* Отступ справа для floating TOC до 1440px */
+@media (min-width: 1281px) and (max-width: 1440px) {
+    .homepage-main {
+        padding-right: 340px; /* 320px (ширина TOC) + 40px (отступ) */
+    }
+
+    .footer-container {
+        padding-right: 360px;
+    }
+}
+
+/* Адаптивный отступ слева для footer в диапазоне 1280px - 1920px */
+@media (min-width: 1281px) and (max-width: 1920px) {
+    .footer-container {
+        margin-left: calc((100vw - 1280px) * 0.390625); /* Плавно от 0px до 250px */
+    }
+}
+
+
+/* Адаптивность для FAQ после 582px */
+@media (max-width: 582px) {
+    .faq-container {
+        flex-direction: column;
+    }
+
+    .faq-container-1-block {
+        margin-right: 0;
+        margin-bottom: 0.75rem;
+    }
+
+    .faq-category-header {
+        padding: 0.75rem 1rem;
+    }
+
+    .faq-category-title {
+        font-size: 0.95rem;
+    }
+
+    .faq-question {
+        font-size: 16px;
+    }
+}
+
+.section {
+    margin-bottom: 90px;
+}
+
+.section-title {
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.section-subtitle {
+    font-size: 20px;
+    color: var(--text-light);
+    margin-bottom: 2rem;
+}
+
+.subsection {
+    margin-top: 60px;
+}
+
+.subsection-title {
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+}
+
+.subsection-title img {
+    width: 32px;
+    height: 32px;
+    margin-right: 0.75rem;
+    flex-shrink: 0;
+}
+
+/* ============================================
+   Карточки типа 1 (большие с иконками)
+   ============================================ */
+
+.cards-grid {
+    display: grid;
+}
+
+.cards-type-1 {
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+}
+
+.card {
+    background: var(--bg-white);
+    border-radius: var(--border-radius);
+    padding: 15px;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--card-shadow-hover);
+    background-color: #E8EAEC;
+}
+
+.card-type-1 {
+    box-shadow: var(--card-shadow);
+    display: flex;
+    width: 100%;
+    max-width: 450px;
+    font-size: 20px;
+    min-height: 100px;
+    border: #E0E6EB 1px solid;
+    margin-bottom: 25px;
+}
+
+.card-type-1 .card-icon {
+    width: 36px;
+    height: 36px;
+    margin-right: 12px;
+    display: flex;
+    align-items: start;
+}
+
+.card-type-1 .card-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.card-type-1 .card-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.card-type-1 .card-description {
+    font-size: 16px;
+    color: var(--text-light);
+}
+
+/* ============================================
+   Карточки типа 2 (маленькие с иконками и тегами)
+   ============================================ */
+
+.cards-type-2 {
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+}
+
+.card-type-2 {
+    box-shadow: var(--card-shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 330px;
+    min-height: 220px;
+    margin-bottom: 24px;
+    border: #E0E6EB 1px solid;
+    padding: 15px;
+}
+
+.card-type-2 .card-icon-small {
+    width: 58px;
+    height: 58px;
+    margin-bottom: 1rem;
+}
+
+.card-type-2 .card-icon-small img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.card-type-2 .card-title {
+    font-size: 20px;
+    font-weight: 600;
+    height: 25px;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    flex-grow: 1;
+}
+
+.card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: auto;
+    margin-bottom: 10px;
+}
+
+.tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: #D1D9E0;
+    color: var(--text-dark);
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.card-type-2 .card-description {
+    font-size: 16px;
+    color: var(--text-light);
+    margin: 0.5rem 0;
+}
+
+.card-type-2 .card-links {
+    list-style: none;
+    margin-top: 0.5rem;
+}
+
+.card-type-2 .card-links li {
+    margin-bottom: 0.25rem;
+}
+
+.card-type-2 .card-links a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.card-type-2 .card-links a:hover {
+    text-decoration: underline;
+}
+
+.cards-type-3 {
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+}
+
+
+
+.card-type-3 {
+    box-shadow: var(--card-shadow);
+    
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    max-width: 450px;
+    min-height: 270px;
+    margin-bottom: 24px;
+    border: #E0E6EB 1px solid;
+    padding: 20px;
+}
+
+.card-type-3:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.card-type-3 .card-title{
+    font-size: 20px;
+
+}
+
+.card-type-3 .card-description{
+    color: var(--text-light);
+    font-size: 16px;
+    margin-bottom: 0px;
+}
+
+.card-type-3 .card-description a{
+    color: var(--text-light);
+    font-weight: 600;
+
+}
+
+.card-type-3 .card-description a:hover{
+    color: var(--primary-blue-dark);
+    font-weight: 600;
+}
+
+.card-links{
+    margin-left: 25px;
+}
+
+.card-links a{
+    color: var(--text-dark);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.text-under-line a{
+    text-decoration: underline;
+}
+
+.card-links a:hover{
+    color: var(--primary-blue-dark);
+    font-weight: 600;
+}
+
+/* ============================================
+   FAQ (Раскрывающиеся элементы)
+   ============================================ */
+
+.faq-container {
+    display: flex;
+
+}
+
+.faq-container-1-block{
+    margin-right: 25px;
+
+}
+
+
+
+.faq-category {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+.faq-category-header {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background: var(--bg-white);
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: left;
+}
+
+.faq-category-header:hover {
+    background: var(--bg-light);
+}
+
+.faq-category-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.faq-toggle {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    transition: transform 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.faq-toggle img {
+    width: 12px;
+    height: 12px;
+    transition: transform 0.3s ease;
+}
+
+.faq-category-header.active .faq-toggle img {
+    transform: rotate(180deg);
+}
+
+.faq-category-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 1.5rem;
+}
+
+.faq-category-content.active {
+    max-height: 280px !important;
+    padding: 1rem 1.5rem;
+}
+
+.faq-item {
+    padding: 5px 20px;
+}
+
+.faq-item:last-child {
+    border-bottom: none;
+}
+
+.faq-question {
+    color: var(--text-dark) !important;
+    text-decoration: none !important;
+    font-size: 20px;
+    transition: var(--transition);
+}
+
+.faq-question:hover {
+    text-decoration: underline;
+}
+
+/* ============================================
+   Плавающее меню содержания справа
+   ============================================ */
+
+.floating-toc {
+    position: fixed !important;
+    top: 80px !important;
+    right: 1rem !important;
+    width: 320px;
+    max-height: calc(100vh - 100px);
+    background: var(--bg-white);
+    border-radius: 0px;
+    box-shadow: var(--card-shadow);
+    z-index: 999 !important;
+    display: flex !important;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.floating-toc-header {
+    padding: 1rem;
+    background: var(--primary-blue);
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.floating-toc-content {
+    padding: 1rem;
+    overflow-y: auto;
+    max-height: calc(100vh - 180px);
+}
+
+.floating-toc-list {
+    list-style: none;
+}
+
+.floating-toc-list li {
+    margin-bottom: 0.5rem;
+}
+
+.floating-toc-list a:hover {
+    background-color: #E8EAEC;
+}
+
+.floating-toc-list a {
+    color: var(--text-dark);
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: block;
+    padding: 0.25rem 20px;
+    transition: var(--transition);
+}
+
+.floating-toc-list ul a {
+    padding: 0.25rem 20px;
+    color: var(--text-dark);
+}
+
+.floating-toc-list a:hover {
+    color: var(--primary-blue);
+}
+
+.floating-toc-list ul {
+    list-style: none;
+    margin-top: 0.25rem;
+    padding-left: 1rem;
+}
+
+.floating-toc-list ul a {
+    font-size: 0.85rem;
+    color: var(--text-dark);
+}
+
+.floating-toc-list>li>a.active{
+    position: relative;
+    transition: var(--transition);
+    font-weight: 600;
+}
+
+.floating-toc-list>li>li>a{
+    color: var(--text-dark);
+}
+
+.floating-toc-list>li>a.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background-color: var(--primary-blue-dark);
+
+}
+
+.floating-toc-list>li>ul>li{
+
+    position: relative;
+
+}
+
+.floating-toc-list>li>ul>li>a.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background-color: var(--primary-blue-dark);
+
+}
+
+.floating-toc-list>li>ul>li>a.active{
+    font-weight: 600;
+
+}
+
+
+/* ============================================
+   Футер
+   ============================================ */
+
+.homepage-footer {
+    background: #EDF0F2;
+    width: 100%;
+    height: 300px;
+    border-top: 1px solid var(--border-color);
+    padding: 45px 0 2rem;
+}
+
+.footer-container {
+    display: flex;
+    max-width: 1400px;
+    height: 205px;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-left: 20px; /* Будет переопределено медиа-запросами */
+    margin-right: 0;
+    padding-right: 1rem;
+}
+
+/* Фиксированный отступ для больших экранов > 1920px */
+@media (min-width: 1921px) {
+    .footer-container {
+        margin-left: 250px;
+    }
+}
+
+.footer-logo {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+}
+
+.footer-logo button {
+    width: 130px;
+    padding: 12px 0px;
+}
+
+.footer-logo-img {
+    height: 40px;
+    width: auto;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 22px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: #56738F;
+    text-decoration: none;
+    font-size: 16px;
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.footer-social {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.social-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-white);
+    border-radius: 50%;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: var(--transition);
+}
+
+.social-icon:hover {
+    color: var(--text-dark);
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95px;
+    border-top: 1px solid var(--border-color);
+}
+
+.footer-copyright {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   Адаптивность (планшеты 1280px)
+   ============================================ */
+
+@media (max-width: 1280px) {
+    /* Левое меню скрыто по умолчанию, но может открываться через dropdown */
+    /* Для экранов больше 768px используем left */
+    @media (min-width: 769px) {
+        .left-nav {
+            left: -400px !important;
+            width: 350px;
+            transition: left 0.3s ease !important; /* Плавная анимация */
+        }
+
+        .left-nav.active {
+            left: 0 !important;
+        }
+    }
+
+    .floating-toc-list>li>a.active{
+        font-weight: 400;
+    }
+    .floating-toc-list>li>ul>li>a.active{
+        font-weight: 400;
+    }
+
+    /* Показываем бургер-меню */
+    .burger-menu-toggle {
+        display: flex !important;
+    }
+
+    /* Скрываем floating TOC по умолчанию в диапазоне 768-1280px, показываем при активном состоянии */
+    .floating-toc {
+        display: none !important;
+        position: fixed !important;
+        top: 66px !important;
+        right: -350px !important;
+        width: 350px !important;
+        max-height: calc(100vh - 66px) !important;
+        height: calc(100vh - 66px) !important;
+        z-index: 10000 !important;
+        background: var(--bg-white) !important;
+        box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1) !important;
+        transition: right 0.3s ease !important;
+    }
+
+    .floating-toc.active {
+        display: flex !important;
+        right: 0 !important;
+    }
+
+    /* Адаптируем header */
+    .header-container {
+        padding: 0 1rem;
+    }
+
+    .header-right {
+        gap: 0.75rem;
+    }
+
+    /* Уменьшаем поиск */
+    .search-input {
+        width: 250px;
+    }
+
+    /* Адаптируем основной контент */
+    .homepage-main {
+        margin-left: 0;
+        margin-top: 80px;
+        padding: 0 1rem;
+    }
+}
+
+/* Минимальные отступы для контента на мобильных */
+@media (max-width: 768px) and (min-width: 320px) {
+    .homepage-main {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+
+    /* Адаптируем карточки */
+    .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .cards-type-1 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cards-type-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card-type-1 {
+        padding: 1.25rem;
+        max-width: 100%;
+        font-size: 18px;
+        min-height: 90px;
+    }
+
+    .card-type-1 .card-title {
+        font-size: 18px;
+    }
+
+    .card-type-1 .card-description {
+        font-size: 15px;
+    }
+
+    .card-type-2 {
+        padding: 1.25rem;
+        max-width: 100%;
+        min-height: 200px;
+    }
+
+    .card-type-2 .card-title {
+        font-size: 18px;
+    }
+
+    .card-type-2 .card-description {
+        font-size: 14px;
+    }
+
+    .cards-type-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card-type-3 {
+        max-width: 100%;
+        min-height: 240px;
+        padding: 1.25rem;
+    }
+
+    .card-type-3 .card-title {
+        font-size: 18px;
+    }
+
+    .card-type-3 .card-description {
+        font-size: 14px;
+    }
+
+    /* Адаптируем секции */
+    .section {
+        margin-bottom: 60px;
+    }
+
+    .section-title {
+        font-size: 32px;
+    }
+
+    .section-subtitle {
+        font-size: 18px;
+    }
+
+    .subsection-title {
+        font-size: 24px;
+    }
+
+    .subsection-title img {
+        width: 28px;
+        height: 28px;
+        margin-right: 0.5rem;
+    }
+
+    /* Скрываем floating TOC по умолчанию, показываем при активном состоянии */
+    .floating-toc {
+        display: none !important;
+        position: fixed !important;
+        top: 66px !important;
+        right: -350px !important;
+        width: 350px !important;
+        max-height: calc(100vh - 66px) !important;
+        height: calc(100vh - 66px) !important;
+        z-index: 10000 !important;
+        background: var(--bg-white) !important;
+        box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1) !important;
+        transition: right 0.3s ease !important;
+    }
+
+    .floating-toc.active {
+        display: flex !important;
+        right: 0 !important;
+    }
+
+    /* Адаптируем FAQ - переопределяем для диапазона 768px - 1280px */
+    .faq-container {
+        flex-direction: column;
+    }
+    
+    /* Для диапазона 768px - 1280px FAQ в два столбца */
+    @media (min-width: 768px) and (max-width: 1280px) {
+        .faq-container {
+            flex-direction: row !important;
+            gap: 1.5rem;
+        }
+
+        .faq-container-1-block {
+            margin-right: 0 !important;
+            margin-bottom: 0 !important;
+            flex: 1;
+        }
+
+        .faq-container-2-block {
+            flex: 1;
+        }
+    }
+
+    .faq-container-1-block {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+
+    .faq-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .faq-category {
+        margin-bottom: 1rem;
+    }
+
+    .faq-category-header {
+        padding: 0.75rem 1rem;
+    }
+
+    .faq-category-title {
+        font-size: 1rem;
+    }
+
+    .faq-question {
+        font-size: 18px;
+    }
+
+    /* Адаптируем footer */
+    .homepage-footer {
+        height: auto;
+        padding: 45px 0 2rem;
+    }
+
+    .footer-container {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-left: 0;
+        padding: 0 1rem;
+        height: auto;
+        max-width: 100%;
+    }
+
+    .footer-logo {
+        margin-bottom: 0;
+        margin-right: 3rem;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .footer-content {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3rem;
+        flex: 1;
+        margin-bottom: 0;
+    }
+
+    .footer-social {
+        margin-bottom: 0;
+    }
+}
+
+
+/* Адаптивность для карточек в диапазоне 1281px - 1454px */
+@media (min-width: 1281px) and (max-width: 1454px) {
+    /* Отступ справа для правого меню */
+    .homepage-main {
+        padding-right: 360px !important; /* 320px (ширина TOC) + 40px (отступ) */
+    }
+
+    .footer-container {
+        padding-right: 360px !important;
+    }
+
+    /* 3 столбца для "для пользователей" (cards-type-2) */
+    .cards-type-2 {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 1rem;
+    }
+
+    /* Уменьшаем размер карточек типа 2 */
+    .card-type-2 {
+        padding: 1rem !important;
+        max-width: 100% !important;
+        min-height: 200px !important;
+        font-size: 16px !important;
+    }
+
+    .card-type-2 .card-title {
+        font-size: 16px !important;
+    }
+
+    .card-type-2 .card-description,
+    .card-type-2 .card-par {
+        font-size: 13px !important;
+    }
+
+    .card-type-2 .card-icon-small {
+        width: 48px !important;
+        height: 48px !important;
+        margin-bottom: 0.75rem !important;
+    }
+}
+
+/* Адаптивность для карточек в диапазоне 1281px - 1358px */
+@media (min-width: 1281px) and (max-width: 1358px) {
+    /* Отступ справа для правого меню */
+    .homepage-main {
+        padding-right: 360px !important; /* 320px (ширина TOC) + 40px (отступ) */
+    }
+
+    .footer-container {
+        padding-right: 360px !important;
+    }
+
+    /* 2 столбца для "Мне нужно" и "для разработчиков" (cards-type-1) */
+    .cards-type-1 {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1rem;
+    }
+
+    /* Уменьшаем размер карточек типа 1 */
+    .card-type-1 {
+        padding: 1rem !important;
+        max-width: 100% !important;
+        font-size: 16px !important;
+        min-height: 90px !important;
+    }
+
+    .card-type-1 .card-title {
+        font-size: 16px !important;
+    }
+
+    .card-type-1 .card-description {
+        font-size: 13px !important;
+    }
+
+    .card-type-1 .card-icon {
+        width: 32px !important;
+        height: 32px !important;
+        margin-right: 10px !important;
+    }
+
+    /* 2 столбца для "дополнительные ресурсы" (cards-type-3) */
+    .cards-type-3 {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1rem;
+    }
+
+    /* Уменьшаем размер карточек типа 3 */
+    .card-type-3 {
+        max-width: 100% !important;
+        min-height: 220px !important;
+        padding: 1rem !important;
+    }
+
+    .card-type-3 .card-title {
+        font-size: 16px !important;
+    }
+
+    .card-type-3 .card-description {
+        font-size: 13px !important;
+    }
+}
+
+/* ============================================
+   Адаптивность (мобильные 393px)
+   ============================================ */
+
+@media (max-width: 768px) {
+    /* Header */
+    .header-container {
+        padding: 0 0.75rem;
+    }
+    .footer-logo>img {
+        min-width: 45%;
+        max-width: 50%;
+    }
+    .homepage-footer {
+        padding-top: 15px;
+    }
+    .header-left {
+        gap: 0.5rem;
+    }
+
+    .logo {
+        height: 24px;
+    }
+
+    .logo-link-main span {
+        font-size: 16px;
+    }
+
+    /* Скрываем поиск в header на мобильных */
+    .homepage-header .search-container {
+        display: none !important;
+    }
+}
+
+/* Инпут поиска в левом меню на главной странице */
+.left-nav-content .search-container {
+    display: none;
+    position: relative;
+    margin-bottom: 1rem;
+    padding: 0 1.5rem;
+}
+
+.left-nav-content .search-container.mobile-search {
+    display: flex;
+    align-items: center;
+}
+
+.left-nav-content .search-container .search-icon {
+    position: absolute;
+    left: 28px;
+    width: 18px;
+    height: 18px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.left-nav-content .search-container .search-input {
+    padding: 0.5rem 1rem 0.5rem 2.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    width: 100%;
+    transition: var(--transition);
+}
+
+.left-nav-content .search-container .search-input:focus {
+    outline: none;
+    border-color: var(--primary-blue-dark);
+    box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.1);
+}
+
+@media (max-width: 768px) {
+    .left-nav-content .search-container.mobile-search {
+        display: flex;
+    }
+
+    .header-right {
+        gap: 0.5rem;
+    }
+
+    .btn-login {
+        padding: 0.4rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    /* Основной контент */
+    .homepage-main {
+        margin-top: 70px;
+        padding: 0 0.75rem;
+    }
+
+    /* Секции */
+    .section {
+        margin-bottom: 40px;
+    }
+
+    .section-title {
+        font-size: 28px;
+    }
+
+    .section-subtitle {
+        font-size: 16px;
+    }
+
+    .subsection {
+        margin-top: 40px;
+    }
+
+    .subsection-title {
+        font-size: 20px;
+    }
+
+    .subsection-title img {
+        width: 24px;
+        height: 24px;
+        margin-right: 0.5rem;
+    }
+
+    /* Карточки - одна колонка */
+    .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .cards-type-1 {
+        grid-template-columns: 1fr;
+    }
+
+    .cards-type-2 {
+        grid-template-columns: 1fr;
+    }
+
+    .card-type-1 {
+        padding: 1rem;
+        max-width: 100%;
+        font-size: 16px;
+        min-height: 80px;
+        margin-bottom: 1rem;
+    }
+
+    .card-type-1 .card-icon {
+        width: 32px;
+        height: 32px;
+        margin-right: 10px;
+    }
+
+    .card-type-1 .card-title {
+        font-size: 16px;
+        margin-bottom: 0.25rem;
+    }
+
+    .card-type-1 .card-description {
+        font-size: 13px;
+    }
+
+    .card-type-2 {
+        padding: 1rem;
+        max-width: 100%;
+        min-height: 180px;
+        margin-bottom: 1rem;
+    }
+
+    .card-type-2 .card-icon-small {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 0.75rem;
+    }
+
+    .card-type-2 .card-title {
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 0.5rem;
+    }
+
+    .card-type-2 .card-description {
+        font-size: 13px;
+    }
+
+    .cards-type-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .card-type-3 {
+        max-width: 100%;
+        min-height: 200px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .card-type-3 .card-title {
+        font-size: 16px;
+    }
+
+    .card-type-3 .card-description {
+        font-size: 13px;
+    }
+
+    .card-links {
+        margin-left: 15px;
+    }
+
+    /* FAQ */
+    .faq-container {
+        flex-direction: column;
+    }
+
+    .faq-container-1-block {
+        margin-right: 0;
+        margin-bottom: 0.75rem;
+    }
+
+    .faq-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .faq-category {
+        margin-bottom: 0.75rem;
+    }
+
+    .faq-category-header {
+        padding: 0.5rem 0.75rem;
+    }
+
+    .faq-category-title {
+        font-size: 0.95rem;
+    }
+
+    .faq-question {
+        font-size: 16px;
+    }
+
+    /* Footer */
+    .footer-container {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 0;
+        padding: 1.5rem 0.75rem;
+        height: auto;
+    }
+
+    .footer-logo {
+        margin-bottom: 1rem;
+        width: 100%;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        width: 100%;
+    }
+
+    .footer-social {
+        margin-bottom: 1rem;
+    }
+
+    .footer-social {
+        gap: 0.75rem;
+    }
+
+    .social-icon {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+/* ============================================
+   Левое меню для планшетов (открывается слева)
+   ============================================ */
+
+@media (max-width: 1280px) and (min-width: 769px) {
+    .left-nav {
+        left: -400px !important;
+        right: auto !important;
+        width: 350px;
+        top: 66px !important;
+        transition: left 0.3s ease;
+    }
+
+    .left-nav.active {
+        left: 0 !important;
+        right: auto !important;
+    }
+
+    /* Overlay для планшетов */
+    .left-nav-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: transparent; /* Убрано затемнение для бургер-меню */
+        z-index: 999;
+        pointer-events: none; /* Отключаем взаимодействие с overlay */
+    }
+
+    .left-nav-overlay.active {
+        display: block;
+        pointer-events: auto; /* Включаем взаимодействие только когда активен */
+    }
+
+    /* Показываем dropdown "Документация" на планшетах */
+    .logo-link {
+        display: flex !important;
+    }
+}
+
+/* ============================================
+   Правое меню для диапазона 425px - 768px (как на планшетах)
+   ============================================ */
+
+@media (min-width: 425px) and (max-width: 768px) {
+    .floating-toc {
+        width: 350px !important;
+        right: -350px !important;
+        top: 66px !important;
+        max-height: calc(100vh - 66px) !important;
+        height: auto !important;
+        transition: right 0.3s ease !important;
+    }
+
+    .floating-toc.active {
+        right: 0 !important;
+    }
+
+    /* Убеждаемся, что левое меню скрыто справа */
+    .left-nav {
+        left: auto !important;
+        right: -100% !important;
+        width: 100% !important;
+        top: 0 !important;
+        height: 100vh !important;
+        z-index: 10000 !important;
+        transition: right 0.3s ease !important;
+    }
+
+    .left-nav.active {
+        right: 0 !important;
+        left: auto !important;
+    }
+}
+
+/* ============================================
+   Левое меню для мобильных (полноэкранное)
+   ============================================ */
+
+/* Явно скрываем левое меню для всех экранов до 768px */
+@media (max-width: 768px) {
+    .left-nav {
+        position: fixed !important;
+        left: -100% !important;
+        right: auto !important;
+        width: 100% !important;
+        top: 66px !important;
+        height: calc(100vh - 66px) !important;
+        z-index: 10000 !important;
+        transition: left 0.3s ease !important;
+        box-shadow: none !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    .homepage-main {
+        margin-top: 25px;
+    }
+
+    .left-nav:not(.active) {
+        left: -100% !important;
+        right: auto !important;
+        top: 64px !important;
+    }
+
+    .left-nav.active {
+        left: 0 !important;
+        right: auto !important;
+        top: 64px !important;
+    }
+
+    /* Overlay для мобильных */
+    .left-nav-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: transparent; /* Убрано затемнение для бургер-меню */
+        z-index: 9999;
+        pointer-events: none; /* Отключаем взаимодействие с overlay */
+    }
+
+    .left-nav-overlay.active {
+        display: block;
+        pointer-events: auto; /* Включаем взаимодействие только когда активен */
+    }
+
+    .left-nav-content {
+        padding: 1rem;
+        height: 100%;
+        overflow-y: auto;
+    }
+}
+
+/* Floating TOC для мобильных до 425px - под header на всю высоту */
+@media (max-width: 424px) {
+    .floating-toc {
+        width: 100% !important;
+        right: -100% !important;
+        top: 64px !important;
+        height: calc(100vh - 66px) !important;
+        max-height: calc(100vh - 66px) !important;
+        z-index: 10000 !important;
+        transition: right 0.3s ease !important;
+    }
+
+    .floating-toc.active {
+        right: 0 !important;
+    }
+}

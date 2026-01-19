@@ -1,0 +1,1921 @@
+/* ============================================
+   Кастомные стили для внутренних страниц
+   ============================================ */
+
+   :root {
+    --primary-blue: #2980b9;
+    --primary-blue-dark: #0C65AF;
+    --primary-blue-light: #3498db;
+    --secondary-gray: #34495e;
+    --text-dark: #1D1D1B;
+    --text-light: #56738F;
+    --bg-white: #ffffff;
+    --bg-light: #D1D9E0;
+    --border-color: #E0E6EB;
+    --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --border-radius: 8px;
+    --transition: all 0.3s ease;
+}
+
+/* ============================================
+   Переопределение стилей ReadTheDocs темы
+   ============================================ */
+
+/* Подключение шрифта Roboto */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+body {
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    color: var(--text-dark);
+    background: var(--bg-white);
+    overflow-x: hidden;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+/* Для главной страницы - переопределяем overflow */
+body.homepage {
+    overflow-x: hidden !important;
+}
+
+/* Скрытие стандартных элементов RTD, но показываем контент */
+.wy-grid-for-nav {
+    display: block !important;
+    position: relative !important;
+    overflow: visible !important;
+    height: auto !important;
+    min-height: 100vh !important;
+}
+
+.wy-nav-side {
+    display: none !important;
+}
+
+.wy-nav-content-wrap {
+    margin-left: 0 !important;
+    padding: 0 !important;
+    position: relative !important;
+    display: block !important;
+    overflow: visible !important;
+}
+
+.wy-nav-content {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+    overflow: visible !important;
+    position: relative !important;
+}
+
+/* Показываем контент внутри wy-nav-content */
+.wy-nav-content > * {
+    display: block !important;
+    visibility: visible !important;
+}
+
+/* Скрытие стандартного header RTD */
+.wy-nav-top {
+    display: none !important;
+}
+
+.wy-side-nav-search {
+    display: none !important;
+}
+
+/* Показываем контент документа */
+.rst-content {
+    margin: 0 !important;
+    padding: 1rem !important;
+    display: block !important;
+    visibility: visible !important;
+}
+
+/* Убеждаемся, что document виден */
+.document {
+    display: block !important;
+    visibility: visible !important;
+}
+
+.document-wrapper .document {
+    display: block !important;
+    visibility: visible !important;
+}
+
+/* Показываем articleBody */
+[itemprop="articleBody"] {
+    display: block !important;
+    visibility: visible !important;
+}
+
+/* Показываем все секции */
+section {
+    display: block !important;
+    visibility: visible !important;
+}
+
+/* Скрытие стандартного footer RTD */
+.rst-footer-buttons {
+    display: none !important;
+}
+
+footer.rst-footer {
+    display: none !important;
+}
+
+/* Скрытие всех стандартных футеров RTD */
+.wy-nav-content footer,
+.wy-nav-content > footer,
+.rst-content footer,
+section footer,
+footer:not(.custom-footer):not(.homepage-footer) {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Скрытие всех стандартных футеров RTD */
+.rst-footer,
+.rst-footer-buttons,
+.wy-nav-content footer {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Скрытие breadcrumbs RTD */
+.wy-breadcrumbs,
+div[role="navigation"][aria-label="Page navigation"],
+.wy-breadcrumbs-aside {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+.breadcrumbs-link{
+    color: var(--text-light) !important;
+}
+
+/* Скрытие HR после breadcrumbs */
+.wy-breadcrumbs + hr,
+div[role="navigation"] + hr,
+div[role="navigation"][aria-label="Page navigation"] + hr,
+div[role="navigation"] ~ hr {
+    display: none !important;
+    visibility: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 0 !important;
+    border: none !important;
+}
+
+/* Скрытие headerlink (значок ссылки на заголовок) */
+.headerlink {
+    display: none !important;
+    visibility: hidden !important;
+    font-size: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Убираем отступы у body */
+body.wy-body-for-nav {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Убеждаемся, что наш header виден и находится в правильном месте */
+body .custom-header,
+.wy-body-for-nav .custom-header,
+.wy-grid-for-nav .custom-header,
+.wy-nav-content-wrap .custom-header,
+.wy-nav-content .custom-header,
+.rst-content .custom-header {
+    display: block !important;
+    visibility: visible !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    width: 100% !important;
+}
+
+/* Убеждаемся, что родительские контейнеры не мешают sticky */
+.wy-body-for-nav,
+.wy-grid-for-nav,
+.wy-nav-content-wrap,
+.wy-nav-content,
+.rst-content {
+    overflow: visible !important;
+    height: auto !important;
+    position: relative !important;
+}
+
+/* Убеждаемся, что header может быть sticky независимо от родительских контейнеров */
+body > .custom-header,
+body > * > .custom-header,
+.wy-body-for-nav > .custom-header,
+.wy-grid-for-nav > .custom-header {
+    position: sticky !important;
+    top: 0 !important;
+}
+
+/* Убеждаемся, что наше левое меню видно */
+body .left-nav-wrapper {
+    display: block !important;
+    position: fixed !important;
+    z-index: 999 !important;
+}
+
+body .left-nav {
+    display: block !important;
+}
+
+/* Убеждаемся, что наше плавающее меню видно */
+body .floating-toc-page {
+    display: flex !important;
+    position: fixed !important;
+    z-index: 998 !important;
+}
+
+/* ============================================
+   Хедер для внутренних страниц
+   ============================================ */
+
+.custom-header {
+    background: var(--bg-white);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    padding: 1rem 0;
+    display: block !important;
+    width: 100% !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin: 0 !important;
+}
+
+.custom-header .header-container {
+    max-width: 1880px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.custom-header .search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.custom-header .search-icon {
+    position: absolute;
+    left: 12px;
+    width: 18px;
+    height: 18px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.custom-header .search-input {
+    padding: 0.5rem 1rem 0.5rem 2.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    width: 300px;
+    transition: var(--transition);
+}
+
+.custom-header .search-input:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.1);
+}
+
+.custom-header .header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.custom-header .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.custom-header .nav-toggle span {
+    width: 24px;
+    height: 2px;
+    background: var(--text-dark);
+    transition: var(--transition);
+}
+
+.custom-header .logo-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+}
+
+.custom-header .logo-link:hover {
+    opacity: 0.8;
+}
+
+.custom-header .dropdown-arrow {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.custom-header .dropdown-arrow img {
+    width: 12px;
+    height: 12px;
+    transition: transform 0.3s ease;
+}
+
+.left-nav.active ~ .homepage-wrapper .dropdown-arrow img,
+.left-nav.active ~ * .dropdown-arrow img,
+body.left-nav-open .custom-header .dropdown-arrow img,
+body.left-nav-open .dropdown-arrow img {
+    transform: rotate(180deg);
+}
+
+.custom-header .logo {
+    height: 32px;
+    width: auto;
+}
+
+.custom-header .logo-text {
+    font-size: 18px;
+    color: #56738F;
+}
+
+.custom-header .dropdown-arrow {
+    color: var(--text-light);
+}
+
+.custom-header .header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+
+.custom-header .btn-login {
+    padding: 0.5rem 1.5rem;
+    background: var(--primary-blue-dark);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.custom-header .btn-login:hover {
+    background: var(--primary-blue);
+}
+
+/* ============================================
+   Левое навигационное меню
+   ============================================ */
+
+.left-nav-wrapper {
+    position: relative;
+}
+
+.left-nav {
+    position: fixed;
+    left: -400px;
+    top: 64px;
+    width: 400px;
+    height: calc(100vh - 64px);
+    background: var(--bg-white);
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+}
+
+.left-nav.active {
+    top: 64px;
+    left: 0 !important;
+}
+
+/* Когда левое меню открыто, контент не сдвигается */
+body:not(.left-nav-open) .document-wrapper {
+    padding-left: 1rem;
+}
+
+body.left-nav-open .document-wrapper {
+    padding-left: 1rem;
+}
+
+
+.left-nav-close {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--text-dark);
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.left-nav-content {
+    padding: 1rem;
+}
+
+/* Стили для навигации Sphinx в левом меню */
+.left-nav-content .toctree-wrapper,
+.left-nav-content .sphinxsidebar {
+    width: 100%;
+}
+
+/* Стили для меню RTD (wy-menu) */
+.left-nav-content .wy-menu,
+.left-nav-content .wy-menu-vertical,
+.left-nav-content ul {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.left-nav-content ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.left-nav-content li {
+    margin-bottom: 0;
+    position: relative;
+}
+
+/* Стили для элементов первого уровня (toctree-l1) */
+.left-nav-content .toctree-l1 {
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+}
+
+.left-nav-content .toctree-l1 > a {
+    color: var(--text-dark);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    padding-right: 2.5rem; /* Место для стрелки */
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 600;
+    font-size: 16px;
+    transition: var(--transition);
+    position: relative;
+}
+
+.left-nav-content .toctree-l1 > a:hover {
+    background: var(--bg-light);
+    color: var(--primary-blue);
+}
+
+/* Текущая страница (активная) */
+.left-nav-content .toctree-l1.current > a {
+    color: var(--text-dark);
+    font-weight: 700;
+}
+
+/* Индикатор для первого уровня - только на ссылке, не на всем элементе с подменю */
+.left-nav-content .toctree-l1.current > a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background-color: var(--primary-blue-dark);
+    z-index: 1;
+}
+
+/* Убеждаемся, что индикатор не растягивается на подменю */
+.left-nav-content .toctree-l1.current > a {
+    position: relative;
+}
+
+/* Индикатор для текущей страницы на всех уровнях */
+.left-nav-content [class*="toctree-l2"].current::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background-color: var(--primary-blue-dark);
+}
+
+.left-nav-content [class*="toctree-l3"].current::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background-color: var(--primary-blue-dark);
+}
+
+.left-nav-content [class*="toctree-l4"].current::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background-color: var(--primary-blue-dark);
+}
+
+/* Стрелка для раскрывающихся элементов - используем иконку (все уровни) */
+.left-nav-content [class*="toctree-l"] > a .nav-arrow-icon {
+    position: absolute;
+    right: 1.5rem;
+    width: 12px;
+    height: 12px;
+    transition: transform 0.3s ease;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* Стрелка поворачивается при открытии (все уровни) */
+.left-nav-content [class*="toctree-l"].current > a .nav-arrow-icon,
+.left-nav-content [class*="toctree-l"].expanded > a .nav-arrow-icon {
+    transform: rotate(180deg);
+}
+
+/* Стили для элементов второго уровня (toctree-l2) */
+.left-nav-content .toctree-l2 {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.left-nav-content .toctree-l2 > a {
+    color: var(--text-dark);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem 0.75rem 3rem;
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 400;
+    font-size: 15px;
+    transition: var(--transition);
+    position: relative;
+}
+
+.toctree-expand {
+    display: none;
+}
+
+.left-nav-content .toctree-l2 > a:hover {
+    background: var(--bg-light);
+    color: var(--primary-blue);
+}
+
+/* Текущая страница второго уровня */
+.left-nav-content .toctree-l2.current > a {
+    color: var(--primary-blue);
+    font-weight: 600;
+    background: rgba(41, 128, 185, 0.1);
+}
+
+/* Стили для элементов третьего уровня (toctree-l3) */
+.left-nav-content .toctree-l3 > a {
+    color: var(--text-dark);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1.5rem 0.5rem 4.5rem;
+    padding-right: 2.5rem; /* Место для стрелки */
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 400;
+    font-size: 14px;
+    transition: var(--transition);
+    position: relative;
+}
+
+.left-nav-content .toctree-l3 > a:hover {
+    background: var(--bg-light);
+    color: var(--primary-blue);
+}
+
+/* Текущая страница третьего уровня */
+.left-nav-content .toctree-l3.current > a {
+    color: var(--primary-blue);
+    font-weight: 600;
+    background: rgba(41, 128, 185, 0.1);
+}
+
+/* Скрытие подменю по умолчанию для всех уровней */
+.left-nav-content [class*="toctree-l"] > ul {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    padding-left: 0;
+    margin: 0;
+    will-change: max-height, opacity;
+}
+
+/* Показываем подменю для текущего элемента и раскрытых (все уровни) */
+.left-nav-content [class*="toctree-l"].current > ul,
+.left-nav-content [class*="toctree-l"].expanded > ul {
+    max-height: 1000px;
+    opacity: 1;
+}
+
+/* ============================================
+   Кастомные breadcrumbs
+   ============================================ */
+
+.custom-breadcrumbs {
+    padding: 1rem 0;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    border-bottom: none !important;
+    padding-bottom: 1rem;
+}
+
+.custom-breadcrumbs a {
+    color: var(--text-light);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.custom-breadcrumbs a:hover {
+    color: var(--primary-blue);
+}
+
+.breadcrumb-separator {
+    color: var(--text-light);
+    margin: 0 0.25rem;
+}
+
+.breadcrumb-current {
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+/* ============================================
+   Кнопки навигации Previous/Next
+   ============================================ */
+
+.page-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    gap: 1rem;
+}
+
+.nav-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--bg-white);
+    border: none;
+    border-radius: none;
+    color: var(--text-light) !important;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.nav-button:hover {
+
+    text-decoration: underline;
+}
+
+.nav-button.nav-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.nav-arrow {
+    font-size: 1.2rem;
+
+}
+
+.nav-prev {
+    margin-right: auto;
+}
+
+.nav-next {
+    margin-left: auto;
+}
+
+/* ============================================
+   Основной контент документа
+   ============================================ */
+
+/* Переопределение стандартного контента RTD */
+.rst-content {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+    display: block !important;
+    visibility: visible !important;
+}
+
+.document-wrapper {
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    min-height: calc(100vh - 200px);
+}
+
+/* Стили для контента Sphinx */
+.document {
+    max-width: 900px;
+    margin: 0 auto;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.document * {
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.document h1 {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    padding-bottom: 0rem;
+    border-bottom: none !important;
+    scroll-margin-top: 80px; /* Отступ для sticky header + небольшой запас для видимости */
+}
+
+.document h2 {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-top: 30px;
+    margin-bottom: 15px;
+    scroll-margin-top: 80px; /* Отступ для sticky header + небольшой запас для видимости */
+}
+
+.document h3 {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-top: 20px;
+    margin-bottom: 10px;
+    scroll-margin-top: 80px; /* Отступ для sticky header + небольшой запас для видимости */
+}
+
+.document h4 {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-top: 20px;
+    margin-bottom: 10px;
+    scroll-margin-top: 80px; /* Отступ для sticky header + небольшой запас для видимости */
+}
+
+.document h5,
+.document h6 {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-top: 20px;
+    margin-bottom: 10px;
+    scroll-margin-top: 80px; /* Отступ для sticky header + небольшой запас для видимости */
+}
+
+.document p {
+    line-height: 1.5;
+    font-size: 17px;
+    color: #374151;
+}
+
+/* Жирный текст (не заголовки) */
+.document strong,
+.document b {
+    color: #374151;
+    font-weight: 600;
+}
+
+/* Стили для ссылок в документе */
+.document a {
+    color: var(--primary-blue-dark);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.document a:hover {
+    text-decoration: underline;
+}
+
+.document img {
+    width: 80%;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--primary-blue-dark);
+    border-radius: 5px;
+    box-shadow: var(--card-shadow);
+    margin: 20px 0px 10px 0px;
+    display: block;
+}
+
+/* Картинки на 100% ширины с 425px */
+@media (max-width: 425px) {
+    .document img {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .document figure img {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+/* Подпись к изображению (figure caption) */
+.document figure {
+    margin: 20px 0;
+}
+
+.document figure img {
+    width: 80%;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--primary-blue-dark);
+    border-radius: 5px;
+    box-shadow: var(--card-shadow);
+    margin: 0 0 10px 0;
+    display: block;
+}
+
+.document figcaption,
+.document .caption,
+.document p.caption {
+    font-style: italic;
+    font-size: 15px;
+    color: #6B7280;
+    text-align: left;
+    margin-top: 8px;
+    margin-bottom: 30px;
+    line-height: 1.5;
+    font-family: 'Courier New', Courier, monospace !important;
+}
+
+/* Обертка для таблиц с горизонтальной прокруткой */
+.document .table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    margin: 20px 0 30px 0;
+    -webkit-overflow-scrolling: touch;
+}
+
+.document table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 !important;
+    border: 1px solid #E0E6EB;
+    background: transparent;
+    font-size: 17px;
+    table-layout: fixed;
+    min-width: 100%;
+}
+
+.document table th,
+.document table td {
+    border: 1px solid #E0E6EB;
+    padding: 1rem;
+    text-align: left;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+    overflow: visible;
+    
+}
+
+.document table th {
+    background: transparent;
+    color: var(--text-dark);
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.document table td {
+    background: transparent;
+    color: var(--text-dark);
+    font-size: 17px;
+    padding: 12px 18px!important;
+}
+
+.document table p {
+    line-height: 1.5 !important;
+
+}
+
+.document .head {
+    font-weight: 500 !important;
+    vertical-align: middle !important;
+}
+
+.document .head p{
+    margin: 0 !important;
+}
+
+
+
+.document table tr:last-child td {
+    border-bottom: 1px solid #E0E6EB;
+}
+
+.document table tr:nth-child(even) {
+    background: transparent;
+}
+
+/* ============================================
+   Admonitions (Примечания, предупреждения и т.д.)
+   ============================================ */
+
+.document .admonition {
+    margin: 30px 0;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+}
+
+/* Стили для note (Примечание) */
+.document .admonition.note {
+    background: #E8F4F8;
+    padding: 10px 40px 25px 10px;
+}
+
+.document .admonition.note .admonition-title {
+    background: transparent;
+    color: var(--text-dark) !important;
+    font-weight: 600;
+    font-size: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 7.5px;
+}
+
+/* Добавляем иконку через ::before */
+.document .admonition.note .admonition-title::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-image: url('../_static/icons/note-icon.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+/* Заменяем текст "Note" на "Примечание" через ::after */
+.document .admonition.note .admonition-title::after {
+    content: 'Примечание';
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text-dark) !important;
+}
+
+/* Скрываем стандартную иконку, если она есть */
+.document .admonition.note .admonition-title img,
+.document .admonition.note .admonition-title .icon {
+    display: none !important;
+}
+
+/* Стили для содержимого примечания */
+.document .admonition.note p {
+    margin: 0px 50px 0px;
+    font-size: 17px;
+    line-height: normal;
+    color: #374151;
+    font-weight: 500;
+}
+
+/* Адаптивность для примечаний на мобильных */
+@media (max-width: 768px) {
+    .document .admonition.note {
+        padding: 10px 15px 15px 10px !important;
+    }
+
+    .document .admonition.note p {
+        margin: 0px 10px 0px !important;
+        font-size: 15px !important;
+        line-height: 1.5 !important;
+    }
+
+    .document .admonition.note .admonition-title {
+        gap: 5px !important;
+        font-size: 0 !important;
+    }
+
+    /* Скрываем оригинальный текст "Note" в заголовке */
+    .document .admonition.note .admonition-title {
+        font-size: 0 !important;
+    }
+
+    .document .admonition.note .admonition-title > * {
+        display: none !important;
+        font-size: 0 !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+    }
+
+    .document .admonition.note .admonition-title::before {
+        width: 16px !important;
+        height: 16px !important;
+    }
+
+    .document .admonition.note .admonition-title::after {
+        font-size: 15px !important;
+    }
+}
+
+
+
+/* ============================================
+   Плавающее меню содержания страницы справа
+   ============================================ */
+
+.floating-toc-page {
+    position: fixed;
+    top: 64px;
+    right: 1rem;
+    width: 320px;
+    max-height: calc(100vh - 64px);
+    height: auto;
+    background: var(--bg-white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.floating-toc-page .floating-toc-content {
+    padding: 1rem;
+    overflow-y: auto;
+    max-height: calc(100vh - 64px);
+}
+
+.floating-toc-page .floating-toc-content a {
+    text-decoration: none;
+}
+
+/* Стили для стандартного TOC от Sphinx */
+.floating-toc-page ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.floating-toc-page li {
+    margin-bottom: 0.5rem;
+}
+
+.floating-toc-page a {
+    color: var(--text-dark);
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: block;
+    padding: 0.25rem 20px !important;
+    transition: var(--transition);
+}
+
+.floating-toc-page a:hover {
+    background-color: #E8EAEC;
+    color: var(--primary-blue);
+}
+
+.floating-toc-page .current > a {
+    color: var(--primary-blue);
+}
+
+.floating-toc-page ul ul {
+    list-style: none;
+    margin-top: 0.25rem;
+    padding-left: 1rem;
+}
+
+.floating-toc-list ul a {
+    padding: 0.25rem 20px;
+    color: var(--text-dark);
+}
+
+.floating-toc-page ul ul a {
+    font-size: 0.85rem;
+    color: var(--text-dark);
+}
+
+/* Активный элемент с индикатором */
+.floating-toc-page ul > li > a.active {
+    position: relative;
+    transition: var(--transition);
+    font-weight: 600;
+}
+
+.floating-toc-page ul > li > a.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background-color: var(--primary-blue-dark);
+}
+
+/* ============================================
+   Футер для внутренних страниц
+   ============================================ */
+
+.custom-footer {
+    background: #EDF0F2;
+    border-top: 1px solid var(--border-color);
+    padding: 45px 0 2rem;
+    margin-top: 4rem;
+    display: block !important;
+    position: relative;
+    z-index: 1;
+    clear: both;
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+}
+
+.custom-footer .footer-container {
+    display: flex;
+    max-width: 1400px;
+    height: 205px;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.custom-footer .footer-logo {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+}
+
+.custom-footer .footer-logo button {
+    width: 130px;
+    padding: 12px 0px;
+}
+
+.custom-footer .footer-logo-img {
+    height: 40px;
+    width: auto;
+}
+
+.custom-footer .footer-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.custom-footer .footer-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 22px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.custom-footer .footer-links {
+    list-style: none;
+}
+
+.custom-footer .footer-links li {
+    margin-bottom: 10px;
+}
+
+.custom-footer .footer-links a {
+    color: #56738F;
+    text-decoration: none;
+    font-size: 16px;
+    transition: var(--transition);
+}
+
+.custom-footer .footer-links a:hover {
+    text-decoration: underline;
+}
+
+.custom-footer .footer-social {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.custom-footer .social-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-white);
+    border-radius: 50%;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: var(--transition);
+}
+
+.custom-footer .social-icon:hover {
+    color: var(--text-dark);
+}
+
+.custom-footer .footer-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95px;
+    border-top: 1px solid var(--border-color);
+}
+
+.custom-footer .footer-copyright {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   Раскрывающиеся элементы
+   ============================================ */
+
+.collapsible {
+    cursor: pointer;
+    user-select: none;
+    transition: var(--transition);
+}
+
+.collapsible:hover {
+    opacity: 0.8;
+}
+
+.collapsible-content {
+    max-height: 0;
+    overflow: hidden;
+    padding-top: 0;
+    transition: max-height 0.3s ease, padding-top 0.3s ease;
+}
+
+.collapsible-content.active {
+    max-height: 1000px;
+    padding-top: 1rem;
+}
+
+/* ============================================
+   Адаптивность
+   ============================================ */
+
+@media (max-width: 379px) {
+    .nav-button {
+        padding: 6px 10px;
+    }
+    .nav-button .nav-text {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .document-wrapper {
+        padding-right: 2rem;
+    }
+
+    .floating-toc-page {
+        display: none;
+    }
+
+    .custom-header .nav-toggle {
+        display: flex;
+    }
+}
+
+@media (max-width: 768px) {
+    .document-wrapper {
+        padding: 2rem 20px;
+    }
+    .custom-footer {
+        margin-top: 20px;
+    }
+    .custom-header .search-input {
+        width: 200px;
+    }
+}
+
+/* Минимальные отступы для контента на мобильных */
+@media (max-width: 768px) and (min-width: 320px) {
+    .document-wrapper {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+}
+
+@media (max-width: 330px) {
+    .custom-breadcrumbs {
+        padding: 5px 0px;
+    }
+    .custom-breadcrumbs>a{
+        font-size: smaller;
+    }
+    .card-type-2 .card-par {
+        text-align: center;
+    }
+}
+
+/* Еще меньшие отступы для контента начиная с 425px */
+@media (max-width: 425px) {
+    .document-wrapper {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        padding-top: 10px !important;
+    }
+}
+
+/* ============================================
+   Адаптивность для внутренних страниц
+   ============================================ */
+
+/* Бургер-меню для внутренних страниц */
+.custom-header .burger-menu-toggle,
+.custom-header #burgerToggle,
+.custom-header .header-right .burger-menu-toggle,
+.custom-header .header-right #burgerToggle,
+.header-right .burger-menu-toggle,
+.header-right #burgerToggle,
+button.burger-menu-toggle,
+button#burgerToggle {
+    display: none; /* Скрыт по умолчанию */
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+    position: relative;
+    width: 32px;
+    height: 32px;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-header .burger-menu-toggle span,
+.custom-header .header-right .burger-menu-toggle span,
+.custom-header #burgerToggle span,
+.custom-header .header-right #burgerToggle span {
+    width: 24px;
+    height: 2px;
+    background: var(--text-dark);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: block;
+    transform-origin: center;
+}
+
+.custom-header .burger-menu-toggle.active span:nth-child(1),
+.custom-header .header-right .burger-menu-toggle.active span:nth-child(1),
+.custom-header #burgerToggle.active span:nth-child(1),
+.custom-header .header-right #burgerToggle.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.custom-header .burger-menu-toggle.active span:nth-child(2),
+.custom-header .header-right .burger-menu-toggle.active span:nth-child(2),
+.custom-header #burgerToggle.active span:nth-child(2),
+.custom-header .header-right #burgerToggle.active span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.custom-header .burger-menu-toggle.active span:nth-child(3),
+.custom-header .header-right .burger-menu-toggle.active span:nth-child(3),
+.custom-header #burgerToggle.active span:nth-child(3),
+.custom-header .header-right #burgerToggle.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* На десктопе бургер скрыт, dropdown показан */
+@media (min-width: 1281px) {
+    .custom-header .burger-menu-toggle,
+    .custom-header #burgerToggle,
+    .custom-header .header-right .burger-menu-toggle,
+    .custom-header .header-right #burgerToggle,
+    .header-right .burger-menu-toggle,
+    .header-right #burgerToggle,
+    .custom-header button.burger-menu-toggle,
+    .custom-header button#burgerToggle,
+    .custom-header .header-right button.burger-menu-toggle,
+    .custom-header .header-right button#burgerToggle,
+    .header-right button.burger-menu-toggle,
+    .header-right button#burgerToggle,
+    button.burger-menu-toggle,
+    button#burgerToggle,
+    #burgerToggle {
+        display: none !important;
+    }
+
+    .custom-header .logo-link {
+        display: flex !important;
+    }
+}
+
+/* Показываем бургер на планшетах и мобильных */
+@media (max-width: 1280px) {
+    .custom-header .burger-menu-toggle,
+    .custom-header #burgerToggle,
+    .custom-header .header-right .burger-menu-toggle,
+    .custom-header .header-right #burgerToggle,
+    .header-right .burger-menu-toggle,
+    .header-right #burgerToggle,
+    .custom-header button.burger-menu-toggle,
+    .custom-header button#burgerToggle,
+    .custom-header .header-right button.burger-menu-toggle,
+    .custom-header .header-right button#burgerToggle,
+    .header-right button.burger-menu-toggle,
+    .header-right button#burgerToggle,
+    button.burger-menu-toggle,
+    button#burgerToggle,
+    #burgerToggle,
+    .custom-header button[class*="burger"],
+    .custom-header button[id*="burger"],
+    .header-right button[class*="burger"],
+    .header-right button[id*="burger"] {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        flex-direction: column !important;
+        gap: 5px !important;
+        width: 32px !important;
+        height: 32px !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    /* Показываем dropdown для открытия левого меню */
+    .custom-header .logo-link {
+        display: flex !important;
+    }
+
+    .custom-header .header-container {
+        padding: 0 1rem;
+    }
+
+    .custom-header .header-right {
+        gap: 0.75rem;
+    }
+
+    .custom-header .search-input {
+        width: 250px;
+    }
+}
+
+/* Скрываем инпут поиска в header когда места нет */
+@media (max-width: 768px) {
+    .custom-header .search-container {
+        display: none !important;
+    }
+}
+
+@media (max-width: 425px) {
+    .custom-header .logo-text {
+        display: none;
+    }
+}
+
+/* Инпут поиска в левом меню */
+.left-nav-content .search-container {
+    display: none;
+    position: relative;
+    margin-bottom: 1rem;
+    padding: 0 1.5rem;
+}
+
+.left-nav-content .search-container.mobile-search {
+    display: flex;
+    align-items: center;
+}
+
+.left-nav-content .search-container .search-icon {
+    position: absolute;
+    left: 28px;
+    width: 18px;
+    height: 18px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.left-nav-content .search-container .search-input {
+    padding: 0.5rem 1rem 0.5rem 2.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    width: 100%;
+    transition: var(--transition);
+}
+
+.left-nav-content .search-container .search-input:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.1);
+}
+
+@media (max-width: 768px) {
+    .left-nav-content .search-container.mobile-search {
+        display: flex;
+    }
+}
+
+/* Горизонтальная прокрутка для таблиц на мобильных */
+@media (max-width: 768px) {
+    .document table {
+        table-layout: auto !important;
+        min-width: 600px;
+        width: auto;
+    }
+
+    /* Если таблица уже в обертке */
+    .document .table-wrapper {
+        overflow-x: auto;
+        overflow-y: visible;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        scrollbar-color: var(--border-color) transparent;
+        margin: 20px 0 30px 0;
+    }
+
+    .document .table-wrapper::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .document .table-wrapper::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .document .table-wrapper::-webkit-scrollbar-thumb {
+        background: var(--border-color);
+        border-radius: 4px;
+    }
+
+    .document .table-wrapper::-webkit-scrollbar-thumb:hover {
+        background: var(--text-light);
+    }
+
+    /* Если таблица не в обертке, делаем её родительский элемент прокручиваемым */
+    .document > table,
+    .document p + table,
+    .document div + table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+        margin: 20px 0 30px 0 !important;
+    }
+}
+
+/* Адаптивность для левого меню на внутренних страницах */
+@media (max-width: 1280px) {
+    .left-nav {
+        left: -400px !important;
+        width: 350px;
+        transition: left 0.3s ease !important;
+    }
+
+    .left-nav.active {
+        left: 0 !important;
+    }
+}
+
+/* Левое меню для планшетов (769px - 1280px) */
+@media (max-width: 1280px) and (min-width: 769px) {
+    .left-nav {
+        left: -400px !important;
+        right: auto !important;
+        width: 350px;
+        top: 64px !important;
+        height: calc(100vh - 64px) !important;
+        transition: left 0.3s ease !important;
+    }
+
+    .left-nav.active {
+        left: 0 !important;
+        right: auto !important;
+    }
+}
+
+/* Левое меню для мобильных (до 768px) */
+@media (max-width: 768px) {
+    .left-nav {
+        position: fixed !important;
+        left: -100% !important;
+        right: auto !important;
+        width: 100% !important;
+        top: 64px !important;
+        height: calc(100vh - 64px) !important;
+        z-index: 10000 !important;
+        transition: left 0.3s ease !important;
+        box-shadow: none !important;
+        display: block !important;
+    }
+
+    .left-nav:not(.active) {
+        left: -100% !important;
+        right: auto !important;
+        top: 64px !important;
+    }
+
+    .left-nav.active {
+        left: 0 !important;
+        right: auto !important;
+        top: 64px !important;
+    }
+}
+
+/* Адаптивность для правого меню (floating-toc-page) */
+@media (max-width: 1280px) {
+    .floating-toc-page {
+        display: none !important;
+        position: fixed !important;
+        top: 64px !important;
+        right: -350px !important;
+        width: 350px !important;
+        max-height: calc(100vh - 64px) !important;
+        height: auto !important;
+        z-index: 10001 !important;
+        background: var(--bg-white) !important;
+        box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1) !important;
+        transition: right 0.3s ease !important;
+        pointer-events: auto !important;
+    }
+
+    .floating-toc-page.active {
+        display: flex !important;
+        right: 0 !important;
+        pointer-events: auto !important;
+    }
+    
+    /* Убеждаемся, что все элементы внутри меню кликабельны */
+    .floating-toc-page.active * {
+        pointer-events: auto !important;
+    }
+}
+
+/* Правое меню для диапазона 425px - 768px */
+@media (min-width: 425px) and (max-width: 768px) {
+    .floating-toc-page {
+        width: 350px !important;
+        right: -350px !important;
+        top: 64px !important;
+        max-height: calc(100vh - 64px) !important;
+        height: auto !important;
+        transition: right 0.3s ease !important;
+    }
+
+    .floating-toc-page.active {
+        right: 0 !important;
+    }
+}
+
+/* Правое меню для мобильных до 425px */
+@media (max-width: 424px) {
+    .floating-toc-page {
+        width: 100% !important;
+        right: -100% !important;
+        top: 64px !important;
+        height: calc(100vh - 64px) !important;
+        max-height: calc(100vh - 64px) !important;
+        z-index: 10000 !important;
+        transition: right 0.3s ease !important;
+    }
+
+    .floating-toc-page.active {
+        right: 0 !important;
+    }
+}
+
+/* Адаптивность кнопки "Войти" начиная с 425px */
+@media (max-width: 424px) {
+    .custom-header .btn-login {
+        padding: 0.4rem 1rem;
+        font-size: 0.85rem;
+    }
+}
+
+/* Адаптивность для document-wrapper */
+@media (max-width: 1280px) {
+    .document-wrapper {
+        padding: 2rem 1rem;
+        margin-left: 0;
+    }
+}
+
+/* Отступ справа для правого меню до 1440px */
+@media (min-width: 1281px) and (max-width: 1440px) {
+    .document-wrapper {
+        padding-right: 200px;
+    }
+
+    .custom-footer .footer-container {
+        padding-right: 360px;
+    }
+}
+
+/* Адаптивность для footer на внутренних страницах */
+@media (max-width: 1280px) {
+    .custom-footer {
+        height: auto;
+        padding: 45px 0 2rem;
+    }
+
+    .custom-footer .footer-container {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-left: 0;
+        padding: 0 1rem;
+        height: auto;
+        max-width: 100%;
+    }
+
+    .custom-footer .footer-logo {
+        margin-bottom: 0;
+        margin-right: 3rem;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .custom-footer .footer-content {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3rem;
+        flex: 1;
+        margin-bottom: 0;
+    }
+
+    .custom-footer .footer-social {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .custom-footer .footer-container {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 0;
+        padding: 1.5rem 0.75rem;
+        height: auto;
+    }
+
+    .custom-footer .footer-logo {
+        margin-bottom: 1rem;
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .custom-footer .footer-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        width: 100%;
+    }
+
+    .custom-footer .footer-social {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Overlay для меню на внутренних страницах */
+.left-nav-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.left-nav-overlay.active {
+    display: block;
+    pointer-events: auto;
+}
+
+/* Правое меню должно быть выше overlay и перехватывать клики */
+@media (max-width: 1280px) {
+    #floatingTocPage.active {
+        z-index: 10002 !important;
+        pointer-events: auto !important;
+    }
+    
+    #floatingTocPage.active * {
+        pointer-events: auto !important;
+    }
+    
+    /* Overlay должен быть ниже меню */
+    .left-nav-overlay.active {
+        z-index: 9999 !important;
+    }
+    
+    @media (max-width: 424px) {
+        .left-nav-overlay.active {
+            /* На мобильных меню занимает всю ширину, overlay не нужен */
+            display: none !important;
+        }
+    }
+}
+
+@media (min-width: 1281px) {
+    .left-nav-overlay {
+        display: none !important;
+    }
+}
+
+/* Принудительно показываем бургер на всех экранах до 1280px */
+@media (max-width: 1280px) {
+    .custom-header button.burger-menu-toggle,
+    .custom-header button#burgerToggle,
+    .custom-header .header-right button.burger-menu-toggle,
+    .custom-header .header-right button#burgerToggle,
+    .header-right button.burger-menu-toggle,
+    .header-right button#burgerToggle,
+    .custom-header .burger-menu-toggle,
+    .custom-header #burgerToggle,
+    .custom-header .header-right .burger-menu-toggle,
+    .custom-header .header-right #burgerToggle,
+    .header-right .burger-menu-toggle,
+    .header-right #burgerToggle,
+    button.burger-menu-toggle,
+    button#burgerToggle,
+    #burgerToggle {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        flex-direction: column !important;
+        gap: 5px !important;
+        width: 32px !important;
+        height: 32px !important;
+    }
+    
+    /* Убеждаемся, что span внутри бургера видны */
+    .custom-header .burger-menu-toggle span,
+    .custom-header #burgerToggle span,
+    .custom-header .header-right .burger-menu-toggle span,
+    .custom-header .header-right #burgerToggle span,
+    .header-right .burger-menu-toggle span,
+    .header-right #burgerToggle span,
+    button.burger-menu-toggle span,
+    button#burgerToggle span,
+    #burgerToggle span {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}

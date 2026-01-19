@@ -1,0 +1,185 @@
+{% extends "!layout.html" %}
+
+{% block extrahead %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ pathto('_static/custom.css', 1) }}?v={{ build_time|default(1) }}">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+{% endblock %}
+
+{% block header %}
+    {%- if pagename != 'index' -%}
+    <div class="custom-header">
+        <div class="header-container">
+            <div class="header-left">
+
+                <a  class="logo-link-main" href="{{ pathto('index.html', 1) }}">
+                    <img src="{{ pathto('_static/images/logo.svg', 1) }}" alt="NextGIS" class="logo">
+                    <span>NextGIS</span>
+                </a>
+                <a href="#" class="logo-link">
+                    <span class="logo-text">Документация</span>
+                    <span class="dropdown-arrow"><img src="{{ pathto('_static/icons/arrow_down_for_nav.svg', 1) }}" alt=""></span>
+                </a>
+            </div>
+            <div class="header-right">
+                <div class="search-container">
+                    <img src="{{ pathto('_static/icons/search-icon.svg', 1) }}" alt="Поиск" class="search-icon">
+                    <input type="search" placeholder="Поиск по документации..." class="search-input">
+                </div>
+                <button class="btn-login">Войти</button>
+                <button class="burger-menu-toggle" id="burgerToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    {%- else -%}
+    {{ super() }}
+    {%- endif -%}
+{% endblock %}
+
+{% block sidebar1 %}
+    {%- if pagename != 'index' -%}
+    <div class="left-nav-wrapper">
+        <nav class="left-nav" id="leftNav">
+            <div class="left-nav-content">
+                {{ super() }}
+            </div>
+        </nav>
+    </div>
+    {%- else -%}
+    {{ super() }}
+    {%- endif -%}
+{% endblock %}
+
+{% block document %}
+    {%- if pagename != 'index' -%}
+    <div class="document-wrapper">
+        <nav class="custom-breadcrumbs">
+            <a class="breadcrumbs-link" href="{{ pathto('index.html', 1) }}">Документация</a>
+            {%- if parents -%}
+                {%- for parent in parents -%}
+                    <span class="breadcrumb-separator">></span>
+                    <a class="breadcrumbs-link" href="{{ parent.link|e }}">{{ parent.title|e }}</a>
+                {%- endfor -%}
+            {%- elif pagename != 'index' -%}
+                {# Если parents нет, пытаемся построить из pagename #}
+                {%- set pagename_parts = pagename.split('/') -%}
+                {%- if pagename_parts|length > 1 -%}
+                    {%- for part in pagename_parts[:-1] -%}
+                        <span class="breadcrumb-separator">></span>
+                        <a class="breadcrumbs-link" href="{{ pathto(part + '.html', 1) }}">{{ part|title }}</a>
+                    {%- endfor -%}
+                {%- endif -%}
+            {%- endif -%}
+            <span class="breadcrumb-separator">></span>
+            <span class="breadcrumb-current">{{ title|striptags|e }}</span>
+        </nav>
+        
+        <div class="document">
+            {{ super() }}
+            
+            <div class="page-navigation">
+                {%- if prev -%}
+                <a href="{{ prev.link }}" class="nav-button nav-prev">
+                    <span class="nav-text">< Предыдущая</span>
+                </a>
+                {%- else -%}
+                <span class="nav-button nav-prev nav-disabled">
+                    <span class="nav-text">< Предыдущая</span>
+
+                </span>
+                {%- endif -%}
+                
+                {%- if next -%}
+                <a href="{{ next.link }}" class="nav-button nav-next">
+                    <span class="nav-text">Следующая ></span>
+                </a>
+                {%- else -%}
+                <span class="nav-button nav-next nav-disabled">
+                    <span class="nav-text">Следующая ></span>
+
+                </span>
+                {%- endif -%}
+            </div>
+        </div>
+        
+        <aside class="floating-toc-page" id="floatingTocPage">
+            <div class="floating-toc-content">
+                {{ toc }}
+            </div>
+        </aside>
+
+    </div>
+    {%- else -%}
+    {{ super() }}
+    {%- endif -%}
+{% endblock %}
+
+{% block footer %}
+    {%- if pagename != 'index' -%}
+    <footer class="custom-footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="{{ pathto('_static/images/logo-large-footer.svg', 1) }}" alt="NextGIS" class="footer-logo-img">
+                <button class="btn-login">Войти</button>
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><img src="{{ pathto('_static/icons/Social_X.svg', 1) }}" alt=""></a>
+                    <a href="#" class="social-icon"><img src="{{ pathto('_static/icons/Social_instagram.svg', 1) }}" alt=""></a>
+                    <a href="#" class="social-icon"><img src="{{ pathto('_static/icons/Social_github.svg', 1) }}" alt=""></a>
+                    <a href="#" class="social-icon"><img src="{{ pathto('_static/icons/Social_inbox.svg', 1) }}" alt=""></a>
+                    <a href="#" class="social-icon"><img src="{{ pathto('_static/icons/Social_youtube.svg', 1) }}" alt=""></a>
+                    <a href="#" class="social-icon"><img src="{{ pathto('_static/icons/Social_discord.svg', 1) }}" alt=""></a>
+                </div>
+            </div>
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4 class="footer-title">ПРОДУКТЫ</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">NextGIS Web</a></li>
+                        <li><a href="#">NextGIS QGIS</a></li>
+                        <li><a href="#">NextGIS Mobile</a></li>
+                        <li><a href="#">NextGIS Data</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-title">РЕСУРСЫ</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">API документация</a></li>
+                        <li><a href="#">События</a></li>
+                        <li><a href="#">Видео</a></li>
+                        <li><a href="#">Блог</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-title">ПОДДЕРЖКА</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Техподдержка</a></li>
+                        <li><a href="#">Сообщество в Telegram</a></li>
+                        <li><a href="#">Консультации</a></li>
+                        <li><a href="#">Контакты</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            
+        </div>
+        <div class="footer-bottom">
+            <p class="footer-copyright">© 2025 NextGIS</p>
+        </div>
+    </footer>
+    {%- else -%}
+    {{ super() }}
+    {%- endif -%}
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    {%- if pagename != 'index' -%}
+    <script src="{{ pathto('_static/custom.js', 1) }}?v={{ build_time|default(1) }}"></script>
+    {%- endif -%}
+{% endblock %}
