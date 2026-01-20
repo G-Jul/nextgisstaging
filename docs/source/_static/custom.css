@@ -181,6 +181,32 @@ div[role="navigation"] ~ hr {
     padding: 0 !important;
 }
 
+/* Скрытие виджета выбора версии RTD (правый нижний угол) */
+.rst-versions,
+.rst-version,
+.rst-current-version,
+.rst-other-versions,
+div.rst-versions,
+.rst-versions .rst-other-versions,
+.rst-versions .rst-current-version,
+.rst-versions .rst-version,
+.rst-versions.rst-badge,
+.rst-versions.rst-badge-small,
+.rst-versions.rst-badge-large,
+.rst-versions[class*="rst-badge"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    position: absolute !important;
+    left: -9999px !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+
 /* Убираем отступы у body */
 body.wy-body-for-nav {
     padding: 0 !important;
@@ -492,8 +518,6 @@ body.left-nav-open .document-wrapper {
 }
 
 .left-nav-content .toctree-l1 > a:hover {
-    background: var(--bg-light);
-    color: var(--primary-blue);
 }
 
 /* Текущая страница (активная) */
@@ -511,7 +535,7 @@ body.left-nav-open .document-wrapper {
     height: 100%;
     width: 2px;
     background-color: var(--primary-blue-dark);
-    z-index: 1;
+    z-index: 100;
 }
 
 /* Убеждаемся, что индикатор не растягивается на подменю */
@@ -519,8 +543,8 @@ body.left-nav-open .document-wrapper {
     position: relative;
 }
 
-/* Индикатор для текущей страницы на всех уровнях */
-.left-nav-content [class*="toctree-l2"].current::before {
+/* Индикатор для текущей страницы второго уровня - только на ссылке, не на всем элементе */
+.left-nav-content .toctree-l2.current > a::before {
     content: '';
     position: absolute;
     left: 0;
@@ -528,19 +552,16 @@ body.left-nav-open .document-wrapper {
     height: 100%;
     width: 2px;
     background-color: var(--primary-blue-dark);
+    z-index: 100;
 }
 
-.left-nav-content [class*="toctree-l3"].current::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 2px;
-    background-color: var(--primary-blue-dark);
+/* Убеждаемся, что индикатор не растягивается на подменю */
+.left-nav-content .toctree-l2.current > a {
+    position: relative;
 }
 
-.left-nav-content [class*="toctree-l4"].current::before {
+/* Индикатор для текущей страницы третьего уровня - только на ссылке */
+.left-nav-content .toctree-l3.current > a::before {
     content: '';
     position: absolute;
     left: 0;
@@ -548,6 +569,27 @@ body.left-nav-open .document-wrapper {
     height: 100%;
     width: 2px;
     background-color: var(--primary-blue-dark);
+    z-index: 100;
+}
+
+.left-nav-content .toctree-l3.current > a {
+    position: relative;
+}
+
+/* Индикатор для текущей страницы четвертого уровня - только на ссылке */
+.left-nav-content .toctree-l4.current > a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background-color: var(--primary-blue-dark);
+    z-index: 100;
+}
+
+.left-nav-content .toctree-l4.current > a {
+    position: relative;
 }
 
 /* Стрелка для раскрывающихся элементов - используем иконку (все уровни) */
@@ -570,8 +612,8 @@ body.left-nav-open .document-wrapper {
 }
 
 /* Стили для элементов второго уровня (toctree-l2) */
-.left-nav-content .toctree-l2 {
-    background: rgba(0, 0, 0, 0.02);
+.left-nav-content .toctree-l2.current{
+    background: #E4F3FF;
 }
 
 .left-nav-content .toctree-l2 > a {
@@ -591,16 +633,15 @@ body.left-nav-open .document-wrapper {
     display: none;
 }
 
-.left-nav-content .toctree-l2 > a:hover {
-    background: var(--bg-light);
-    color: var(--primary-blue);
+.left-nav-content .toctree-l1,
+.left-nav-content .toctree-l2,
+.left-nav-content .toctree-l3 > a:hover {
+    background: #E4F3FF;
+
 }
 
 /* Текущая страница второго уровня */
 .left-nav-content .toctree-l2.current > a {
-    color: var(--primary-blue);
-    font-weight: 600;
-    background: rgba(41, 128, 185, 0.1);
 }
 
 /* Стили для элементов третьего уровня (toctree-l3) */
@@ -620,15 +661,11 @@ body.left-nav-open .document-wrapper {
 }
 
 .left-nav-content .toctree-l3 > a:hover {
-    background: var(--bg-light);
-    color: var(--primary-blue);
 }
 
 /* Текущая страница третьего уровня */
 .left-nav-content .toctree-l3.current > a {
-    color: var(--primary-blue);
-    font-weight: 600;
-    background: rgba(41, 128, 185, 0.1);
+    background: #E4F3FF;
 }
 
 /* Скрытие подменю по умолчанию для всех уровней */
@@ -1282,6 +1319,10 @@ body.left-nav-open .document-wrapper {
     font-size: 0.9rem;
 }
 
+.floating { 
+    display: none !important;
+} 
+
 /* ============================================
    Раскрывающиеся элементы
    ============================================ */
@@ -1684,7 +1725,6 @@ button#burgerToggle {
         top: 64px !important;
         right: -350px !important;
         width: 350px !important;
-        max-height: calc(100vh - 64px) !important;
         height: auto !important;
         z-index: 10001 !important;
         background: var(--bg-white) !important;
@@ -1702,6 +1742,19 @@ button#burgerToggle {
     /* Убеждаемся, что все элементы внутри меню кликабельны */
     .floating-toc-page.active * {
         pointer-events: auto !important;
+    }
+}
+
+/* Правое меню для диапазона 768px - 1280px - не занимает всю высоту, как при 768px */
+@media (min-width: 768px) and (max-width: 1280px) {
+    .floating-toc-page {
+        max-height: 80vh !important;
+        height: auto !important;
+    }
+
+    .floating-toc-page .floating-toc-content {
+        max-height: 80vh !important;
+        overflow-y: auto !important;
     }
 }
 

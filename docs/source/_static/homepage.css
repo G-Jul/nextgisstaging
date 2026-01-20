@@ -9,9 +9,11 @@
     --secondary-gray: #34495e;
     --text-dark: #1D1D1B;
     --text-light: #56738F;
-    --bg-white: #ffffff;
+    --bg-card-white: #F0F2F4;
     --bg-light: #D1D9E0;
+    --bg-white: #FFFFFF;
     --border-color: #E0E6EB;
+    --card-hover: #E8EAEC;
     --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     --card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
     --border-radius: 8px;
@@ -393,7 +395,9 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
     .burger-menu-toggle {
         display: flex !important;
     }
-
+    .floating-toc.active {
+        height: auto !important;
+    }
 }
 
 @media (max-width: 425px) {
@@ -529,7 +533,7 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
 }
 
 .card {
-    background: var(--bg-white);
+    background: var(--bg-card-white);
     border-radius: var(--border-radius);
     padding: 15px;
     transition: var(--transition);
@@ -539,7 +543,7 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
 .card:hover {
     transform: translateY(-2px);
     box-shadow: var(--card-shadow-hover);
-    background-color: #E8EAEC;
+    background-color: var(--card-hover);
 }
 
 .card-type-1 {
@@ -596,7 +600,7 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
     max-width: 330px;
     min-height: 220px;
     margin-bottom: 24px;
-    border: #E0E6EB 1px solid;
+    border: var(--border-color) 1px solid;
     padding: 15px;
 }
 
@@ -672,7 +676,6 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
 
 .card-type-3 {
     box-shadow: var(--card-shadow);
-    
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -680,13 +683,14 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
     max-width: 450px;
     min-height: 270px;
     margin-bottom: 24px;
-    border: #E0E6EB 1px solid;
+    border: var(--border-color) 1px solid;
     padding: 20px;
 }
 
 .card-type-3:hover {
     transform: none;
     box-shadow: none;
+    background-color: var(--card-hover);
 }
 
 .card-type-3 .card-title{
@@ -756,7 +760,7 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
 .faq-category-header {
     width: 100%;
     padding: 1rem 1.5rem;
-    background: var(--bg-white);
+    background: var(--bg-card-white);
     border: none;
     display: flex;
     justify-content: space-between;
@@ -1146,7 +1150,6 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
     /* Адаптируем карточки */
     .cards-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
     }
 
     .cards-type-1 {
@@ -1348,7 +1351,7 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
     /* 3 столбца для "для пользователей" (cards-type-2) */
     .cards-type-2 {
         grid-template-columns: repeat(3, 1fr) !important;
-        gap: 1rem;
+        column-gap: 1rem;
     }
 
     /* Уменьшаем размер карточек типа 2 */
@@ -1357,6 +1360,7 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
         max-width: 100% !important;
         min-height: 200px !important;
         font-size: 16px !important;
+        margin-bottom: 16px !important;
     }
 
     .card-type-2 .card-title {
@@ -1375,6 +1379,8 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
     }
 }
 
+
+
 /* Адаптивность для карточек в диапазоне 1281px - 1358px */
 @media (min-width: 1281px) and (max-width: 1358px) {
     /* Отступ справа для правого меню */
@@ -1389,7 +1395,7 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
     /* 2 столбца для "Мне нужно" и "для разработчиков" (cards-type-1) */
     .cards-type-1 {
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 1rem;
+        column-gap: 1rem;
     }
 
     /* Уменьшаем размер карточек типа 1 */
@@ -1398,6 +1404,7 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
         max-width: 100% !important;
         font-size: 16px !important;
         min-height: 90px !important;
+        margin-bottom: 12px !important;
     }
 
     .card-type-1 .card-title {
@@ -1414,10 +1421,14 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
         margin-right: 10px !important;
     }
 
+    .card-type-1 {
+        margin-bottom: 12px !important;
+    }
+
     /* 2 столбца для "дополнительные ресурсы" (cards-type-3) */
     .cards-type-3 {
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 1rem;
+        column-gap: 1rem;
     }
 
     /* Уменьшаем размер карточек типа 3 */
@@ -1425,6 +1436,7 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
         max-width: 100% !important;
         min-height: 220px !important;
         padding: 1rem !important;
+        margin-bottom: 12px !important; 
     }
 
     .card-type-3 .card-title {
@@ -1433,6 +1445,73 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
 
     .card-type-3 .card-description {
         font-size: 13px !important;
+    }
+}
+
+/* Адаптивность для карточек в диапазоне 960px - 1280px */
+@media (min-width: 960px) and (max-width: 1280px) {
+    /* 2 столбца для "Мне нужно" и "для разработчиков" (cards-type-1) */
+    .cards-type-1 {
+        grid-template-columns: repeat(2, 1fr) !important;
+        column-gap: 0.75rem !important;
+        row-gap: 0.75rem !important;
+    }
+
+    /* Карточки занимают по 50% ширины */
+    .card-type-1 {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 1rem !important;
+        font-size: 16px !important;
+        min-height: 90px !important;
+        margin-bottom: 0 !important;
+    }
+
+    .card-type-1 .card-title {
+        font-size: 16px !important;
+    }
+
+    .card-type-1 .card-description {
+        font-size: 13px !important;
+    }
+
+    .card-type-1 .card-icon {
+        width: 32px !important;
+        height: 32px !important;
+        margin-right: 10px !important;
+    }
+}
+
+/* Адаптивность для карточек в диапазоне 768px - 960px */
+@media (min-width: 768px) and (max-width: 960px) {
+    /* 2 столбца для "Мне нужно" и "для разработчиков" (cards-type-1) */
+    .cards-type-1 {
+        grid-template-columns: repeat(2, 1fr) !important;
+        column-gap: 1rem;
+        
+    }
+
+    /* Уменьшаем размер карточек типа 1 */
+    .card-type-1 {
+        padding: 1rem !important;
+        max-width: 100% !important;
+        font-size: 16px !important;
+        min-height: 90px !important;
+        margin-bottom: 12px !important;
+    }
+
+    .card-type-1 .card-title {
+        font-size: 16px !important;
+    }
+
+    .card-type-1 .card-description {
+        font-size: 13px !important;
+    }
+
+    .card-type-1 .card-icon {
+        width: 32px !important;
+        height: 32px !important;
+        margin-right: 10px !important;
     }
 }
 
@@ -1507,6 +1586,10 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
     box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.1);
 }
 
+.floating {
+    display: none !important;
+} 
+
 @media (max-width: 768px) {
     .left-nav-content .search-container.mobile-search {
         display: flex;
@@ -1557,7 +1640,6 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
     /* Карточки - одна колонка */
     .cards-grid {
         grid-template-columns: 1fr;
-        gap: 1rem;
     }
 
     .cards-type-1 {
@@ -1573,7 +1655,7 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
         max-width: 100%;
         font-size: 16px;
         min-height: 80px;
-        margin-bottom: 1rem;
+        margin-bottom: 12px;
     }
 
     .card-type-1 .card-icon {
@@ -1595,7 +1677,7 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
         padding: 1rem;
         max-width: 100%;
         min-height: 180px;
-        margin-bottom: 1rem;
+        margin-bottom: 12px;
     }
 
     .card-type-2 .card-icon-small {
@@ -1622,7 +1704,7 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
         max-width: 100%;
         min-height: 200px;
         padding: 1rem;
-        margin-bottom: 1rem;
+        margin-bottom: 12px;
     }
 
     .card-type-3 .card-title {
@@ -1854,5 +1936,56 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
 
     .floating-toc.active {
         right: 0 !important;
+    }
+}
+
+/* ============================================
+   Скрытие виджета выбора версии RTD (правый нижний угол)
+   ============================================ */
+.rst-versions,
+.rst-version,
+.rst-current-version,
+.rst-other-versions,
+div.rst-versions,
+.rst-versions .rst-other-versions,
+.rst-versions .rst-current-version,
+.rst-versions .rst-version,
+.rst-versions.rst-badge,
+.rst-versions.rst-badge-small,
+.rst-versions.rst-badge-large,
+.rst-versions[class*="rst-badge"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    position: absolute !important;
+    left: -9999px !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+
+
+@media (min-width: 1281px) and (max-width: 1327px) {
+    .card-tags > .tag {
+        font-size: 10px !important;
+    }
+}
+
+@media (min-width: 1328px) and (max-width: 1402px) {
+    .card-tags > .tag {
+        font-size: 12px !important;
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 960px) {
+    .footer-logo> img {
+        width: 200px !important;
+    }
+    .footer-logo {
+        margin-right: 12px;
     }
 }

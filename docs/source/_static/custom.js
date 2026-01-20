@@ -288,15 +288,40 @@
                         }
                         
                         // Если клик по тексту ссылки
+                        const href = finalLink.getAttribute('href');
+                        
                         if (!isExpanded) {
-                            // Если меню закрыто - раскрываем его и не переходим по ссылке
+                            // Если меню закрыто - раскрываем его
                             e.preventDefault();
                             e.stopPropagation();
                             item.classList.add('expanded');
+                            
+                            // Если это переход на другую страницу (не якорная ссылка), добавляем current
+                            if (href && !href.startsWith('#')) {
+                                // Убираем current со всех элементов меню
+                                const leftNav = document.getElementById('leftNav');
+                                if (leftNav) {
+                                    leftNav.querySelectorAll('[class*="toctree-l"]').forEach(menuItem => {
+                                        menuItem.classList.remove('current');
+                                    });
+                                }
+                                // Добавляем current к кликнутому элементу
+                                item.classList.add('current');
+                                
+                                // Устанавливаем флаг, что пользователь кликнул
+                                if (leftNav) {
+                                    leftNav.dataset.userClicked = 'true';
+                                    setTimeout(() => {
+                                        if (leftNav) {
+                                            leftNav.dataset.userClicked = 'false';
+                                        }
+                                    }, 2000);
+                                }
+                            }
                         } else {
-                            // Если меню уже раскрыто - добавляем плавную прокрутку
-                            const href = finalLink.getAttribute('href');
+                            // Если меню уже раскрыто
                             if (href && href.startsWith('#')) {
+                                // Якорная ссылка - добавляем плавную прокрутку
                                 e.preventDefault();
                                 const targetElement = document.querySelector(href);
                                 if (targetElement) {
@@ -306,8 +331,49 @@
                                         block: 'start'
                                     });
                                 }
+                                
+                                // Убираем current со всех элементов меню
+                                const leftNav = document.getElementById('leftNav');
+                                if (leftNav) {
+                                    leftNav.querySelectorAll('[class*="toctree-l"]').forEach(menuItem => {
+                                        menuItem.classList.remove('current');
+                                    });
+                                }
+                                // Добавляем current к кликнутому элементу
+                                item.classList.add('current');
+                                
+                                // Устанавливаем флаг, что пользователь кликнул
+                                if (leftNav) {
+                                    leftNav.dataset.userClicked = 'true';
+                                    setTimeout(() => {
+                                        if (leftNav) {
+                                            leftNav.dataset.userClicked = 'false';
+                                        }
+                                    }, 2000);
+                                }
+                            } else if (href && !href.startsWith('#')) {
+                                // Переход на другую страницу - добавляем current
+                                // Убираем current со всех элементов меню
+                                const leftNav = document.getElementById('leftNav');
+                                if (leftNav) {
+                                    leftNav.querySelectorAll('[class*="toctree-l"]').forEach(menuItem => {
+                                        menuItem.classList.remove('current');
+                                    });
+                                }
+                                // Добавляем current к кликнутому элементу
+                                item.classList.add('current');
+                                
+                                // Устанавливаем флаг, что пользователь кликнул
+                                if (leftNav) {
+                                    leftNav.dataset.userClicked = 'true';
+                                    setTimeout(() => {
+                                        if (leftNav) {
+                                            leftNav.dataset.userClicked = 'false';
+                                        }
+                                    }, 2000);
+                                }
+                                // Разрешаем стандартный переход на другую страницу
                             }
-                            // Если это внешняя ссылка, разрешаем стандартное поведение
                         }
                     }, false); // Используем bubble phase, чтобы стрелка обработалась раньше
                     
@@ -374,6 +440,46 @@
         
         // Обрабатываем все уровни меню
         processMenuItems(leftNav);
+        
+        // Функция для удаления current с родительских элементов, если активен дочерний
+        function removeCurrentFromParents() {
+            const leftNav = document.getElementById('leftNav');
+            if (!leftNav) return;
+            
+            // Находим все элементы с классом current
+            const currentItems = leftNav.querySelectorAll('[class*="toctree-l"].current');
+            
+            currentItems.forEach(currentItem => {
+                // Определяем уровень текущего элемента
+                const classList = Array.from(currentItem.classList);
+                const levelClass = classList.find(cls => cls.startsWith('toctree-l'));
+                if (!levelClass) return;
+                
+                const currentLevel = parseInt(levelClass.replace('toctree-l', ''));
+                
+                // Если это не первый уровень (l2, l3, l4 и т.д.)
+                if (currentLevel > 1) {
+                    // Находим все родительские элементы и убираем у них current
+                    let parent = currentItem.parentElement;
+                    while (parent && parent !== leftNav) {
+                        const parentItem = parent.closest('[class*="toctree-l"]');
+                        if (parentItem && parentItem !== currentItem) {
+                            parentItem.classList.remove('current');
+                            // Оставляем expanded, чтобы меню оставалось раскрытым
+                            if (!parentItem.classList.contains('expanded')) {
+                                parentItem.classList.add('expanded');
+                            }
+                        }
+                        parent = parent.parentElement;
+                    }
+                }
+            });
+        }
+        
+        // Вызываем после обработки меню (несколько раз с задержками, чтобы учесть классы от Sphinx)
+        setTimeout(removeCurrentFromParents, 100);
+        setTimeout(removeCurrentFromParents, 500);
+        setTimeout(removeCurrentFromParents, 1000);
         
         // Функция для обновления current на основе видимых заголовков при прокрутке
         function updateCurrentFromScroll() {
@@ -448,6 +554,9 @@
                     }
                 }
             }
+            
+            // Убираем current с родительских элементов после обновления
+            removeCurrentFromParents();
         }
         
         // Отслеживаем прокрутку для обновления current
