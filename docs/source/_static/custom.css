@@ -1322,6 +1322,12 @@ body.left-nav-open .document-wrapper {
 .floating { 
     display: none !important;
 } 
+.container.bottom-right {
+    display: none !important;
+    right: 0 !important;
+    bottom: 0 !important;
+}
+
 
 /* ============================================
    Раскрывающиеся элементы

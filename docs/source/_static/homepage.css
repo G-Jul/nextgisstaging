@@ -1590,6 +1590,12 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
     display: none !important;
 } 
 
+.container.bottom-right {
+    display: none !important;
+    right: 0 !important;
+    bottom: 0 !important;
+}
+
 @media (max-width: 768px) {
     .left-nav-content .search-container.mobile-search {
         display: flex;
