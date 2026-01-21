@@ -904,6 +904,9 @@ body.left-nav-open .document-wrapper {
 /* Стили для контента Sphinx */
 .document {
     font-family: 'Roboto', sans-serif !important;
+    max-width: 100% !important; /* Переопределяем стили темы ReadTheDocs */
+    margin: 0 !important; /* Переопределяем margin: 0 auto из темы */
+    width: 100% !important;
 }
 
 .document * {
