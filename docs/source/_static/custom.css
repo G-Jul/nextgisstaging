@@ -130,7 +130,9 @@ body.homepage {
 .document-wrapper .document {
     display: block !important;
     visibility: visible !important;
-    width: 100%;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
 }
 
 /* Показываем articleBody */
@@ -2189,4 +2191,18 @@ button#burgerToggle {
         visibility: visible !important;
         opacity: 1 !important;
     }
+}
+
+/* Критически важные переопределения стилей темы ReadTheDocs для .document */
+/* Размещаем в конце файла для максимальной специфичности */
+.document-wrapper .document,
+.wy-nav-content .document,
+.rst-content .document,
+.wy-nav-content-wrap .document,
+.document {
+    max-width: 100% !important;
+    margin: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
 }
