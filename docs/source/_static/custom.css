@@ -815,13 +815,19 @@ body.left-nav-open .document-wrapper {
 }
 
 /* Фон развёрнутых подзаголовков выделенного меню */
-.left-nav-content [class*="toctree-l"].current.expanded > ul > li,
-.left-nav-content [class*="toctree-l"].expanded > ul > li {
+.left-nav-content [class*="toctree-l"].current.expanded > ul > li {
     background-color: #F0F2F4 !important;
 }
 
-.left-nav-content [class*="toctree-l"].current.expanded > ul > li > a,
+.left-nav-content [class*="toctree-l"].expanded > ul > li {
+    background-color: #E4F3FF !important;
+}
+
 .left-nav-content [class*="toctree-l"].expanded > ul > li > a {
+    background-color: #E4F3FF !important;
+}
+
+.left-nav-content [class*="toctree-l"].current.expanded > ul > li > a{
     background-color: #F0F2F4 !important;
 }
 
