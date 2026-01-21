@@ -1,6 +1,9 @@
 (function() {
     'use strict';
     
+    
+
+
     function getStaticPath() {
         const scripts = document.querySelectorAll('script[src*="_static"]');
         if (scripts.length > 0) {
@@ -1385,6 +1388,8 @@
     
     setTimeout(initBurgerMenuWrapper, 500);
     setTimeout(initBurgerMenuWrapper, 1000);
+    
+
     
     function forceDocumentStyles() {
         const documents = document.querySelectorAll('.document');

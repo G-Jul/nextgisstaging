@@ -24,32 +24,31 @@
 
 /* Подключение локальных шрифтов Roboto */
 @font-face {
-    font-family: 'Roboto';
+    font-family: 'Roboto-Regular';
     src: url('fonts/Roboto-Regular.ttf') format('truetype');
-    font-weight: 400;
+    font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'Roboto';
+    font-family: 'Roboto-Bold';
     src: url('fonts/Roboto-Bold.ttf') format('truetype');
-    font-weight: 700;
+    font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'Roboto';
+    font-family: 'Roboto-Medium';
     src: url('fonts/Roboto-Medium.ttf') format('truetype');
-    font-weight: 500;
+    font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
 
 body {
-    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-    font-weight: 400; /* Roboto-Regular для обычного текста */
+    font-family: 'Roboto-Regular', sans-serif !important;
     color: var(--text-dark);
     background: var(--bg-white);
     overflow-x: hidden;
@@ -313,8 +312,8 @@ body .floating-toc-page {
 }
 
 .custom-header .header-container {
-    max-width: 1880px;
-    margin: 0 auto;
+    max-width: 2560px;
+    margin: 0 20px;
     padding: 0 20px;
     display: flex;
     justify-content: space-between;
@@ -414,7 +413,9 @@ body.left-nav-open .dropdown-arrow img {
 }
 
 .custom-header .logo-text {
+    font-family: 'Roboto-Regular', sans-serif !important;
     font-size: 18px;
+    font-weight: 400;
     color: #56738F;
 }
 
@@ -465,6 +466,7 @@ body.left-nav-open .dropdown-arrow img {
     z-index: 1001;
     transition: left 0.3s ease;
     overflow-y: auto;
+    overflow-x: visible !important;
 }
 
 .left-nav.active {
@@ -484,6 +486,8 @@ body.left-nav-open .document-wrapper {
 /* Отступ слева для контента в диапазоне 1281px-1920px, чтобы не налазило на левое меню */
 @media (min-width: 1281px) and (max-width: 1920px) {
     /* Левое меню может открываться и закрываться через JavaScript */
+
+    
     .left-nav {
         position: fixed !important;
         /* left управляется через JavaScript и класс .active */
@@ -516,6 +520,20 @@ body.left-nav-open .document-wrapper {
 
     .rst-content {
         padding-left: 1rem !important;
+    }
+
+    
+}
+
+@media (max-width: 1500px) and (min-width: 1280px) {
+    .document-wrapper {
+        padding: 32px 360px 32px 16px !important;
+    }
+    body:not(.left-nav-open) .document-wrapper {
+        padding-left: 0px !important; 
+    }
+    body.left-nav-open .document-wrapper {
+        padding-left: 0px !important; /* 400px (ширина меню) + 20px (отступ) */
     }
 }
 
@@ -573,13 +591,17 @@ body.left-nav-open .document-wrapper {
 }
 
 .left-nav-content {
-    padding: 1rem;
+    padding: 20px 13px 0 0;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
 }
 
 /* Стили для навигации Sphinx в левом меню */
 .left-nav-content .toctree-wrapper,
 .left-nav-content .sphinxsidebar {
     width: 100%;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
 }
 
 /* Стили для меню RTD (wy-menu) */
@@ -590,47 +612,57 @@ body.left-nav-open .document-wrapper {
     margin: 0;
     padding: 0;
     list-style: none;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
 }
 
 .left-nav-content ul {
     list-style: none;
     padding-left: 0;
     margin: 0;
+    overflow-x: visible;
 }
 
 .left-nav-content li {
     margin-bottom: 0;
     position: relative;
+    overflow: visible !important;
 }
 
 /* Стили для элементов первого уровня (toctree-l1) */
 .left-nav-content .toctree-l1 {
     border-bottom: none !important;
     position: relative;
+    background-color: #fafafa;
+    overflow: visible !important;
 }
 
 .left-nav-content .toctree-l1 > a {
-    font-family: 'Roboto', sans-serif !important; /* Roboto-Medium для элементов первого уровня */
-    font-weight: 500 !important;
+    font-family: 'Roboto-Medium', sans-serif !important;
     color: var(--text-dark);
     text-decoration: none;
     display: flex;
     align-items: center;
     padding: 7px 1.5rem;
     padding-right: 2.5rem; /* Место для стрелки */
-    font-size: 16px;
+    font-size: 17px;
     transition: var(--transition);
     position: relative;
-}
-
-.left-nav-content .toctree-l1 > a:hover {
+    background-color: #fafafa;
 }
 
 /* Текущая страница (активная) */
+.left-nav-content .toctree-l1.current {
+    background-color: #E4F3FF !important;
+}
+
 .left-nav-content .toctree-l1.current > a {
     color: var(--text-dark);
-    font-weight: 700;
+    background-color: #E4F3FF !important;
+
 }
+
+
 
 /* Индикатор для первого уровня - только на ссылке, не на всем элементе с подменю */
 .left-nav-content .toctree-l1.current > a::before {
@@ -639,24 +671,23 @@ body.left-nav-open .document-wrapper {
     left: 0;
     top: 0;
     height: 100%;
-    width: 2px;
+    width: 4px;
     background-color: var(--primary-blue-dark);
     z-index: 100;
 }
 
 /* Убеждаемся, что индикатор не растягивается на подменю */
-.left-nav-content .toctree-l1.current > a {
-    position: relative;
+.toctree-l2 {
+    padding-left: 20px;
 }
-
 /* Индикатор для текущей страницы второго уровня - только на ссылке, не на всем элементе */
 .left-nav-content .toctree-l2.current > a::before {
     content: '';
     position: absolute;
-    left: 0;
+    left: -20px;
     top: 0;
     height: 100%;
-    width: 2px;
+    width: 4px;
     background-color: var(--primary-blue-dark);
     z-index: 100;
 }
@@ -665,45 +696,83 @@ body.left-nav-open .document-wrapper {
 .left-nav-content .toctree-l2.current > a {
     position: relative;
 }
+.toctree-l3 {
+    padding-left: 20px;
+    overflow: visible !important;
+    position: relative;
+}
+
+.left-nav-content .toctree-l3 {
+    overflow: visible !important;
+}
+
+.toctree-l4 {
+    padding-left: 20px;
+}
 
 /* Индикатор для текущей страницы третьего уровня - только на ссылке */
+.left-nav-content .toctree-l3.current {
+    position: relative;
+}
+
 .left-nav-content .toctree-l3.current > a::before {
     content: '';
     position: absolute;
-    left: 0;
+    left: -40px;
     top: 0;
     height: 100%;
-    width: 2px;
+    width: 4px;
     background-color: var(--primary-blue-dark);
-    z-index: 100;
+    z-index: 10000 !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: none;
 }
 
 .left-nav-content .toctree-l3.current > a {
     position: relative;
+    overflow: visible !important;
+}
+
+.toctree-l3> a {
+    font-size: 17px !important;
 }
 
 /* Индикатор для текущей страницы четвертого уровня - только на ссылке */
 .left-nav-content .toctree-l4.current > a::before {
     content: '';
     position: absolute;
-    left: 0;
+    left: -60px;
     top: 0;
     height: 100%;
-    width: 2px;
+    width: 4px;
     background-color: var(--primary-blue-dark);
     z-index: 100;
 }
 
+.left-nav-content .toctree-l4 {
+    background-color: #fafafa;
+}
+
+.left-nav-content .toctree-l4.current {
+    background-color: #E4F3FF !important;
+}
+
+.left-nav-content .toctree-l4 > a {
+    background-color: #fafafa;
+}
+
 .left-nav-content .toctree-l4.current > a {
     position: relative;
+    background-color: #E4F3FF !important;
 }
 
 /* Стрелка для раскрывающихся элементов - используем иконку (все уровни) */
 .left-nav-content [class*="toctree-l"] > a .nav-arrow-icon {
     position: absolute;
     right: 1.5rem;
-    width: 12px;
-    height: 12px;
+    width: 13px;
     transition: transform 0.3s ease;
     display: inline-block;
     vertical-align: middle;
@@ -718,8 +787,14 @@ body.left-nav-open .document-wrapper {
 }
 
 /* Стили для элементов второго уровня (toctree-l2) */
-.left-nav-content .toctree-l2.current{
-    background: #E4F3FF;
+.left-nav-content .toctree-l2 {
+    background-color: #fafafa;
+    overflow: visible !important;
+    position: relative;
+}
+
+.left-nav-content .toctree-l2.current {
+    background-color: #E4F3FF !important;
 }
 
 .left-nav-content .toctree-l2 > a {
@@ -728,22 +803,42 @@ body.left-nav-open .document-wrapper {
     display: flex;
     align-items: center;
     padding: 7px 1.5rem 7px 3rem;
-    font-family: 'Roboto', sans-serif !important;
-    font-weight: 400;
-    font-size: 15px;
+    font-family: 'Roboto-Regular', sans-serif !important;
+    font-size: 17px;
     transition: var(--transition);
     position: relative;
+    background-color: #fafafa;
+}
+
+.left-nav-content .toctree-l2.current > a {
+    background-color: #E4F3FF !important;
+}
+
+/* Фон развёрнутых подзаголовков выделенного меню */
+.left-nav-content [class*="toctree-l"].current.expanded > ul > li,
+.left-nav-content [class*="toctree-l"].expanded > ul > li {
+    background-color: #F0F2F4 !important;
+}
+
+.left-nav-content [class*="toctree-l"].current.expanded > ul > li > a,
+.left-nav-content [class*="toctree-l"].expanded > ul > li > a {
+    background-color: #F0F2F4 !important;
 }
 
 .toctree-expand {
     display: none;
 }
 
-.left-nav-content .toctree-l1,
-.left-nav-content .toctree-l2,
-.left-nav-content .toctree-l3 > a:hover {
-    background: #E4F3FF;
+.left-nav-content .toctree-l1 > a,
+.left-nav-content .toctree-l2 > a,
+.left-nav-content .toctree-l3 > a {
+    padding: 7px 62px 8px 20px !important;
+}
 
+.left-nav-content .toctree-l1 > a:hover,
+.left-nav-content .toctree-l2 > a:hover,
+.left-nav-content .toctree-l3 > a:hover {
+    background-color: #E4F3FF;
 }
 
 /* Текущая страница второго уровня */
@@ -751,6 +846,12 @@ body.left-nav-open .document-wrapper {
 }
 
 /* Стили для элементов третьего уровня (toctree-l3) */
+.left-nav-content .toctree-l3 {
+    background-color: #fafafa;
+    overflow: visible !important;
+    position: relative;
+}
+
 .left-nav-content .toctree-l3 > a {
     color: var(--text-dark);
     text-decoration: none;
@@ -759,19 +860,22 @@ body.left-nav-open .document-wrapper {
     justify-content: space-between;
     padding: 7px 1.5rem 7px 4.5rem;
     padding-right: 2.5rem; /* Место для стрелки */
-    font-family: 'Roboto', sans-serif !important;
-    font-weight: 400;
+    font-family: 'Roboto-Regular', sans-serif !important;
     font-size: 14px;
     transition: var(--transition);
     position: relative;
+    background-color: #fafafa;
 }
 
-.left-nav-content .toctree-l3 > a:hover {
-}
+
 
 /* Текущая страница третьего уровня */
+.left-nav-content .toctree-l3.current {
+    background-color: #E4F3FF !important;
+}
+
 .left-nav-content .toctree-l3.current > a {
-    background: #E4F3FF;
+    background-color: #E4F3FF !important;
 }
 
 /* Скрытие подменю по умолчанию для всех уровней */
@@ -790,6 +894,22 @@ body.left-nav-open .document-wrapper {
 .left-nav-content [class*="toctree-l"].expanded > ul {
     max-height: 1000px;
     opacity: 1;
+}
+
+/* Фон развёрнутых подзаголовков выделенного меню */
+.left-nav-content [class*="toctree-l"].current.expanded > ul,
+.left-nav-content [class*="toctree-l"].expanded > ul {
+    background-color: #F0F2F4 !important;
+}
+
+.left-nav-content [class*="toctree-l"].current.expanded > ul > li:not(.current),
+.left-nav-content [class*="toctree-l"].expanded > ul > li:not(.current) {
+    background-color: #F0F2F4 !important;
+}
+
+.left-nav-content [class*="toctree-l"].current.expanded > ul > li:not(.current) > a,
+.left-nav-content [class*="toctree-l"].expanded > ul > li:not(.current) > a {
+    background-color: #F0F2F4 !important;
 }
 
 /* ============================================
@@ -905,20 +1025,19 @@ body.left-nav-open .document-wrapper {
 
 /* Стили для контента Sphinx */
 .document {
-    font-family: 'Roboto', sans-serif !important;
+    font-family: 'Roboto-Regular', sans-serif !important;
     max-width: 100% !important; /* Переопределяем стили темы ReadTheDocs */
     margin: 0 !important; /* Переопределяем margin: 0 auto из темы */
     width: 100% !important;
 }
 
 .document * {
-    font-family: 'Roboto', sans-serif !important;
+    font-family: 'Roboto-Regular', sans-serif !important;
 }
 
 .document h1 {
-    font-family: 'Roboto', sans-serif !important; /* Roboto-Bold для заголовков */
+    font-family: 'Roboto-Bold', sans-serif !important;
     font-size: 36px;
-    font-weight: 700;
     color: var(--text-dark);
     margin-bottom: 10px;
     padding-bottom: 0rem;
@@ -927,9 +1046,8 @@ body.left-nav-open .document-wrapper {
 }
 
 .document h2 {
-    font-family: 'Roboto', sans-serif !important; /* Roboto-Bold для заголовков */
+    font-family: 'Roboto-Bold', sans-serif !important;
     font-size: 28px;
-    font-weight: 700;
     color: var(--text-dark);
     margin-top: 30px;
     margin-bottom: 15px;
@@ -937,9 +1055,8 @@ body.left-nav-open .document-wrapper {
 }
 
 .document h3 {
-    font-family: 'Roboto', sans-serif !important; /* Roboto-Bold для заголовков */
+    font-family: 'Roboto-Bold', sans-serif !important;
     font-size: 28px;
-    font-weight: 700;
     color: var(--text-dark);
     margin-top: 20px;
     margin-bottom: 10px;
@@ -947,9 +1064,8 @@ body.left-nav-open .document-wrapper {
 }
 
 .document h4 {
-    font-family: 'Roboto', sans-serif !important; /* Roboto-Bold для заголовков */
+    font-family: 'Roboto-Bold', sans-serif !important;
     font-size: 28px;
-    font-weight: 700;
     color: var(--text-dark);
     margin-top: 20px;
     margin-bottom: 10px;
@@ -958,9 +1074,8 @@ body.left-nav-open .document-wrapper {
 
 .document h5,
 .document h6 {
-    font-family: 'Roboto', sans-serif !important; /* Roboto-Bold для заголовков */
+    font-family: 'Roboto-Bold', sans-serif !important;
     font-size: 28px;
-    font-weight: 700;
     color: var(--text-dark);
     margin-top: 20px;
     margin-bottom: 10px;
@@ -1346,8 +1461,7 @@ body.left-nav-open .document-wrapper {
     position: relative;
     transition: var(--transition);
     color: var(--text-dark) !important;
-    font-family: 'Roboto', sans-serif !important; /* Roboto-Medium для активных элементов */
-    font-weight: 500 !important;
+    font-family: 'Roboto-Medium', sans-serif !important;
     background-color: transparent;
 }
 
@@ -1369,8 +1483,7 @@ body.left-nav-open .document-wrapper {
 .floating-toc-page ul > li > ul > li > a.active {
     position: relative;
     transition: var(--transition);
-    font-family: 'Roboto', sans-serif !important; /* Roboto-Medium для активных элементов */
-    font-weight: 500 !important;
+    font-family: 'Roboto-Medium', sans-serif !important;
     background-color: transparent;
 }
 
@@ -1453,9 +1566,8 @@ body.left-nav-open .document-wrapper {
 }
 
 .custom-footer .footer-title {
-    font-family: 'Roboto', sans-serif !important; /* Roboto-Bold для заголовков */
+    font-family: 'Roboto-Bold', sans-serif !important;
     font-size: 15px;
-    font-weight: 700;
     color: var(--text-dark);
     margin-bottom: 22px;
     text-transform: uppercase;
@@ -1936,8 +2048,8 @@ button#burgerToggle {
         display: none !important;
         position: fixed !important;
         top: 64px !important;
-        right: -350px !important;
-        width: 350px !important;
+        right: -440px !important;
+        width: 440px !important;
         height: auto !important;
         z-index: 10001 !important;
         background: var(--bg-white) !important;
@@ -2206,3 +2318,4 @@ button#burgerToggle {
     margin-right: 0 !important;
     width: 100% !important;
 }
+
