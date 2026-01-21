@@ -840,8 +840,8 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
     width: 320px;
     max-height: calc(100vh - 100px);
     background: var(--bg-white);
-    border-radius: 0px;
-    box-shadow: var(--card-shadow);
+    border-bottom-left-radius: var(--border-radius);
+    box-shadow: none !important;
     z-index: 999 !important;
     display: flex !important;
     flex-direction: column;
@@ -864,7 +864,17 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
 
 .floating-toc-list {
     list-style: none;
+    position: relative;
 }
+.floating-toc-list::before {
+    position: absolute;
+    content: '';
+    left:1px;
+    width: 2px;
+    height: 100%;
+    background-color: #DCE0E5;
+}
+
 
 .floating-toc-list li {
     margin-bottom: 0.5rem;
@@ -872,6 +882,7 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
 
 .floating-toc-list a:hover {
     background-color: #E8EAEC;
+    color: var(--primary-blue);
 }
 
 .floating-toc-list a {
@@ -883,30 +894,74 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
     transition: var(--transition);
 }
 
+/* Убираем изменение background и color при клике (active и focus) */
+.floating-toc-list a:active,
+.floating-toc-list a:focus,
+.floating-toc-list a:active:focus {
+    background-color: transparent !important;
+    color: var(--text-dark) !important;
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
 .floating-toc-list ul a {
     padding: 0.25rem 20px;
     color: var(--text-dark);
 }
 
 .floating-toc-list a:hover {
-    color: var(--primary-blue);
+    background-color: transparent !important;
+    color: var(--text-dark) !important;
+}
+
+/* Убираем hover для активных элементов */
+.floating-toc-list a.active:hover {
+    background-color: transparent !important;
+    color: var(--text-dark) !important;
+}
+
+/* Убираем изменение background и color при клике для активных элементов */
+.floating-toc-list a.active:active,
+.floating-toc-list a.active:focus,
+.floating-toc-list a.active:active:focus {
+    background-color: transparent !important;
+    color: var(--text-dark) !important;
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Убираем изменение для всех вложенных элементов */
+.floating-toc-list ul > li > a:active,
+.floating-toc-list ul > li > a:focus,
+.floating-toc-list ul > li > a.active:active,
+.floating-toc-list ul > li > a.active:focus {
+    background-color: transparent !important;
+    color: var(--text-dark) !important;
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
 }
 
 .floating-toc-list ul {
     list-style: none;
     margin-top: 0.25rem;
-    padding-left: 1rem;
+    padding-left: 0;
 }
 
 .floating-toc-list ul a {
     font-size: 0.85rem;
     color: var(--text-dark);
+
+}
+
+.floating-toc-list ul li {
+    padding-left: 1rem;
 }
 
 .floating-toc-list>li>a.active{
     position: relative;
     transition: var(--transition);
-    font-weight: 600;
+    font-weight: 400 !important;
+    background-color: transparent;
 }
 
 .floating-toc-list>li>li>a{
@@ -919,31 +974,32 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
     left: 0;
     top: 0;
     height: 100%;
-    width: 2px;
+    width:4px;
     background-color: var(--primary-blue-dark);
 
 }
 
 .floating-toc-list>li>ul>li{
-
     position: relative;
-
 }
 
 .floating-toc-list>li>ul>li>a.active::before {
     content: '';
     position: absolute;
-    left: 0;
+    left: 0px;
     top: 0;
     height: 100%;
-    width: 2px;
+    width: 4px;
     background-color: var(--primary-blue-dark);
 
 }
 
-.floating-toc-list>li>ul>li>a.active{
-    font-weight: 600;
+.floating-toc-list>li>ul>li:has(>a.active) {
+}
 
+.floating-toc-list>li>ul>li>a.active{
+    font-weight: 400 !important;
+    background-color: transparent;
 }
 
 
@@ -1941,10 +1997,17 @@ readthedocs-flyout {
         width: 100% !important;
         right: -100% !important;
         top: 64px !important;
-        height: calc(100vh - 66px) !important;
-        max-height: calc(100vh - 66px) !important;
+        height: calc(100vh - 64px) !important;
+        max-height: calc(100vh - 64px) !important;
+        min-height: calc(100vh - 64px) !important;
         z-index: 10000 !important;
         transition: right 0.3s ease !important;
+    }
+
+    .floating-toc-content {
+        height: 100% !important;
+        max-height: 100% !important;
+        flex: 1 !important;
     }
 
     .floating-toc.active {

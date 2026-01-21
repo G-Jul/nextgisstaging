@@ -637,6 +637,30 @@
                     // Добавляем active к кликнутой ссылке
                     clickedLink.classList.add('active');
                     
+                    // Устанавливаем флаг, что это пользовательский выбор (для планшетов и мобильных)
+                    clickedLink.dataset.userSelected = 'true';
+                    clickedLink.dataset.selectionTime = Date.now().toString();
+                    
+                    // Убираем флаг с других ссылок
+                    allTocLinks.forEach(l => {
+                        if (l !== clickedLink) {
+                            l.dataset.userSelected = 'false';
+                        }
+                    });
+                    
+                    // Блокируем обновление активного элемента на время прокрутки + дополнительное время
+                    // Увеличиваем время блокировки, чтобы updateActiveHeading не переключал обратно
+                    if (clickTimeout) {
+                        clearTimeout(clickTimeout);
+                    }
+                    clickTimeout = setTimeout(() => {
+                        userClickedLink = null;
+                        // Снимаем флаг пользовательского выбора через 3 секунды (для планшетов)
+                        if (clickedLink) {
+                            clickedLink.dataset.userSelected = 'false';
+                        }
+                    }, 3000); // Увеличиваем до 3 секунд для планшетов и мобильных
+                    
                     // Обрабатываем разные форматы ссылок
                     let targetId = null;
                     
@@ -647,9 +671,15 @@
                             top: 0,
                             behavior: 'smooth'
                         });
+                        if (clickTimeout) {
+                            clearTimeout(clickTimeout);
+                        }
+                        if (clickedLink) {
+                            clickedLink.dataset.userSelected = 'false';
+                        }
                         clickTimeout = setTimeout(() => {
                             userClickedLink = null;
-                        }, 1000);
+                        }, 3000); // Увеличиваем до 3 секунд для планшетов
                         return;
                     }
                     
@@ -681,23 +711,37 @@
                             // НЕ закрываем меню - оно должно оставаться открытым
                             // Меню закрывается только при клике на бургер (крестик)
                             
-                            // Сбрасываем флаг через 1 секунду после завершения скролла
+                            // Сбрасываем флаг через 3 секунды после завершения скролла
+                            // Увеличиваем время для планшетов и мобильных, чтобы updateActiveHeading не переключал обратно
+                            if (clickTimeout) {
+                                clearTimeout(clickTimeout);
+                            }
                             clickTimeout = setTimeout(() => {
                                 userClickedLink = null;
+                                // Снимаем флаг пользовательского выбора
+                                if (clickedLink) {
+                                    clickedLink.dataset.userSelected = 'false';
+                                }
                                 // Сбрасываем флаг предотвращения закрытия меню
                                 if (window._setPreventMenuClose) {
                                     window._setPreventMenuClose(false);
                                 }
-                            }, 1000);
+                            }, 3000); // Увеличиваем до 3 секунд для планшетов и мобильных
                         } else {
                             // Если элемент не найден, скроллим в начало
                             window.scrollTo({
                                 top: 0,
                                 behavior: 'smooth'
                             });
+                            if (clickTimeout) {
+                                clearTimeout(clickTimeout);
+                            }
+                            if (clickedLink) {
+                                clickedLink.dataset.userSelected = 'false';
+                            }
                             clickTimeout = setTimeout(() => {
                                 userClickedLink = null;
-                            }, 1000);
+                            }, 3000); // Увеличиваем до 3 секунд для планшетов
                         }
                     } else {
                         // Если targetId не определен, скроллим в начало
@@ -705,9 +749,15 @@
                             top: 0,
                             behavior: 'smooth'
                         });
+                        if (clickTimeout) {
+                            clearTimeout(clickTimeout);
+                        }
+                        if (clickedLink) {
+                            clickedLink.dataset.userSelected = 'false';
+                        }
                         clickTimeout = setTimeout(() => {
                             userClickedLink = null;
-                        }, 1000);
+                        }, 3000); // Увеличиваем до 3 секунд для планшетов
                     }
                 }
                 // Если это не якорная ссылка (например, ссылка на другую страницу), 
@@ -760,6 +810,21 @@
                 // Проверяем, не истек ли таймаут
                 if (userClickedLink) {
                     return;
+                }
+                
+                // Дополнительная проверка: если есть активная ссылка, которую пользователь выбрал,
+                // не переключаем её обратно (для планшетов и мобильных)
+                const activeLink = floatingTocPage.querySelector('a.active');
+                if (activeLink && activeLink.dataset.userSelected === 'true') {
+                    // Проверяем, не истек ли таймаут для пользовательского выбора
+                    const selectionTime = parseInt(activeLink.dataset.selectionTime || '0');
+                    const currentTime = Date.now();
+                    if (currentTime - selectionTime < 3000) { // 3 секунды для планшетов
+                        return;
+                    } else {
+                        // Таймаут истек, снимаем флаг
+                        activeLink.dataset.userSelected = 'false';
+                    }
                 }
                 
                 if (tocLinks.length === 0) {

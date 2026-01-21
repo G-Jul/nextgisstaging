@@ -1121,8 +1121,7 @@ body.left-nav-open .document-wrapper {
     max-height: calc(100vh - 64px);
     height: auto;
     background: var(--bg-white);
-    border-radius: var(--border-radius);
-    box-shadow: var(--card-shadow);
+    border-bottom-left-radius: var(--border-radius);
     z-index: 99;
     display: flex;
     flex-direction: column;
@@ -1144,6 +1143,17 @@ body.left-nav-open .document-wrapper {
     list-style: none;
     padding-left: 0;
     margin: 0;
+    position: relative;
+}
+
+/* Вертикальная линия для списка, как на главной странице */
+.floating-toc-page > .floating-toc-content > ul::before {
+    position: absolute;
+    content: '';
+    left: 1px;
+    width: 2px;
+    height: 100%;
+    background-color: #DCE0E5;
 }
 
 .floating-toc-page li {
@@ -1155,13 +1165,47 @@ body.left-nav-open .document-wrapper {
     text-decoration: none;
     font-size: 0.9rem;
     display: block;
-    padding: 0.25rem 20px !important;
+    padding: 7px 20px !important;
     transition: var(--transition);
 }
 
-.floating-toc-page a:hover {
-    background-color: #E8EAEC;
-    color: var(--primary-blue);
+
+
+/* Убираем изменение background и color при клике (active и focus) */
+.floating-toc-page a:active,
+.floating-toc-page a:focus,
+.floating-toc-page a:active:focus {
+    background-color: transparent !important;
+    color: var(--text-dark) !important;
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Убираем hover для активных элементов */
+.floating-toc-page a.active:hover {
+    background-color: transparent !important;
+    color: var(--text-dark) !important;
+}
+
+/* Убираем изменение background и color при клике для активных элементов */
+.floating-toc-page a.active:active,
+.floating-toc-page a.active:focus,
+.floating-toc-page a.active:active:focus {
+    background-color: transparent !important;
+    color: var(--text-dark) !important;
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Убираем изменение для всех вложенных элементов */
+.floating-toc-page ul > li > ul > li > a:active,
+.floating-toc-page ul > li > ul > li > a:focus,
+.floating-toc-page ul > li > ul > li > a.active:active,
+.floating-toc-page ul > li > ul > li > a.active:focus {
+    background-color: transparent !important;
+    color: var(--text-dark) !important;
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
 }
 
 .floating-toc-page .current > a {
@@ -1182,13 +1226,16 @@ body.left-nav-open .document-wrapper {
 .floating-toc-page ul ul a {
     font-size: 0.85rem;
     color: var(--text-dark);
+    padding: 7px 20px !important;
 }
 
-/* Активный элемент с индикатором */
+/* Активный элемент первого уровня с индикатором */
 .floating-toc-page ul > li > a.active {
     position: relative;
     transition: var(--transition);
-    font-weight: 600;
+    color: var(--text-dark) !important;
+    font-weight: 400 !important;
+    background-color: transparent;
 }
 
 .floating-toc-page ul > li > a.active::before {
@@ -1197,8 +1244,45 @@ body.left-nav-open .document-wrapper {
     left: 0;
     top: 0;
     height: 100%;
-    width: 2px;
+    width: 4px;
     background-color: var(--primary-blue-dark);
+}
+
+/* Вложенные элементы второго уровня */
+.floating-toc-page ul > li {
+    position: relative;
+}
+
+.floating-toc-page ul > li > ul > li > a.active {
+    position: relative;
+    transition: var(--transition);
+    font-weight: 600;
+    background-color: transparent;
+}
+
+.floating-toc-page ul > li > ul > li > a.active::before {
+    content: '';
+    position: absolute;
+    left: -16px;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background-color: var(--primary-blue-dark);
+}
+
+.floating-toc-page ul > li > ul > li > ul > li a.active::before {
+    content: '';
+    position: absolute;
+    left: -32px;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background-color: var(--primary-blue-dark);
+}
+
+/* Убираем hover для активных вложенных элементов */
+.floating-toc-page ul > li > ul > li > a.active:hover {
+    background-color: transparent;
 }
 
 /* ============================================
@@ -1794,8 +1878,15 @@ button#burgerToggle {
         top: 64px !important;
         height: calc(100vh - 64px) !important;
         max-height: calc(100vh - 64px) !important;
+        min-height: calc(100vh - 64px) !important;
         z-index: 10000 !important;
         transition: right 0.3s ease !important;
+    }
+
+    .floating-toc-page .floating-toc-content {
+        height: 100% !important;
+        max-height: 100% !important;
+        flex: 1 !important;
     }
 
     .floating-toc-page.active {
