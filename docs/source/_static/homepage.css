@@ -56,8 +56,30 @@ select {
     box-sizing: border-box;
 }
 
-/* Подключение шрифта Roboto */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+/* Подключение локальных шрифтов Roboto */
+@font-face {
+    font-family: 'Roboto';
+    src: url('fonts/Roboto-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('fonts/Roboto-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('fonts/Roboto-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
 
 html {
     overflow-x: hidden !important;
@@ -75,6 +97,7 @@ body {
 
 .homepage {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    font-weight: 400; /* Roboto-Regular для обычного текста */
     color: var(--text-dark);
     background: var(--bg-white);
     line-height: 1.6;
@@ -268,9 +291,6 @@ body.homepage .homepage-header,
     user-select: none;
 }
 
-.logo-link:hover {
-    opacity: 0.8;
-}
 
 .dropdown-arrow {
     cursor: pointer;
@@ -523,6 +543,7 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
 .section-title {
     font-size: 40px;
     font-weight: 700;
+    font-family: 'Roboto', sans-serif !important; /* Roboto-Bold для заголовков */
     color: var(--text-dark);
     margin-bottom: 1rem;
 }
@@ -539,7 +560,8 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
 
 .subsection-title {
     font-size: 26px;
-    font-weight: 600;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif !important; /* Roboto-Bold для заголовков */
     color: var(--text-dark);
     margin-bottom: 32px;
     display: flex;
@@ -575,12 +597,12 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
 
 .card:hover {
     transform: translateY(-2px);
-    box-shadow: var(--card-shadow-hover);
+    box-shadow: none;
     background-color: var(--card-hover);
 }
 
 .card-type-1 {
-    box-shadow: var(--card-shadow);
+    box-shadow: none;
     display: flex;
     width: 100%;
     max-width: 450px;
@@ -605,8 +627,9 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
 }
 
 .card-type-1 .card-title {
+    font-family: 'Roboto', sans-serif !important; /* Roboto-Bold для заголовков */
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--text-dark);
     margin-bottom: 0.5rem;
 }
@@ -625,7 +648,7 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
 }
 
 .card-type-2 {
-    box-shadow: var(--card-shadow);
+    box-shadow: none;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -650,8 +673,9 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
 }
 
 .card-type-2 .card-title {
+    font-family: 'Roboto', sans-serif !important; /* Roboto-Bold для заголовков */
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 700;
     height: 25px;
     color: var(--text-dark);
     margin-bottom: 10px;
@@ -708,7 +732,7 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
 
 
 .card-type-3 {
-    box-shadow: var(--card-shadow);
+    box-shadow: none;
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -727,8 +751,9 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
 }
 
 .card-type-3 .card-title{
+    font-family: 'Roboto', sans-serif !important; /* Roboto-Bold для заголовков */
     font-size: 20px;
-
+    font-weight: 700;
 }
 
 .card-type-3 .card-description{
@@ -993,7 +1018,8 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
 .floating-toc-list>li>a.active{
     position: relative;
     transition: var(--transition);
-    font-weight: 400 !important;
+    font-family: 'Roboto', sans-serif !important; /* Roboto-Medium для активных элементов */
+    font-weight: 500 !important;
     background-color: transparent;
 }
 
@@ -1031,7 +1057,8 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
 }
 
 .floating-toc-list>li>ul>li>a.active{
-    font-weight: 400 !important;
+    font-family: 'Roboto', sans-serif !important; /* Roboto-Medium для активных элементов */
+    font-weight: 500 !important;
     background-color: transparent;
 }
 
@@ -1092,6 +1119,7 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
 }
 
 .footer-title {
+    font-family: 'Roboto', sans-serif !important; /* Roboto-Bold для заголовков */
     font-size: 15px;
     font-weight: 700;
     color: var(--text-dark);

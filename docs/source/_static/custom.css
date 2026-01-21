@@ -22,11 +22,34 @@
    Переопределение стилей ReadTheDocs темы
    ============================================ */
 
-/* Подключение шрифта Roboto */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+/* Подключение локальных шрифтов Roboto */
+@font-face {
+    font-family: 'Roboto';
+    src: url('fonts/Roboto-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('fonts/Roboto-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('fonts/Roboto-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
 
 body {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    font-weight: 400; /* Roboto-Regular для обычного текста */
     color: var(--text-dark);
     background: var(--bg-white);
     overflow-x: hidden;
@@ -99,11 +122,15 @@ body.homepage {
 .document {
     display: block !important;
     visibility: visible !important;
+    width: 100% !important;
 }
-
+.rst-content:has(>.document) {
+    width: 100% !important;
+}
 .document-wrapper .document {
     display: block !important;
     visibility: visible !important;
+    width: 100%;
 }
 
 /* Показываем articleBody */
@@ -432,6 +459,7 @@ body.left-nav-open .dropdown-arrow img {
     height: calc(100vh - 64px);
     background: var(--bg-white);
     box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    border-bottom-right-radius: var(--border-radius);
     z-index: 1001;
     transition: left 0.3s ease;
     overflow-y: auto;
@@ -442,13 +470,89 @@ body.left-nav-open .dropdown-arrow img {
     left: 0 !important;
 }
 
-/* Когда левое меню открыто, контент не сдвигается */
+/* Базовые стили для document-wrapper */
 body:not(.left-nav-open) .document-wrapper {
     padding-left: 1rem;
 }
 
 body.left-nav-open .document-wrapper {
     padding-left: 1rem;
+}
+
+/* Отступ слева для контента в диапазоне 1281px-1920px, чтобы не налазило на левое меню */
+@media (min-width: 1281px) and (max-width: 1920px) {
+    /* Левое меню может открываться и закрываться через JavaScript */
+    .left-nav {
+        position: fixed !important;
+        /* left управляется через JavaScript и класс .active */
+    }
+
+    /* Когда меню открыто (active), оно видимо */
+    .left-nav.active {
+        left: 0 !important;
+    }
+
+    /* Когда меню закрыто (не active), оно скрыто */
+    .left-nav:not(.active) {
+        left: -400px !important;
+    }
+
+    /* Отступ слева для контента когда меню ОТКРЫТО, чтобы контент не налазил на меню */
+    body.left-nav-open .document-wrapper {
+        padding-left: 420px !important; /* 400px (ширина меню) + 20px (отступ) */
+    }
+
+    /* Отступ слева для контента когда меню ЗАКРЫТО, чтобы было место для меню */
+    body:not(.left-nav-open) .document-wrapper {
+        padding-left: 420px !important; /* 400px (ширина меню) + 20px (отступ) */
+    }
+
+    /* Отступ справа для контента, чтобы правое меню не налазило на контент */
+    .document-wrapper {
+        padding-right: 360px !important; /* 320px (ширина правого меню) + 40px (отступ) */
+    }
+
+    .rst-content {
+        padding-left: 1rem !important;
+    }
+}
+
+/* Отступ слева для контента на экранах больше 1920px, чтобы не налазило на левое меню */
+@media (min-width: 1921px) {
+    /* Левое меню может открываться и закрываться через JavaScript */
+    .left-nav {
+        position: fixed !important;
+        /* left управляется через JavaScript и класс .active */
+    }
+
+    /* Когда меню открыто (active), оно видимо */
+    .left-nav.active {
+        left: 0 !important;
+    }
+
+    /* Когда меню закрыто (не active), оно скрыто */
+    .left-nav:not(.active) {
+        left: -400px !important;
+    }
+
+    /* Отступ слева для контента когда меню ОТКРЫТО, чтобы контент не налазил на меню */
+    body.left-nav-open .document-wrapper {
+        padding-left: 420px !important; /* 400px (ширина меню) + 20px (отступ) */
+    }
+
+    /* Отступ слева для контента когда меню ЗАКРЫТО, чтобы было место для меню */
+    body:not(.left-nav-open) .document-wrapper {
+        padding-left: 420px !important; /* 400px (ширина меню) + 20px (отступ) */
+    }
+
+    /* Отступ справа для контента, чтобы правое меню не налазило на контент */
+    .document-wrapper {
+        padding-right: 360px !important; /* 320px (ширина правого меню) + 40px (отступ) */
+    }
+
+    .rst-content {
+        padding-left: 1rem !important;
+    }
 }
 
 
@@ -499,19 +603,19 @@ body.left-nav-open .document-wrapper {
 
 /* Стили для элементов первого уровня (toctree-l1) */
 .left-nav-content .toctree-l1 {
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: none !important;
     position: relative;
 }
 
 .left-nav-content .toctree-l1 > a {
+    font-family: 'Roboto', sans-serif !important; /* Roboto-Medium для элементов первого уровня */
+    font-weight: 500 !important;
     color: var(--text-dark);
     text-decoration: none;
     display: flex;
     align-items: center;
-    padding: 1rem 1.5rem;
+    padding: 7px 1.5rem;
     padding-right: 2.5rem; /* Место для стрелки */
-    font-family: 'Roboto', sans-serif !important;
-    font-weight: 600;
     font-size: 16px;
     transition: var(--transition);
     position: relative;
@@ -621,7 +725,7 @@ body.left-nav-open .document-wrapper {
     text-decoration: none;
     display: flex;
     align-items: center;
-    padding: 0.75rem 1.5rem 0.75rem 3rem;
+    padding: 7px 1.5rem 7px 3rem;
     font-family: 'Roboto', sans-serif !important;
     font-weight: 400;
     font-size: 15px;
@@ -651,7 +755,7 @@ body.left-nav-open .document-wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.5rem 1.5rem 0.5rem 4.5rem;
+    padding: 7px 1.5rem 7px 4.5rem;
     padding-right: 2.5rem; /* Место для стрелки */
     font-family: 'Roboto', sans-serif !important;
     font-weight: 400;
@@ -791,16 +895,14 @@ body.left-nav-open .document-wrapper {
 
 .document-wrapper {
     position: relative;
-    max-width: 1400px;
-    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
     padding: 2rem 1rem;
     min-height: calc(100vh - 200px);
 }
 
 /* Стили для контента Sphinx */
 .document {
-    max-width: 900px;
-    margin: 0 auto;
     font-family: 'Roboto', sans-serif !important;
 }
 
@@ -809,6 +911,7 @@ body.left-nav-open .document-wrapper {
 }
 
 .document h1 {
+    font-family: 'Roboto', sans-serif !important; /* Roboto-Bold для заголовков */
     font-size: 36px;
     font-weight: 700;
     color: var(--text-dark);
@@ -819,8 +922,9 @@ body.left-nav-open .document-wrapper {
 }
 
 .document h2 {
+    font-family: 'Roboto', sans-serif !important; /* Roboto-Bold для заголовков */
     font-size: 28px;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--text-dark);
     margin-top: 30px;
     margin-bottom: 15px;
@@ -828,8 +932,9 @@ body.left-nav-open .document-wrapper {
 }
 
 .document h3 {
+    font-family: 'Roboto', sans-serif !important; /* Roboto-Bold для заголовков */
     font-size: 28px;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--text-dark);
     margin-top: 20px;
     margin-bottom: 10px;
@@ -837,8 +942,9 @@ body.left-nav-open .document-wrapper {
 }
 
 .document h4 {
+    font-family: 'Roboto', sans-serif !important; /* Roboto-Bold для заголовков */
     font-size: 28px;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--text-dark);
     margin-top: 20px;
     margin-bottom: 10px;
@@ -847,8 +953,9 @@ body.left-nav-open .document-wrapper {
 
 .document h5,
 .document h6 {
+    font-family: 'Roboto', sans-serif !important; /* Roboto-Bold для заголовков */
     font-size: 28px;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--text-dark);
     margin-top: 20px;
     margin-bottom: 10px;
@@ -1234,7 +1341,8 @@ body.left-nav-open .document-wrapper {
     position: relative;
     transition: var(--transition);
     color: var(--text-dark) !important;
-    font-weight: 400 !important;
+    font-family: 'Roboto', sans-serif !important; /* Roboto-Medium для активных элементов */
+    font-weight: 500 !important;
     background-color: transparent;
 }
 
@@ -1256,7 +1364,8 @@ body.left-nav-open .document-wrapper {
 .floating-toc-page ul > li > ul > li > a.active {
     position: relative;
     transition: var(--transition);
-    font-weight: 600;
+    font-family: 'Roboto', sans-serif !important; /* Roboto-Medium для активных элементов */
+    font-weight: 500 !important;
     background-color: transparent;
 }
 
@@ -1339,6 +1448,7 @@ body.left-nav-open .document-wrapper {
 }
 
 .custom-footer .footer-title {
+    font-family: 'Roboto', sans-serif !important; /* Roboto-Bold для заголовков */
     font-size: 15px;
     font-weight: 700;
     color: var(--text-dark);
@@ -1775,8 +1885,10 @@ button#burgerToggle {
         right: auto !important;
         width: 350px;
         top: 64px !important;
-        height: calc(100vh - 64px) !important;
+        height: auto !important; /* Автоматическая высота, подстраивается под элементы */
+        max-height: calc(100vh - 64px) !important; /* Максимальная высота ограничена высотой экрана */
         transition: left 0.3s ease !important;
+        border-bottom-right-radius: var(--border-radius) !important;
     }
 
     .left-nav.active {
