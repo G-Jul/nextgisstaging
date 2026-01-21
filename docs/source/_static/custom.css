@@ -1327,6 +1327,12 @@ body.left-nav-open .document-wrapper {
     right: 0 !important;
     bottom: 0 !important;
 }
+.container {
+    display: none !important;
+}
+readthedocs-flyout {
+    display: none !important;
+}
 
 
 /* ============================================

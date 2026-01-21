@@ -1596,6 +1596,13 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
     bottom: 0 !important;
 }
 
+.container {
+    display: none !important;
+}
+readthedocs-flyout {
+    display: none !important;
+}
+
 @media (max-width: 768px) {
     .left-nav-content .search-container.mobile-search {
         display: flex;
