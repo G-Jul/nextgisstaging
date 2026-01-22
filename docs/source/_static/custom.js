@@ -209,10 +209,25 @@
                             e.preventDefault();
                             e.stopPropagation();
                             e.stopImmediatePropagation();
+                            
+                            const leftNav = document.getElementById('leftNav');
+                            if (leftNav) {
+                                leftNav.dataset.userClicked = 'true';
+                                setTimeout(() => {
+                                    if (leftNav) {
+                                        leftNav.dataset.userClicked = 'false';
+                                    }
+                                }, 2000);
+                            }
+                            
                             // Переключаем состояние независимо от класса current
                             const isExpanded = item.classList.contains('expanded');
                             if (isExpanded) {
                                 item.classList.remove('expanded');
+                                // Если элемент был current и мы его сворачиваем, убираем current
+                                if (item.classList.contains('current')) {
+                                    item.classList.remove('current');
+                                }
                             } else {
                                 item.classList.add('expanded');
                             }
@@ -231,9 +246,24 @@
                             e.preventDefault();
                             e.stopPropagation();
                             e.stopImmediatePropagation();
+                            
+                            const leftNav = document.getElementById('leftNav');
+                            if (leftNav) {
+                                leftNav.dataset.userClicked = 'true';
+                                setTimeout(() => {
+                                    if (leftNav) {
+                                        leftNav.dataset.userClicked = 'false';
+                                    }
+                                }, 2000);
+                            }
+                            
                             const isExpanded = item.classList.contains('expanded');
                             if (isExpanded) {
                                 item.classList.remove('expanded');
+                                // Если элемент был current и мы его сворачиваем, убираем current
+                                if (item.classList.contains('current')) {
+                                    item.classList.remove('current');
+                                }
                             } else {
                                 item.classList.add('expanded');
                             }

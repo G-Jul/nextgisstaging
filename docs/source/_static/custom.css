@@ -535,6 +535,9 @@ body.left-nav-open .document-wrapper {
     body.left-nav-open .document-wrapper {
         padding-left: 0px !important; /* 400px (ширина меню) + 20px (отступ) */
     }
+    .left-nav {
+        top: 62px !important;
+    }
 }
 
 /* Отступ слева для контента на экранах больше 1920px, чтобы не налазило на левое меню */
@@ -591,7 +594,7 @@ body.left-nav-open .document-wrapper {
 }
 
 .left-nav-content {
-    padding: 20px 13px 0 0;
+    padding: 20px 13px 10px 0 !important;
     overflow-x: visible !important;
     overflow-y: visible !important;
 }
@@ -857,9 +860,7 @@ body.left-nav-open .document-wrapper {
     background-color: #E4F3FF;
 }
 
-/* Текущая страница второго уровня */
-.left-nav-content .toctree-l2.current > a {
-}
+
 
 /* Стили для элементов третьего уровня (toctree-l3) */
 .left-nav-content .toctree-l3 {
@@ -1908,6 +1909,22 @@ button#burgerToggle {
         display: none;
     }
 }
+@media (max-width: 375px) {
+    .custom-header .header-container {
+        margin: 0 10px;
+    }
+}
+@media (max-width: 393px) {
+    .logo-link-main > span {
+        display: none;
+    }
+}
+
+@media (max-width: 500px) {
+    .logo-link > span {
+        display: none;
+    }
+}
 
 /* Инпут поиска в левом меню */
 .left-nav-content .search-container {
@@ -2055,7 +2072,8 @@ button#burgerToggle {
     .left-nav.active {
         left: 0 !important;
         right: auto !important;
-        top: 64px !important;
+        top: 60px !important;
+        height: 100vh !important;
     }
 }
 
