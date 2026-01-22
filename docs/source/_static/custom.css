@@ -772,18 +772,27 @@ body.left-nav-open .document-wrapper {
 .left-nav-content [class*="toctree-l"] > a .nav-arrow-icon {
     position: absolute;
     right: 1.5rem;
-    width: 13px;
-    transition: transform 0.3s ease;
-    display: inline-block;
-    vertical-align: middle;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     z-index: 10;
+    transform-origin: center;
+}
+
+.left-nav-content [class*="toctree-l"] > a .nav-arrow-icon-img {
+    width: 13px;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
 }
 
 
 /* Стрелка поворачивается при открытии (все уровни) */
-.left-nav-content [class*="toctree-l"].current > a .nav-arrow-icon,
-.left-nav-content [class*="toctree-l"].expanded > a .nav-arrow-icon {
+.left-nav-content [class*="toctree-l"].current > a .nav-arrow-icon .nav-arrow-icon-img,
+.left-nav-content [class*="toctree-l"].expanded > a .nav-arrow-icon .nav-arrow-icon-img {
     transform: rotate(180deg);
 }
 

@@ -189,11 +189,16 @@
                 if (submenu && submenu.children.length > 0) {
                     let arrowIcon = finalLink.querySelector('.nav-arrow-icon');
                     if (!arrowIcon) {
-                        arrowIcon = document.createElement('img');
-                        arrowIcon.src = staticPath + '/icons/arrow_down_for_nav.svg';
+                        arrowIcon = document.createElement('div');
                         arrowIcon.className = 'nav-arrow-icon';
-                        arrowIcon.alt = '';
                         arrowIcon.style.cursor = 'pointer';
+                        
+                        const arrowImg = document.createElement('img');
+                        arrowImg.src = staticPath + '/icons/arrow_down_for_nav.svg';
+                        arrowImg.className = 'nav-arrow-icon-img';
+                        arrowImg.alt = '';
+                        
+                        arrowIcon.appendChild(arrowImg);
                         finalLink.appendChild(arrowIcon);
                     }
                     
@@ -242,10 +247,10 @@
                         
                         if (target === arrowIcon || 
                             target.classList.contains('nav-arrow-icon') || 
+                            target.classList.contains('nav-arrow-icon-img') ||
                             target.classList.contains('toctree-expand') ||
                             target.closest('.nav-arrow-icon') ||
-                            target.closest('.toctree-expand') ||
-                            (target.tagName === 'IMG' && target.classList.contains('nav-arrow-icon'))) {
+                            target.closest('.toctree-expand')) {
                             return;
                         }
                         
