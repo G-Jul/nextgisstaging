@@ -285,10 +285,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Плавающее меню содержания (десктоп)
     
-    const floatingToc = document.getElementById('floatingToc');
+    const floatingTocPage = document.getElementById('floatingTocPage');
     
-    if (floatingToc) {
-        const tocLinks = Array.from(floatingToc.querySelectorAll('a'));
+    if (floatingTocPage) {
+        const tocLinks = Array.from(floatingTocPage.querySelectorAll('a'));
         let userClickedLink = null;
         let clickTimeout = null;
         
@@ -307,7 +307,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     clearTimeout(clickTimeout);
                 }
                 
-                const allTocLinks = Array.from(floatingToc.querySelectorAll('a'));
+                const allTocLinks = Array.from(floatingTocPage.querySelectorAll('a'));
                 allTocLinks.forEach(l => {
                     l.classList.remove('active');
                 });
@@ -329,7 +329,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (targetId && targetId.startsWith('#')) {
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
-                        const headerHeight = document.querySelector('.homepage-header')?.offsetHeight || 80;
+                        const headerHeight = document.querySelector('.custom-header')?.offsetHeight || 64;
                         
                         let targetPosition = 0;
                         let element = targetElement;
@@ -373,7 +373,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         });
                         
                         if (foundSection) {
-                            const headerHeight = document.querySelector('.homepage-header')?.offsetHeight || 80;
+                            const headerHeight = document.querySelector('.custom-header')?.offsetHeight || 64;
                             
                             const rect = foundSection.getBoundingClientRect();
                             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -614,7 +614,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (activeSection) {
                 const sectionId = activeSection.getAttribute('id');
-                const allTocLinks = Array.from(floatingToc.querySelectorAll('a'));
+                const allTocLinks = Array.from(floatingTocPage.querySelectorAll('a'));
                 allTocLinks.forEach(link => {
                     link.classList.remove('active');
                     const linkHref = link.getAttribute('href');
@@ -629,7 +629,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     (document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset || 0) :
                     (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0);
                 if (currentScroll < 200) {
-                    const allTocLinks = Array.from(floatingToc.querySelectorAll('a'));
+                    const allTocLinks = Array.from(floatingTocPage.querySelectorAll('a'));
                     allTocLinks.forEach(link => link.classList.remove('active'));
                     const firstLink = allTocLinks[0];
                     if (firstLink) {
@@ -672,41 +672,41 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     if (burgerToggle) {
-        // Получаем floatingToc из глобальной области или находим заново
-        const floatingToc = document.getElementById('floatingToc');
+        // Получаем floatingTocPage из глобальной области или находим заново
+        const floatingTocPage = document.getElementById('floatingTocPage');
         
-        if (floatingToc) {
+        if (floatingTocPage) {
             const overlay = createOverlay();
             
             burgerToggle.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
                 
-                const isActive = floatingToc.classList.contains('active');
+                const isActive = floatingTocPage.classList.contains('active');
                 
                 if (isActive) {
-                    floatingToc.classList.remove('active');
+                    floatingTocPage.classList.remove('active');
                     overlay.classList.remove('active');
                     burgerToggle.classList.remove('active');
                 } else {
-                    floatingToc.classList.add('active');
+                    floatingTocPage.classList.add('active');
                     overlay.classList.add('active');
                     burgerToggle.classList.add('active');
                 }
             });
             
             overlay.addEventListener('click', function() {
-                floatingToc.classList.remove('active');
+                floatingTocPage.classList.remove('active');
                 overlay.classList.remove('active');
                 burgerToggle.classList.remove('active');
             });
             
             document.addEventListener('click', function(e) {
-                if (floatingToc && floatingToc.classList.contains('active')) {
-                    if (!floatingToc.contains(e.target) && 
+                if (floatingTocPage && floatingTocPage.classList.contains('active')) {
+                    if (!floatingTocPage.contains(e.target) && 
                         !burgerToggle.contains(e.target) &&
                         e.target !== overlay) {
-                        floatingToc.classList.remove('active');
+                        floatingTocPage.classList.remove('active');
                         overlay.classList.remove('active');
                         burgerToggle.classList.remove('active');
                     }
@@ -718,14 +718,15 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleResize() {
         const width = window.innerWidth;
         
+        const floatingTocPage = document.getElementById('floatingTocPage');
         if (width <= 1280) {
-            if (floatingToc && !floatingToc.classList.contains('active')) {
-                floatingToc.style.display = 'none';
+            if (floatingTocPage && !floatingTocPage.classList.contains('active')) {
+                floatingTocPage.style.display = 'none';
             }
         } else {
-            if (floatingToc) {
-                floatingToc.style.display = 'flex';
-                floatingToc.classList.remove('active');
+            if (floatingTocPage) {
+                floatingTocPage.style.display = 'flex';
+                floatingTocPage.classList.remove('active');
             }
             if (burgerToggle) {
                 burgerToggle.style.display = 'none';
@@ -737,7 +738,7 @@ document.addEventListener('DOMContentLoaded', function() {
     handleResize();
 
     function moveSearchToLeftMenu() {
-        const headerSearchContainer = document.querySelector('.homepage-header .search-container');
+        const headerSearchContainer = document.querySelector('.custom-header .search-container');
         const leftNavContent = document.querySelector('.left-nav-content');
         
         if (!headerSearchContainer || !leftNavContent) {

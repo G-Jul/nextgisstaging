@@ -44,8 +44,8 @@
 .tag,
 .faq-category,
 .faq-category-header,
-.homepage-header,
-.floating-toc,
+.custom-header,
+.floating-toc-page,
 .floating-toc-header,
 .floating-toc-content,
 .floating-toc-list a,
@@ -55,6 +55,7 @@ textarea,
 select {
     box-sizing: border-box;
 }
+
 
 /* Подключение локальных шрифтов Roboto */
 @font-face {
@@ -93,16 +94,18 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
+    scrollbar-gutter: stable;
 }
 
 .homepage {
     font-family: 'Roboto-Regular', sans-serif !important;
     color: var(--text-dark);
     background: var(--bg-white);
-    line-height: 1.6;
+    line-height: 1.5;
     overflow-x: hidden !important;
     width: 100%;
     max-width: 100vw;
+    scrollbar-gutter: stable;
 }
 
 /* ============================================
@@ -126,7 +129,7 @@ body {
     left: 0 !important;
 }
 
-.logo-link-main {
+.custom-header .logo-link-main {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -134,11 +137,12 @@ body {
     color: var(--text-dark);
 }
 
-.logo-link-main span{
+.custom-header .logo-link-main span {
     margin-left: 20px;
     color: #1D1D1B;
     font-weight: 600;
     font-size: 18px;
+    line-height: 1;
 }
 
 .left-nav-close {
@@ -164,32 +168,38 @@ body {
    Хедер
    ============================================ */
 
-.homepage-header {
-    background: var(--bg-white);
-    border-bottom: 1px solid var(--border-color);
+.custom-header {
+    background: var(--bg-white) !important;
+    border-bottom: 1px solid var(--border-color) !important;
     position: -webkit-sticky !important;
     position: sticky !important;
+    height: 65px !important;
     top: 0 !important;
-    z-index: 1000 !important;
-    padding: 14px 0;
-    width: 100% !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    margin: 0 !important;
     left: 0 !important;
     right: 0 !important;
-    transform: none !important;
-    will-change: auto !important;
+    z-index: 1000 !important;
+    padding: 14px 0 !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+    margin: 0 !important;
+    will-change: transform !important;
+    transform: translateZ(0) !important;
+    -webkit-transform: translateZ(0) !important;
 }
 
 /* Убеждаемся, что родительские контейнеры не блокируют sticky */
 body.homepage {
     overflow-x: hidden !important;
-    overflow-y: auto !important;
+    overflow-y: visible !important;
     width: 100%;
     max-width: 100vw;
     position: relative !important;
     height: 100%;
     min-height: 100vh;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
 }
 
 /* Убираем min-height из RTD элементов на главной странице */
@@ -211,6 +221,8 @@ body.homepage .wy-nav-content {
 /* Критично: homepage-wrapper не должен иметь overflow, который блокирует sticky */
 .homepage-wrapper {
     overflow: visible !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
     width: 100%;
     max-width: 100vw;
     box-sizing: content-box;
@@ -222,8 +234,9 @@ body.homepage .wy-nav-content {
     isolation: auto !important;
     will-change: auto !important;
     height: auto !important;
-    min-height: 0 !important;
-    max-height: none !important;
+    min-height: 100vh !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
 }
 
 /* Убеждаемся, что все родители header не блокируют sticky */
@@ -233,21 +246,27 @@ body.homepage > *,
 }
 
 /* Критично: header должен быть sticky независимо от родительских контейнеров */
-.homepage-wrapper .homepage-header,
-body.homepage .homepage-header,
-.homepage .homepage-header {
+.homepage-wrapper .custom-header,
+body.homepage .custom-header,
+.homepage .custom-header,
+body.homepage > .custom-header,
+.homepage-wrapper > .custom-header,
+.custom-header {
     position: -webkit-sticky !important;
     position: sticky !important;
     top: 0 !important;
-    z-index: 1000 !important;
-    width: 100% !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
     left: 0 !important;
     right: 0 !important;
+    z-index: 1000 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    will-change: transform !important;
+    transform: translateZ(0) !important;
+    -webkit-transform: translateZ(0) !important;
+    margin: 0 !important;
 }
 
-.header-container {
+.custom-header .header-container {
     max-width: 2560px;
     margin: 0 20px;
     padding: 0 20px;
@@ -256,7 +275,7 @@ body.homepage .homepage-header,
     align-items: center;
 }
 
-.header-left {
+.custom-header .header-left {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -279,13 +298,13 @@ body.homepage .homepage-header,
     transition: var(--transition);
 }
 
-.logo-link {
+.custom-header .logo-link {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     text-decoration: none;
     color: var(--text-dark);
-    font-weight: 400;
+    font-weight: 600;
     cursor: pointer;
     user-select: none;
 }
@@ -307,34 +326,37 @@ body.homepage .homepage-header,
 
 /* Поворот стрелки при открытом меню */
 .left-nav.active ~ .homepage-wrapper .dropdown-arrow img,
-body.left-nav-open .homepage-header .dropdown-arrow img,
-.homepage-header .logo-link.active .dropdown-arrow img {
+body.left-nav-open .custom-header .dropdown-arrow img,
+.custom-header .logo-link.active .dropdown-arrow img {
     transform: rotate(180deg);
 }
 
-.logo {
+.custom-header .logo {
     height: 32px;
     width: auto;
 }
 
-.logo-text {
+.custom-header .logo-text {
+    font-family: 'Roboto-Regular', sans-serif !important;
     font-size: 18px;
+    font-weight: 400;
+    line-height: 1;
     color: #56738F;
 }
 
-.header-right {
+.custom-header .header-right {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-.search-container {
+.custom-header .search-container {
     position: relative;
     display: flex;
     align-items: center;
 }
 
-.search-icon {
+.custom-header .search-icon {
     position: absolute;
     left: 12px;
     width: 18px;
@@ -343,19 +365,25 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
     pointer-events: none;
 }
 
-.search-input {
-    padding: 0.5rem 1rem 0.5rem 2.5rem;
+.custom-header .search-input {
+    padding: 9px 30px 9px 38px;
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
-    font-size: 0.9rem;
-    width: 300px;
+    font-size: 16px;
+    font-family: 'Roboto-Regular', sans-serif !important;
+    width: 320px;
+    outline: none;
+    box-shadow: none !important;
     transition: var(--transition);
 }
 
-.search-input:focus {
+.custom-header .search-input:focus {
     outline: none;
-    border-color: var(--primary-blue-dark);
-    box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.1);
+    border-color: var(--primary-blue);
+}
+
+.footer-container {
+    padding: 35px 0 35px 0 !important;
 }
 
 .btn-login {
@@ -414,13 +442,13 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
     .burger-menu-toggle {
         display: flex !important;
     }
-    .floating-toc.active {
+    .floating-toc-page.active {
         height: auto !important;
     }
 }
 
 @media (max-width: 425px) {
-    .logo-text {
+    .custom-header .logo-text {
         display: none;
     }
 }
@@ -465,7 +493,7 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
         padding-right: 1rem !important; /* Отступ убран для диапазона 768px-1280px */
     }
 
-    .footer-container {
+    .homepage-footer .footer-container {
         padding-right: 1rem !important;
     }
 }
@@ -476,7 +504,7 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
         padding-right: 1rem !important;
     }
 
-    .footer-container {
+    .homepage-footer .footer-container {
         padding-right: 1rem !important;
     }
 }
@@ -489,7 +517,7 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
     }
 
     /* Footer: убираем отступ справа и распределяем элементы равномерно */
-    .footer-container {
+    .homepage-footer .footer-container {
         padding-right: 1rem !important;
         margin-left: auto !important;
         margin-right: auto !important;
@@ -500,7 +528,7 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
 
 /* Адаптивный отступ слева для footer в диапазоне 1280px - 1920px */
 @media (min-width: 1281px) and (max-width: 1920px) {
-    .footer-container {
+    .homepage-footer .footer-container {
         margin-left: calc((100vw - 1280px) * 0.390625); /* Плавно от 0px до 250px */
     }
 
@@ -508,13 +536,13 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
 
 @media (min-width: 1631px) and (max-width: 1920px) {
 
-    .footer-content {
+    .homepage-footer .footer-content {
         margin-right: 200px;
     }
 }
 
 @media (min-width: 1281px) and (max-width: 1631px) {
-    .footer-content {
+    .homepage-footer .footer-content {
         margin-right: 150px;
     }
 
@@ -909,19 +937,22 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
    Плавающее меню содержания справа
    ============================================ */
 
-.floating-toc {
-    position: fixed !important;
-    top: 80px !important;
-    right: 1rem !important;
+
+
+.floating-toc-page {
+    position: fixed;
+    top: 64px;
+    right: 1rem;
     width: 320px;
-    max-height: calc(100vh - 100px);
+    max-height: calc(100vh - 64px);
+    height: auto;
     background: var(--bg-white);
     border-bottom-left-radius: var(--border-radius);
-    box-shadow: none !important;
-    z-index: 999 !important;
-    display: flex !important;
+    z-index: 99;
+    display: flex;
     flex-direction: column;
     overflow: hidden;
+    margin-top: 20px;
 }
 
 .floating-toc-header {
@@ -932,74 +963,63 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
     font-size: 0.95rem;
 }
 
-.floating-toc-content {
-    padding: 1rem;
+.floating-toc-page .floating-toc-content {
+    padding: 0rem !important;
     overflow-y: auto;
-    max-height: calc(100vh - 180px);
+    max-height: calc(100vh - 64px);
 }
 
-.floating-toc-list {
+.floating-toc-page ul {
     list-style: none;
+    padding-left: 0;
+    margin: 0;
     position: relative;
 }
-.floating-toc-list::before {
+
+.floating-toc-page > .floating-toc-content > ul::before {
     position: absolute;
     content: '';
-    left:1px;
+    left: 1px;
     width: 2px;
     height: 100%;
     background-color: #DCE0E5;
 }
 
 
-.floating-toc-list li {
-    margin-bottom: 0.5rem;
+.floating-toc-page li {
+    margin: 0;
 }
 
-.floating-toc-list a:hover {
-    background-color: #E8EAEC;
-    color: var(--primary-blue);
-}
-
-.floating-toc-list a {
+.floating-toc-page a {
     color: var(--text-dark);
     text-decoration: none;
     font-size: 0.9rem;
     display: block;
-    padding: 0.25rem 20px;
+    padding: 7px 20px !important;
+    line-height: 1;
     transition: var(--transition);
 }
 
 /* Убираем изменение background и color при клике (active и focus) */
-.floating-toc-list a:active,
-.floating-toc-list a:focus,
-.floating-toc-list a:active:focus {
+.floating-toc-page a:active,
+.floating-toc-page a:focus,
+.floating-toc-page a:active:focus {
     background-color: transparent !important;
     color: var(--text-dark) !important;
     outline: none !important;
     -webkit-tap-highlight-color: transparent !important;
 }
 
-.floating-toc-list ul a {
-    padding: 0.25rem 20px;
-    color: var(--text-dark);
-}
-
-.floating-toc-list a:hover {
-    background-color: transparent !important;
-    color: var(--text-dark) !important;
-}
-
 /* Убираем hover для активных элементов */
-.floating-toc-list a.active:hover {
+.floating-toc-page a.active:hover {
     background-color: transparent !important;
     color: var(--text-dark) !important;
 }
 
 /* Убираем изменение background и color при клике для активных элементов */
-.floating-toc-list a.active:active,
-.floating-toc-list a.active:focus,
-.floating-toc-list a.active:active:focus {
+.floating-toc-page a.active:active,
+.floating-toc-page a.active:focus,
+.floating-toc-page a.active:active:focus {
     background-color: transparent !important;
     color: var(--text-dark) !important;
     outline: none !important;
@@ -1007,74 +1027,86 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
 }
 
 /* Убираем изменение для всех вложенных элементов */
-.floating-toc-list ul > li > a:active,
-.floating-toc-list ul > li > a:focus,
-.floating-toc-list ul > li > a.active:active,
-.floating-toc-list ul > li > a.active:focus {
+.floating-toc-page ul > li > ul > li > a:active,
+.floating-toc-page ul > li > ul > li > a:focus,
+.floating-toc-page ul > li > ul > li > a.active:active,
+.floating-toc-page ul > li > ul > li > a.active:focus {
     background-color: transparent !important;
     color: var(--text-dark) !important;
     outline: none !important;
     -webkit-tap-highlight-color: transparent !important;
 }
 
-.floating-toc-list ul {
-    list-style: none;
-    margin-top: 0.25rem;
-    padding-left: 0;
+.floating-toc-page .current > a {
+    color: var(--primary-blue);
 }
 
-.floating-toc-list ul a {
+.floating-toc-page ul ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 20px !important;
+}
+
+.floating-toc-page ul ul a {
     font-size: 0.85rem;
     color: var(--text-dark);
-
+    padding: 7px 20px !important;
+    line-height: 1;
 }
 
-.floating-toc-list ul li {
-    padding-left: 1rem;
+/* Активный элемент первого уровня с индикатором */
+.floating-toc-page ul > li > a.active {
+    position: relative;
+    transition: var(--transition);
+    color: var(--text-dark) !important;
+    font-family: 'Roboto-Medium', sans-serif !important;
+    background-color: transparent;
 }
 
-.floating-toc-list>li>a.active{
+.floating-toc-page ul > li > a.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background-color: var(--primary-blue-dark);
+}
+
+/* Вложенные элементы второго уровня */
+.floating-toc-page ul > li {
+    position: relative;
+}
+
+.floating-toc-page ul > li > ul > li > a.active {
     position: relative;
     transition: var(--transition);
     font-family: 'Roboto-Medium', sans-serif !important;
     background-color: transparent;
 }
 
-.floating-toc-list>li>li>a{
-    color: var(--text-dark);
-}
-
-.floating-toc-list>li>a.active::before {
+.floating-toc-page ul > li > ul > li > a.active::before {
     content: '';
     position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width:4px;
-    background-color: var(--primary-blue-dark);
-
-}
-
-.floating-toc-list>li>ul>li{
-    position: relative;
-}
-
-.floating-toc-list>li>ul>li>a.active::before {
-    content: '';
-    position: absolute;
-    left: 0px;
+    left: -16px;
     top: 0;
     height: 100%;
     width: 4px;
     background-color: var(--primary-blue-dark);
-
 }
 
-.floating-toc-list>li>ul>li:has(>a.active) {
+.floating-toc-page ul > li > ul > li > ul > li a.active::before {
+    content: '';
+    position: absolute;
+    left: -32px;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background-color: var(--primary-blue-dark);
 }
 
-.floating-toc-list>li>ul>li>a.active{
-    font-family: 'Roboto-Medium', sans-serif !important;
+/* Убираем hover для активных вложенных элементов */
+.floating-toc-page ul > li > ul > li > a.active:hover {
     background-color: transparent;
 }
 
@@ -1088,53 +1120,64 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
     width: 100%;
     height: 300px;
     border-top: 1px solid var(--border-color);
-    padding: 45px 0 2rem;
+    padding: 0 !important;
 }
 
-.footer-container {
+.homepage-footer .footer-container {
     display: flex;
     max-width: 1400px;
-    height: 205px;
+    height: auto;
     justify-content: space-between;
     align-items: flex-start;
     margin-left: 20px; /* Будет переопределено медиа-запросами */
     margin-right: 0;
-    padding-right: 1rem;
+    padding-right: 0rem !important;
+    padding-bottom: 0px !important;
 }
 
 /* Фиксированный отступ для больших экранов > 1920px */
 @media (min-width: 1921px) {
-    .footer-container {
+    .homepage-footer .footer-container {
         margin-left: 250px;
     }
 }
 
-.footer-logo {
-    margin-bottom: 2rem;
+.homepage-footer .footer-logo {
+    margin-bottom: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 25px;
+    height: 100%;
 }
 
-.footer-logo button {
+.homepage-footer .footer-logo button {
     width: 130px;
     padding: 12px 0px;
 }
 
-.footer-logo-img {
-    height: 40px;
-    width: auto;
+.homepage-footer .footer-logo-img,
+.homepage-footer .footer-logo > img,
+.homepage-footer .footer-logo img,
+.homepage-footer .footer-logo .footer-logo-img {
+    justify-self: start;
+    height: 25px !important;
+    width: 200px !important;
+    object-fit: contain !important;
+    max-width: none !important;
+    min-width: 0 !important;
 }
 
-.footer-content {
+.homepage-footer .footer-content {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 0;
+    height: 100%;
+    align-items: flex-start;
 }
 
-.footer-title {
+.homepage-footer .footer-title {
     font-family: 'Roboto-Bold', sans-serif !important;
     font-size: 15px;
     color: var(--text-dark);
@@ -1143,38 +1186,43 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
     letter-spacing: 0.5px;
 }
 
-.footer-links {
+.homepage-footer .footer-links {
     list-style: none;
+    margin-bottom: 0px !important;
 }
 
-.footer-links li {
+.homepage-footer .footer-links li {
+    width: auto;
+    height: auto;
     margin-bottom: 10px;
+    line-height: 1 !important;
 }
 
-.footer-links a {
+.homepage-footer .footer-links a {
     color: #56738F;
     text-decoration: none;
     font-size: 16px;
+    line-height: 1 !important;
     transition: var(--transition);
 }
 
-.footer-links a:hover {
+.homepage-footer .footer-links a:hover {
     text-decoration: underline;
 }
 
-.footer-social {
+.homepage-footer .footer-social {
     display: flex;
     gap: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 0;
 }
 
-.social-icon {
+.homepage-footer .social-icon {
     width: 32px;
     height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--bg-white);
+    background: transparent !important;
     border-radius: 50%;
     color: var(--text-dark);
     text-decoration: none;
@@ -1182,21 +1230,24 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
     transition: var(--transition);
 }
 
-.social-icon:hover {
+.homepage-footer .social-icon:hover {
     color: var(--text-dark);
 }
 
-.footer-bottom {
+.homepage-footer .footer-bottom {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 95px;
+    height: 85px;
     border-top: 1px solid var(--border-color);
 }
 
-.footer-copyright {
+.homepage-footer .footer-copyright {
     color: var(--text-light);
     font-size: 0.9rem;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
 }
 
 /* ============================================
@@ -1231,37 +1282,39 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
     }
 
     /* Скрываем floating TOC по умолчанию в диапазоне 768-1280px, показываем при активном состоянии */
-    .floating-toc {
+    .floating-toc-page {
         display: none !important;
         position: fixed !important;
-        top: 66px !important;
+        top: 64px !important;
         right: -440px !important;
         width: 440px !important;
-        max-height: calc(100vh - 66px) !important;
-        height: calc(100vh - 66px) !important;
-        z-index: 10000 !important;
+        height: auto !important;
+        z-index: 10001 !important;
         background: var(--bg-white) !important;
         box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1) !important;
         transition: right 0.3s ease !important;
+        pointer-events: auto !important;
     }
 
-    .floating-toc.active {
+    .floating-toc-page.active {
         display: flex !important;
         right: 0 !important;
+        pointer-events: auto !important;
     }
 
     /* Адаптируем header */
-    .header-container {
+    .custom-header .header-container {
         padding: 0 1rem;
     }
 
-    .header-right {
+    .custom-header .header-right {
         gap: 0.75rem;
     }
 
     /* Уменьшаем поиск */
-    .search-input {
+    .custom-header .search-input {
         width: 250px;
+        padding-right: 25px;
     }
 
     /* Адаптируем основной контент */
@@ -1382,21 +1435,21 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
     }
 
     /* Скрываем floating TOC по умолчанию, показываем при активном состоянии */
-    .floating-toc {
+    .floating-toc-page {
         display: none !important;
         position: fixed !important;
-        top: 66px !important;
+        top: 60px !important;
         right: -350px !important;
         width: 350px !important;
-        max-height: calc(100vh - 66px) !important;
-        height: calc(100vh - 66px) !important;
-        z-index: 10000 !important;
+        max-height: calc(100vh - 64px) !important;
+        height: auto !important;
+        z-index: 10001 !important;
         background: var(--bg-white) !important;
         box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1) !important;
         transition: right 0.3s ease !important;
     }
 
-    .floating-toc.active {
+    .floating-toc-page.active {
         display: flex !important;
         right: 0 !important;
     }
@@ -1456,7 +1509,7 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
         padding: 45px 0 2rem;
     }
 
-    .footer-container {
+    .homepage-footer .footer-container {
         flex-direction: row;
         align-items: flex-start;
         justify-content: space-between;
@@ -1466,23 +1519,23 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
         max-width: 100%;
     }
 
-    .footer-logo {
+    .homepage-footer .footer-logo {
         margin-bottom: 0;
         margin-right: 3rem;
         flex-shrink: 0;
         display: flex;
         flex-direction: column;
-        gap: 25px;
+        gap: 15px;
     }
 
-    .footer-content {
+    .homepage-footer .footer-content {
         grid-template-columns: repeat(3, 1fr);
         gap: 3rem;
         flex: 1;
         margin-bottom: 0;
     }
 
-    .footer-social {
+    .homepage-footer .footer-social {
         margin-bottom: 0;
     }
 }
@@ -1569,10 +1622,11 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
     }
 
     /* Footer: убираем отступ справа и распределяем элементы равномерно */
-    .footer-container {
+    .homepage-footer .footer-container {
         padding-right: 1rem !important;
         margin-left: auto !important;
         margin-right: auto !important;
+        padding-bottom: 30px !important;
         justify-content: space-between !important;
         max-width: calc(100% - 360px) !important;
     }
@@ -1627,12 +1681,13 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
     }
 
     /* Footer: убираем отступ справа и распределяем элементы равномерно */
-    .footer-container {
+    .homepage-footer .footer-container {
         padding-right: 1rem !important;
         margin-left: auto !important;
         margin-right: auto !important;
         justify-content: space-between !important;
         max-width: calc(100% - 360px) !important;
+        padding-bottom: 30px !important;
     }
 
     
@@ -1679,21 +1734,31 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
 }
 
 @media (min-width: 1281px) and (max-width: 1440px) {
-    .footer-container {
+    .homepage-footer .footer-container {
         margin-left: 120px !important;
     }
-    .footer-logo {
+    .homepage-footer .footer-logo {
         margin-right: 50px;
     }
-    .footer-logo img {
-        width: 270px;
+    .homepage-footer .footer-logo-img,
+    .homepage-footer .footer-logo img {
+        width: auto !important;
+        height: 25px !important;
+        object-fit: contain !important;
+        max-width: none !important;
     }
 }
 
 @media (min-width: 1281px) and (max-width: 1428px) {
-    .footer-container {
-        height: 235px !important;
+    .homepage-footer .footer-container {
+        padding-bottom: 15px !important;
     }
+    .homepage-footer .footer-links a {
+        font-size: 12px !important;
+    }
+    .footer-content {
+        margin-right: 120px !important;
+    } 
 
 }
 
@@ -1711,15 +1776,26 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
     }
 
     /* Footer: убираем отступ справа и распределяем элементы равномерно */
-    .footer-container {
+    .homepage-footer .footer-container {
         padding-right: 1rem !important;
         margin-left: auto !important;
         margin-right: auto !important;
         justify-content: space-between !important;
     }
 
-    .footer-logo {
+    .homepage-footer .footer-logo {
         margin-left: 20px;
+    }
+
+    .homepage-footer .footer-logo-img,
+    .homepage-footer .footer-logo > img,
+    .homepage-footer .footer-logo img,
+    .homepage-footer .footer-logo .footer-logo-img {
+        width: 200px !important;
+        height: 25px !important;
+        object-fit: contain !important;
+        max-width: none !important;
+        min-width: 0 !important;
     }
     /* 2 столбца для "Мне нужно" и "для разработчиков" (cards-type-1) */
     .cards-type-1 {
@@ -1783,21 +1859,32 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
 
 /* Уменьшаем размер шрифта в футере для диапазона 768px - 925px */
 @media (min-width: 768px) and (max-width: 925px) {
-    .footer-title {
+    .homepage-footer .footer-title {
         font-size: 13px !important;
     }
 
-    .footer-links a {
-        font-size: 14px !important;
+    .homepage-footer .footer-links a {
+        font-size: 11px !important;
     }
 
-    .footer-copyright {
+    .homepage-footer .footer-copyright {
         font-size: 0.8rem !important;
     }
 }
 
 /* Адаптивность для карточек в диапазоне 768px - 960px */
 @media (min-width: 768px) and (max-width: 960px) {
+    .homepage-footer .footer-logo-img,
+    .homepage-footer .footer-logo > img,
+    .homepage-footer .footer-logo img,
+    .homepage-footer .footer-logo .footer-logo-img {
+        width: 200px !important;
+        height: 25px !important;
+        object-fit: contain !important;
+        max-width: none !important;
+        min-width: 0 !important;
+    }
+
     /* 2 столбца для "Мне нужно" и "для разработчиков" (cards-type-1) */
     .cards-type-1 {
         grid-template-columns: repeat(2, 1fr) !important;
@@ -1863,31 +1950,40 @@ body.left-nav-open .homepage-header .dropdown-arrow img,
 
 @media (max-width: 768px) {
     /* Header */
-    .header-container {
+    .custom-header .header-container {
         padding: 0 0.75rem;
     }
-    .footer-logo>img {
-        min-width: 45%;
-        max-width: 50%;
+    .homepage-footer .footer-logo-img,
+    .homepage-footer .footer-logo > img,
+    .homepage-footer .footer-logo img {
+        width: auto !important;
+        height: 25px !important;
+        object-fit: contain !important;
+        max-width: none !important;
     }
     .homepage-footer {
         padding-top: 15px;
     }
-    .header-left {
+    .custom-header .header-left {
         gap: 0.5rem;
     }
 
-    .logo {
+    .custom-header .logo {
         height: 24px;
     }
 
-    .logo-link-main span {
+    .custom-header .logo-link-main span {
         font-size: 16px;
     }
 
     /* Скрываем поиск в header на мобильных */
-    .homepage-header .search-container {
+    .custom-header .search-container {
         display: none !important;
+    }
+    
+    .custom-header .search-input {
+        width: 200px;
+        padding-right: 20px;
     }
 }
 
@@ -1950,7 +2046,7 @@ readthedocs-flyout {
         display: flex;
     }
 
-    .header-right {
+    .custom-header .header-right {
         gap: 0.5rem;
     }
 
@@ -2105,34 +2201,32 @@ readthedocs-flyout {
     }
 
     /* Footer */
-    .footer-container {
+    .homepage-footer .footer-container {
         flex-direction: column;
         align-items: flex-start;
         margin-left: 0;
-        padding: 1.5rem 0.75rem;
+        padding: 1.5rem 0.75rem !important;
         height: auto;
     }
 
-    .footer-logo {
+    .homepage-footer .footer-logo {
         margin-bottom: 1rem;
         width: 100%;
+        margin-right: 0;
     }
 
-    .footer-content {
+    .homepage-footer .footer-content {
         grid-template-columns: 1fr;
         gap: 1.5rem;
         width: 100%;
     }
 
-    .footer-social {
+    .homepage-footer .footer-social {
         margin-bottom: 1rem;
-    }
-
-    .footer-social {
         gap: 0.75rem;
     }
 
-    .social-icon {
+    .homepage-footer .social-icon {
         width: 28px;
         height: 28px;
     }
@@ -2184,17 +2278,28 @@ readthedocs-flyout {
    Правое меню для диапазона 425px - 768px (как на планшетах)
    ============================================ */
 
+@media (min-width: 425px) and (max-width: 1280px) {
+    .floating-toc-page {
+        width: 440px !important;
+        padding: 24px 35px !important;
+        border-bottom-left-radius: var(--border-radius) !important;
+        margin-top: 0 !important;
+    }
+}
+
 @media (min-width: 425px) and (max-width: 768px) {
-    .floating-toc {
+    .floating-toc-page {
         width: 350px !important;
         right: -350px !important;
-        top: 66px !important;
-        max-height: calc(100vh - 66px) !important;
+        top: 60px !important;
+        max-height: calc(100vh - 64px) !important;
         height: auto !important;
         transition: right 0.3s ease !important;
+        padding: 0 !important;
+        border-bottom-left-radius: 0 !important;
     }
 
-    .floating-toc.active {
+    .floating-toc-page.active {
         right: 0 !important;
     }
 
@@ -2279,25 +2384,39 @@ readthedocs-flyout {
 
 /* Floating TOC для мобильных до 425px - под header на всю высоту */
 @media (max-width: 424px) {
-    .floating-toc {
+    .floating-toc-page {
         width: 100% !important;
         right: -100% !important;
-        top: 64px !important;
-        height: calc(100vh - 64px) !important;
-        max-height: calc(100vh - 64px) !important;
-        min-height: calc(100vh - 64px) !important;
+        top: 60px !important;
+        height: calc(100vh - 60px) !important;
+        max-height: calc(100vh - 60px) !important;
+        min-height: calc(100vh - 60px) !important;
         z-index: 10000 !important;
         transition: right 0.3s ease !important;
     }
 
-    .floating-toc-content {
+    .floating-toc-page .floating-toc-content {
         height: 100% !important;
         max-height: 100% !important;
         flex: 1 !important;
     }
 
-    .floating-toc.active {
+    .floating-toc-page.active {
         right: 0 !important;
+    }
+    .homepage-footer .footer-logo-img, .homepage-footer .footer-logo > img, .homepage-footer .footer-logo img, .homepage-footer .footer-logo .footer-logo-img {
+        width: 120px !important; 
+        height: auto !important;
+    }
+    .homepage-footer .footer-logo button {
+        width: 85px;
+        height: 31px;
+        padding: 0;
+        border-radius: 4px;
+    }
+    .social-icon {
+        width: 22px !important;
+        height: 22px !important;
     }
 }
 
@@ -2344,11 +2463,22 @@ div.rst-versions,
 
 
 @media (min-width: 768px) and (max-width: 960px) {
-    .footer-logo> img {
+    .homepage-footer .footer-logo-img,
+    .homepage-footer .footer-logo > img,
+    .homepage-footer .footer-logo img,
+    .homepage-footer .footer-logo .footer-logo-img {
         width: 200px !important;
+        height: 25px !important;
+        object-fit: contain !important;
+        max-width: none !important;
+        min-width: 0 !important;
     }
-    .footer-logo {
+    .homepage-footer .footer-logo {
         margin-right: 30px;
+
+    }
+    .footer-content {
+                padding-right: 1rem !important;
     }
 }
 
@@ -2361,7 +2491,21 @@ div.rst-versions,
         padding-right: 1rem !important; /* Отступ убран для диапазона 768px-1280px */
     }
 
-    .footer-container {
-        padding-right: 1rem !important;
+    .homepage-footer .footer-container {
+        padding-right: 1rem;
+        padding-bottom: 30px !important;
     }
+}
+
+@media (min-width: 768px) and (max-width: 850px) {
+    .homepage-footer .footer-container {
+        padding-bottom: 15px !important;
+    }
+    .footer-links  a{
+        font-size: 12px !important;
+    }
+}
+
+.flot-toc-pag {
+    right: 1rem !important;
 }

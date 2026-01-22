@@ -314,9 +314,13 @@
                                 e.preventDefault();
                                 const targetElement = document.querySelector(href);
                                 if (targetElement) {
-                                    targetElement.scrollIntoView({
-                                        behavior: 'smooth',
-                                        block: 'start'
+                                    // Прокрутка к элементу - элемент должен быть на 80px от верха экрана
+                                    const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                                    const offsetPosition = elementPosition - 80;
+                                    
+                                    window.scrollTo({
+                                        top: Math.max(0, offsetPosition),
+                                        behavior: 'smooth'
                                     });
                                 }
                                 
@@ -368,9 +372,13 @@
                             e.preventDefault();
                             const targetElement = document.querySelector(href);
                             if (targetElement) {
-                                targetElement.scrollIntoView({
-                                    behavior: 'smooth',
-                                    block: 'start'
+                                // Прокрутка к элементу - элемент должен быть на 80px от верха экрана
+                                const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                                const offsetPosition = elementPosition - 80;
+                                
+                                window.scrollTo({
+                                    top: Math.max(0, offsetPosition),
+                                    behavior: 'smooth'
                                 });
                             } else {
                                 window.scrollTo({
@@ -903,21 +911,29 @@
                     setTimeout(function() {
                         const targetElement = document.querySelector(scrollToAnchor);
                         if (targetElement) {
-                            targetElement.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start'
+                            // Прокрутка к элементу - элемент должен быть на 80px от верха экрана
+                            const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                            const offsetPosition = elementPosition - 80;
+                            
+                            window.scrollTo({
+                                top: Math.max(0, offsetPosition),
+                                behavior: 'smooth'
                             });
                         }
                     }, 500);
                 }
-                
+
                 if (window.location.hash) {
                     setTimeout(function() {
                         const targetElement = document.querySelector(window.location.hash);
                         if (targetElement) {
-                            targetElement.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start'
+                            // Прокрутка к элементу - элемент должен быть на 80px от верха экрана
+                            const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                            const offsetPosition = elementPosition - 80;
+                            
+                            window.scrollTo({
+                                top: Math.max(0, offsetPosition),
+                                behavior: 'smooth'
                             });
                         }
                     }, 500);
@@ -1463,4 +1479,645 @@
             setTimeout(forceDocumentStyles, 500);
         }
     }).observe(document, { subtree: true, childList: true });
+    
+    // Делаем заголовки кликабельными
+    function makeHeadingsClickable() {
+        // Сначала ищем заголовки с id, потом без id
+        let headings = document.querySelectorAll('.document h1[id], .document h2[id], .document h3[id], .document h4[id], .document h5[id], .document h6[id]');
+        
+        // Если нет заголовков с id, ищем все заголовки
+        if (headings.length === 0) {
+            headings = document.querySelectorAll('.document h1, .document h2, .document h3, .document h4, .document h5, .document h6');
+        }
+        
+        headings.forEach(function(heading) {
+            if (heading.dataset.clickableAdded) return;
+            heading.dataset.clickableAdded = 'true';
+            
+            // Убеждаемся, что у заголовка есть id
+            // Проверяем, есть ли валидный id (не пустая строка)
+            let currentId = heading.getAttribute('id');
+            if (!currentId || currentId.trim() === '') {
+                // Если id пустой или отсутствует, генерируем новый
+                const text = heading.textContent.trim();
+                if (text) {
+                    // Генерируем id из текста
+                    let generatedId = text.toLowerCase()
+                        .replace(/[^\w\s-]/g, '') // Удаляем спецсимволы
+                        .replace(/\s+/g, '-') // Заменяем пробелы на дефисы
+                        .replace(/-+/g, '-') // Убираем множественные дефисы
+                        .replace(/^-|-$/g, ''); // Убираем дефисы в начале и конце
+                    
+                    // Если id все еще пустой, используем индекс заголовка для стабильности
+                    if (!generatedId || generatedId.length === 0) {
+                        const allHeadings = document.querySelectorAll('.document h1, .document h2, .document h3, .document h4, .document h5, .document h6');
+                        let headingIndex = 0;
+                        for (let i = 0; i < allHeadings.length; i++) {
+                            if (allHeadings[i] === heading) {
+                                headingIndex = i;
+                                break;
+                            }
+                        }
+                        generatedId = 'heading-' + headingIndex;
+                    }
+                    
+                    // Устанавливаем id через setAttribute, чтобы перезаписать пустой атрибут
+                    heading.setAttribute('id', generatedId);
+                    currentId = generatedId;
+                } else {
+                    // Если текста нет, используем индекс заголовка для стабильности
+                    const allHeadings = document.querySelectorAll('.document h1, .document h2, .document h3, .document h4, .document h5, .document h6');
+                    let headingIndex = 0;
+                    for (let i = 0; i < allHeadings.length; i++) {
+                        if (allHeadings[i] === heading) {
+                            headingIndex = i;
+                            break;
+                        }
+                    }
+                    currentId = 'heading-' + headingIndex;
+                    heading.setAttribute('id', currentId);
+                }
+            } else {
+                // Используем существующий id
+                currentId = currentId.trim();
+            }
+            
+            // Проверяем, что id не пустой
+            if (!currentId || currentId.trim() === '') {
+                return;
+            }
+        });
+    }
+    
+    // Обработчик кликов на заголовках через делегирование событий
+    function setupHeadingClickHandlers() {
+        // Удаляем старые обработчики, если они есть
+        if (window._headingClickHandler) {
+            document.removeEventListener('click', window._headingClickHandler, true);
+            document.removeEventListener('contextmenu', window._headingContextMenuHandler, true);
+        }
+        
+        // Обработчик обычного клика
+        window._headingClickHandler = function(e) {
+            // Проверяем, что клик был на заголовке
+            let heading = e.target;
+            let foundHeading = null;
+            
+            // Проверяем сам элемент
+            if (heading && heading.tagName && /^H[1-6]$/.test(heading.tagName) && heading.closest('.document')) {
+                foundHeading = heading;
+            } else {
+                // Ищем в родителях
+                let current = heading;
+                let depth = 0;
+                while (current && current !== document.body && depth < 10) {
+                    if (current.tagName && /^H[1-6]$/.test(current.tagName) && current.closest('.document')) {
+                        foundHeading = current;
+                        break;
+                    }
+                    current = current.parentElement;
+                    depth++;
+                }
+            }
+            
+            if (!foundHeading || !foundHeading.closest('.document')) {
+                return;
+            }
+            
+            heading = foundHeading;
+            
+            // Пропускаем клики на дочерние элементы (например, ссылки)
+            if (e.target !== heading && e.target.closest('a')) {
+                return;
+            }
+            
+            const id = heading.id;
+            if (!id || id.trim() === '') {
+                return;
+            }
+            
+            // Обработка Ctrl/Cmd + клик
+            if (e.ctrlKey || e.metaKey) {
+                e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                const url = new URL(window.location);
+                url.hash = id;
+                const linkUrl = url.href;
+                navigator.clipboard.writeText(linkUrl).then(function() {
+                    // Ссылка скопирована
+                }).catch(function(err) {
+                    console.error('Failed to copy link:', err);
+                    // Fallback для старых браузеров
+                    const textArea = document.createElement('textarea');
+                    textArea.value = linkUrl;
+                    textArea.style.position = 'fixed';
+                    textArea.style.opacity = '0';
+                    textArea.style.left = '-9999px';
+                    document.body.appendChild(textArea);
+                    textArea.focus();
+                    textArea.select();
+                    try {
+                        document.execCommand('copy');
+                    } catch (err2) {
+                        console.error('Fallback copy failed:', err2);
+                    }
+                    document.body.removeChild(textArea);
+                });
+                return false;
+            }
+            
+            // Обычный клик - прокрутка к заголовку
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            
+            const url = new URL(window.location);
+            url.hash = id;
+            window.history.pushState({}, '', url);
+            
+            // Прокрутка с учетом header - заголовок должен быть на 80px от верха экрана
+            const scrollToHeading = function() {
+                // Пересчитываем позицию, так как DOM мог измениться
+                const rect = heading.getBoundingClientRect();
+                const elementPosition = rect.top + window.pageYOffset;
+                const offsetPosition = elementPosition - 80;
+                
+                window.scrollTo({
+                    top: Math.max(0, offsetPosition),
+                    behavior: 'smooth'
+                });
+            };
+            
+            // Небольшая задержка для обновления DOM
+            setTimeout(function() {
+                scrollToHeading();
+            }, 10);
+            
+            return false;
+        };
+        
+        // Обработчик правого клика
+        window._headingContextMenuHandler = function(e) {
+            // Проверяем, что клик был на заголовке
+            let heading = e.target;
+            let foundHeading = null;
+            
+            // Проверяем сам элемент
+            if (heading && heading.tagName && /^H[1-6]$/.test(heading.tagName) && heading.closest('.document')) {
+                foundHeading = heading;
+            } else {
+                // Ищем в родителях
+                let current = heading;
+                let depth = 0;
+                while (current && current !== document.body && depth < 10) {
+                    if (current.tagName && /^H[1-6]$/.test(current.tagName) && current.closest('.document')) {
+                        foundHeading = current;
+                        break;
+                    }
+                    current = current.parentElement;
+                    depth++;
+                }
+            }
+            
+            if (!foundHeading || !foundHeading.closest('.document')) {
+                return;
+            }
+            
+            heading = foundHeading;
+            
+            const id = heading.id;
+            if (!id || id.trim() === '') {
+                return;
+            }
+            
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            
+            const url = new URL(window.location);
+            url.hash = id;
+            const linkUrl = url.href;
+            
+            navigator.clipboard.writeText(linkUrl).then(function() {
+                // Ссылка скопирована
+            }).catch(function(err) {
+                console.error('Failed to copy link:', err);
+                // Fallback для старых браузеров
+                const textArea = document.createElement('textarea');
+                textArea.value = linkUrl;
+                textArea.style.position = 'fixed';
+                textArea.style.opacity = '0';
+                textArea.style.left = '-9999px';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                } catch (err2) {
+                    console.error('Fallback copy failed:', err2);
+                }
+                document.body.removeChild(textArea);
+            });
+            return false;
+        };
+        
+        // Добавляем обработчики на уровне документа с capture phase
+        document.addEventListener('click', window._headingClickHandler, true);
+        document.addEventListener('contextmenu', window._headingContextMenuHandler, true);
+    }
+    
+    // Делаем подписи к картинкам кликабельными
+    function makeCaptionsClickable() {
+        const captions = document.querySelectorAll('.document figcaption, .document .caption, .document p.caption');
+        
+        captions.forEach(function(caption, index) {
+            if (caption.dataset.clickableAdded) return;
+            caption.dataset.clickableAdded = 'true';
+            
+            const captionText = caption.textContent.trim();
+            
+            // Ищем связанное изображение
+            const figure = caption.closest('figure');
+            const img = figure ? figure.querySelector('img') : caption.previousElementSibling;
+            
+            if (img) {
+                // Создаем id для изображения (если его нет) и для подписи
+                if (!img.id || img.id.trim() === '') {
+                    const text = captionText;
+                    if (text) {
+                        let generatedId = 'image-' + text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+                        if (!generatedId || generatedId === 'image-') {
+                            // Если id пустой, используем индекс
+                            generatedId = 'image-' + index;
+                        }
+                        img.id = generatedId;
+                    } else {
+                        img.id = 'image-' + index;
+                    }
+                }
+                
+                if (!caption.id || caption.id.trim() === '') {
+                    const text = captionText;
+                    if (text) {
+                        let generatedId = 'caption-' + text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+                        if (!generatedId || generatedId === 'caption-') {
+                            // Если id пустой, используем индекс
+                            generatedId = 'caption-' + index;
+                        }
+                        caption.id = generatedId;
+                    } else {
+                        caption.id = 'caption-' + index;
+                    }
+                }
+                
+                // При клике на подпись прокручиваем к началу изображения
+                caption.addEventListener('click', function(e) {
+                    // Обработка правого клика или Ctrl/Cmd + клик
+                    if (e.button === 2 || e.ctrlKey || e.metaKey) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        e.stopImmediatePropagation();
+                        // При копировании ссылки используем id изображения, чтобы при переходе прокручивало к изображению
+                        let imgId = img.id;
+                        
+                        // Если id пустой, генерируем его
+                        if (!imgId || imgId.trim() === '') {
+                            const text = caption.textContent.trim();
+                            if (text) {
+                                imgId = 'image-' + text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+                                if (!imgId || imgId === 'image-') {
+                                    const allCaptions = document.querySelectorAll('.document figcaption, .document .caption, .document p.caption');
+                                    let captionIndex = 0;
+                                    for (let i = 0; i < allCaptions.length; i++) {
+                                        if (allCaptions[i] === caption) {
+                                            captionIndex = i;
+                                            break;
+                                        }
+                                    }
+                                    imgId = 'image-' + captionIndex;
+                                }
+                            } else {
+                                const allCaptions = document.querySelectorAll('.document figcaption, .document .caption, .document p.caption');
+                                let captionIndex = 0;
+                                for (let i = 0; i < allCaptions.length; i++) {
+                                    if (allCaptions[i] === caption) {
+                                        captionIndex = i;
+                                        break;
+                                    }
+                                }
+                                imgId = 'image-' + captionIndex;
+                            }
+                            img.id = imgId;
+                        }
+                        
+                        if (imgId && imgId.trim() !== '') {
+                            const url = new URL(window.location);
+                            url.hash = imgId;
+                            navigator.clipboard.writeText(url.href).then(function() {
+                                // Ссылка скопирована
+                            }).catch(function(err) {
+                                console.error('Failed to copy link:', err);
+                            });
+                        }
+                        return false;
+                    }
+                    
+                    // Обычный клик - прокрутка к началу изображения
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
+                    
+                    // Всегда используем id изображения для ссылки, чтобы при переходе по ссылке прокручивало к изображению
+                    let imgId = img.id;
+                    
+                    // Если id пустой, генерируем его
+                    if (!imgId || imgId.trim() === '') {
+                        const text = caption.textContent.trim();
+                        if (text) {
+                            imgId = 'image-' + text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+                            if (!imgId || imgId === 'image-') {
+                                const allCaptions = document.querySelectorAll('.document figcaption, .document .caption, .document p.caption');
+                                let captionIndex = 0;
+                                for (let i = 0; i < allCaptions.length; i++) {
+                                    if (allCaptions[i] === caption) {
+                                        captionIndex = i;
+                                        break;
+                                    }
+                                }
+                                imgId = 'image-' + captionIndex;
+                            }
+                        } else {
+                            const allCaptions = document.querySelectorAll('.document figcaption, .document .caption, .document p.caption');
+                            let captionIndex = 0;
+                            for (let i = 0; i < allCaptions.length; i++) {
+                                if (allCaptions[i] === caption) {
+                                    captionIndex = i;
+                                    break;
+                                }
+                            }
+                            imgId = 'image-' + captionIndex;
+                        }
+                        img.id = imgId;
+                    }
+                    
+                    if (!imgId || imgId.trim() === '') {
+                        return false;
+                    }
+                    
+                    const url = new URL(window.location);
+                    url.hash = imgId;
+                    window.history.pushState({}, '', url);
+                    
+                    // Прокрутка к началу изображения - изображение должно быть на 80px от верха экрана
+                    const scrollToImage = function() {
+                        const rect = img.getBoundingClientRect();
+                        const elementPosition = rect.top + window.pageYOffset;
+                        const offsetPosition = elementPosition - 80;
+                        
+                        window.scrollTo({
+                            top: Math.max(0, offsetPosition),
+                            behavior: 'smooth'
+                        });
+                    };
+                    
+                    setTimeout(function() {
+                        scrollToImage();
+                    }, 10);
+                    
+                    return false;
+                }, true);
+                
+                // Обработка правого клика
+                caption.addEventListener('contextmenu', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
+                    // При копировании ссылки используем id изображения, чтобы при переходе прокручивало к изображению
+                    let imgId = img.id;
+                    
+                    // Если id пустой, генерируем его
+                    if (!imgId || imgId.trim() === '') {
+                        const text = caption.textContent.trim();
+                        if (text) {
+                            imgId = 'image-' + text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+                            if (!imgId || imgId === 'image-') {
+                                const allCaptions = document.querySelectorAll('.document figcaption, .document .caption, .document p.caption');
+                                let captionIndex = 0;
+                                for (let i = 0; i < allCaptions.length; i++) {
+                                    if (allCaptions[i] === caption) {
+                                        captionIndex = i;
+                                        break;
+                                    }
+                                }
+                                imgId = 'image-' + captionIndex;
+                            }
+                        } else {
+                            const allCaptions = document.querySelectorAll('.document figcaption, .document .caption, .document p.caption');
+                            let captionIndex = 0;
+                            for (let i = 0; i < allCaptions.length; i++) {
+                                if (allCaptions[i] === caption) {
+                                    captionIndex = i;
+                                    break;
+                                }
+                            }
+                            imgId = 'image-' + captionIndex;
+                        }
+                        img.id = imgId;
+                    }
+                    
+                    if (imgId && imgId.trim() !== '') {
+                        const url = new URL(window.location);
+                        url.hash = imgId;
+                        navigator.clipboard.writeText(url.href).then(function() {
+                            // Ссылка скопирована
+                        }).catch(function(err) {
+                            console.error('Failed to copy link:', err);
+                        });
+                    }
+                    return false;
+                }, true);
+            }
+        });
+    }
+    
+    // Обработка хэша при загрузке страницы
+    let hashProcessed = null;
+    let hashProcessing = false;
+    let hashScrollTimeout = null;
+    
+    function handleHashOnLoad() {
+        // Проверяем, есть ли хэш в URL
+        if (!window.location.hash || window.location.hash === '') {
+            return;
+        }
+        
+        const hash = window.location.hash.substring(1);
+        if (!hash || hash === '') {
+            return;
+        }
+        
+        // Предотвращаем множественные вызовы
+        if (hashProcessing) {
+            return;
+        }
+        
+        // Если хэш уже был обработан для этого URL, не обрабатываем снова
+        const currentHash = window.location.hash;
+        if (hashProcessed === currentHash) {
+            return;
+        }
+        
+        // Отменяем предыдущий таймаут, если он есть
+        if (hashScrollTimeout) {
+            clearTimeout(hashScrollTimeout);
+            hashScrollTimeout = null;
+        }
+        
+        hashProcessing = true;
+        hashProcessed = currentHash;
+        
+        // Сначала убеждаемся, что заголовки получили свои id
+        makeHeadingsClickable();
+        makeCaptionsClickable();
+        
+        // Функция для прокрутки к элементу (вызывается только один раз)
+        const scrollToHash = function() {
+            if (!hash) {
+                hashProcessing = false;
+                return;
+            }
+            
+            let targetElement = document.getElementById(hash);
+            
+            // Если элемент не найден, возможно это id подписи - ищем связанное изображение
+            if (!targetElement && hash.startsWith('caption-')) {
+                const caption = document.getElementById(hash);
+                if (caption) {
+                    const figure = caption.closest('figure');
+                    const img = figure ? figure.querySelector('img') : caption.previousElementSibling;
+                    if (img) {
+                        targetElement = img; // Прокручиваем к изображению, а не к подписи
+                    }
+                }
+            }
+            
+            // Если элемент не найден, возможно это id изображения
+            if (!targetElement && hash.startsWith('image-')) {
+                targetElement = document.getElementById(hash);
+            }
+            
+            // Если элемент все еще не найден, попробуем найти заголовок по id
+            if (!targetElement) {
+                const headings = document.querySelectorAll('.document h1, .document h2, .document h3, .document h4, .document h5, .document h6');
+                headings.forEach(function(heading) {
+                    if (heading.id === hash) {
+                        targetElement = heading;
+                    }
+                });
+            }
+            
+            if (targetElement) {
+                // Проверяем, не прокручиваем ли мы уже к этому элементу
+                const rect = targetElement.getBoundingClientRect();
+                const currentScroll = window.pageYOffset || window.scrollY;
+                const elementPosition = rect.top + currentScroll;
+                const offsetPosition = elementPosition - 80;
+                const targetScroll = Math.max(0, offsetPosition);
+                
+                // Прокручиваем только если мы не находимся уже близко к целевому элементу
+                // (разница больше 10px, чтобы избежать постоянных микропрокруток)
+                if (Math.abs(currentScroll - targetScroll) > 10) {
+                    window.scrollTo({
+                        top: targetScroll,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+            
+            hashProcessing = false;
+        };
+        
+        // Однократная попытка с задержкой для полной загрузки DOM
+        hashScrollTimeout = setTimeout(scrollToHash, 300);
+    }
+    
+    // Инициализация
+    function initClickableElements() {
+        makeHeadingsClickable();
+        setupHeadingClickHandlers();
+        makeCaptionsClickable();
+        // Не обрабатываем хэш здесь - это будет сделано в handleHashOnLoad при необходимости
+    }
+    
+    // Инициализация при загрузке
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            initClickableElements();
+            setTimeout(initClickableElements, 100);
+            setTimeout(initClickableElements, 300);
+        });
+    } else {
+        initClickableElements();
+        setTimeout(initClickableElements, 100);
+        setTimeout(initClickableElements, 300);
+    }
+    
+    // Инициализация после полной загрузки
+    window.addEventListener('load', function() {
+        initClickableElements();
+        setTimeout(initClickableElements, 100);
+        setTimeout(initClickableElements, 500);
+    });
+    
+    // Обработка изменений в DOM
+    const observer = new MutationObserver(function() {
+        makeHeadingsClickable();
+        setupHeadingClickHandlers();
+        makeCaptionsClickable();
+    });
+    
+    if (document.body) {
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    }
+    
+    // Обработка изменения хэша
+    window.addEventListener('hashchange', function() {
+        // Сбрасываем флаги обработки при изменении хэша
+        hashProcessed = null;
+        hashProcessing = false;
+        hashLoadProcessed = false;
+        // Отменяем предыдущий таймаут
+        if (hashScrollTimeout) {
+            clearTimeout(hashScrollTimeout);
+            hashScrollTimeout = null;
+        }
+        // Убеждаемся, что заголовки получили свои id перед обработкой хэша
+        makeHeadingsClickable();
+        makeCaptionsClickable();
+        handleHashOnLoad();
+    });
+    
+    // Обработка хэша при полной загрузке страницы (только один раз)
+    let hashLoadProcessed = false;
+    window.addEventListener('load', function() {
+        if (window.location.hash && window.location.hash !== '' && !hashLoadProcessed) {
+            hashLoadProcessed = true;
+            makeHeadingsClickable();
+            makeCaptionsClickable();
+            // Однократная обработка хэша после полной загрузки
+            handleHashOnLoad();
+        }
+    });
+    
+    // Обработка хэша при первой загрузке страницы (если load уже произошел)
+    if (document.readyState === 'complete' && window.location.hash && window.location.hash !== '' && !hashLoadProcessed) {
+        hashLoadProcessed = true;
+        makeHeadingsClickable();
+        makeCaptionsClickable();
+        handleHashOnLoad();
+    }
 })();

@@ -51,17 +51,30 @@ body {
     font-family: 'Roboto-Regular', sans-serif !important;
     color: var(--text-dark);
     background: var(--bg-white);
-    overflow-x: hidden;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    min-height: 100vh !important;
+    height: auto !important;
 }
 
 html {
     scroll-behavior: smooth;
-    overflow-x: hidden;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 /* Для главной страницы - переопределяем overflow */
 body.homepage {
     overflow-x: hidden !important;
+    line-height: 1.5;
 }
 
 /* Скрытие стандартных элементов RTD, но показываем контент */
@@ -71,6 +84,10 @@ body.homepage {
     overflow: visible !important;
     height: auto !important;
     min-height: 100vh !important;
+    margin: 0 !important;
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+    padding-bottom: 0 !important;
 }
 
 .wy-nav-side {
@@ -83,6 +100,11 @@ body.homepage {
     position: relative !important;
     display: block !important;
     overflow: visible !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    margin: 0 !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
 }
 
 .wy-nav-content {
@@ -92,6 +114,10 @@ body.homepage {
     display: block !important;
     overflow: visible !important;
     position: relative !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
 }
 
 /* Показываем контент внутри wy-nav-content */
@@ -112,7 +138,7 @@ body.homepage {
 /* Показываем контент документа */
 .rst-content {
     margin: 0 !important;
-    padding: 1rem !important;
+    padding: 0 !important;
     display: block !important;
     visibility: visible !important;
 }
@@ -198,7 +224,65 @@ div[role="navigation"] ~ hr {
     border: none !important;
 }
 
-/* Скрытие headerlink (значок ссылки на заголовок) */
+/* Делаем заголовки кликабельными */
+.document h1,
+.document h2,
+.document h3,
+.document h4,
+.document h5,
+.document h6 {
+    position: relative;
+    cursor: pointer;
+    pointer-events: auto !important;
+    user-select: text;
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Иконка ссылки справа от заголовка */
+.document h1::after,
+.document h2::after,
+.document h3::after,
+.document h4::after,
+.document h5::after,
+.document h6::after {
+    margin-top: 5px;
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    background-image: url('icons/header-link.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex-shrink: 0;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+    margin-left: 0;
+}
+
+.document h1:hover::after,
+.document h2:hover::after,
+.document h3:hover::after,
+.document h4:hover::after,
+.document h5:hover::after,
+.document h6:hover::after {
+    opacity: 0.6;
+}
+
+.document h1:hover,
+.document h2:hover,
+.document h3:hover,
+.document h4:hover,
+.document h5:hover,
+.document h6:hover {
+    opacity: 0.6 !important;
+}
+
+/* Скрытие стандартного headerlink, так как весь заголовок будет кликабельным */
 .headerlink {
     display: none !important;
     visibility: hidden !important;
@@ -239,6 +323,15 @@ div.rst-versions,
 body.wy-body-for-nav {
     padding: 0 !important;
     margin: 0 !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    height: 100%;
+    min-height: 100vh;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    width: 100%;
+    max-width: 100vw;
+    position: relative !important;
 }
 
 /* Убеждаемся, что наш header виден и находится в правильном месте */
@@ -247,33 +340,186 @@ body .custom-header,
 .wy-grid-for-nav .custom-header,
 .wy-nav-content-wrap .custom-header,
 .wy-nav-content .custom-header,
-.rst-content .custom-header {
+.rst-content .custom-header,
+.wy-body-for-nav > .custom-header,
+.wy-grid-for-nav > .custom-header,
+.wy-nav-content-wrap > .custom-header {
     display: block !important;
     visibility: visible !important;
+    position: -webkit-sticky !important;
     position: sticky !important;
     top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
     z-index: 1000 !important;
     width: 100% !important;
+    will-change: transform !important;
+    margin: 0 !important;
 }
 
 /* Убеждаемся, что родительские контейнеры не мешают sticky */
-.wy-body-for-nav,
+.wy-body-for-nav {
+    overflow: visible !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    position: relative !important;
+    margin: 0 !important;
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+    padding-bottom: 0 !important;
+    contain: none !important;
+    isolation: auto !important;
+}
+
 .wy-grid-for-nav,
 .wy-nav-content-wrap,
 .wy-nav-content,
 .rst-content {
     overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
     height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
     position: relative !important;
+    contain: none !important;
+    isolation: auto !important;
+    transform: none !important;
+    filter: none !important;
+    perspective: none !important;
+}
+
+/* Критично: убеждаемся, что все родители header не блокируют sticky */
+.wy-body-for-nav,
+.wy-body-for-nav > *,
+.wy-grid-for-nav,
+.wy-grid-for-nav > *,
+.wy-grid-for-nav > * > *,
+.wy-nav-content-wrap,
+.wy-nav-content-wrap > *,
+.wy-nav-content-wrap > * > *,
+.wy-nav-content-wrap > * > * > *,
+.wy-nav-content,
+.wy-nav-content > *,
+.wy-nav-content > * > *,
+.rst-content,
+.rst-content > *,
+.rst-content > * > * {
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    min-height: auto !important;
+}
+
+/* Специально для элементов, которые могут содержать header */
+.wy-nav-content-wrap > header,
+.wy-nav-content-wrap > div:first-child,
+.wy-nav-content-wrap > div:first-child > *,
+.wy-nav-content-wrap > div:first-child > * > *,
+.wy-nav-content-wrap > div:first-child > * > * > *,
+.wy-grid-for-nav > header,
+.wy-grid-for-nav > div:first-child,
+.wy-grid-for-nav > div:first-child > *,
+.wy-grid-for-nav > div:first-child > * > *,
+.wy-grid-for-nav > div:first-child > * > * > *,
+.wy-body-for-nav > header,
+.wy-body-for-nav > div:first-child,
+.wy-body-for-nav > div:first-child > *,
+.wy-body-for-nav > div:first-child > * > * {
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+}
+
+/* Универсальное правило для любого div, который является прямым родителем custom-header */
+div > .custom-header {
+    /* Убеждаемся, что родительский div не блокирует sticky */
+}
+
+/* Применяем overflow: visible ко всем div, которые могут содержать header */
+.wy-nav-content-wrap > div,
+.wy-grid-for-nav > div,
+.wy-body-for-nav > div,
+body > div {
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    min-height: auto !important;
+}
+
+/* Убеждаемся, что любой элемент, содержащий custom-header, не блокирует sticky */
+*:has(> .custom-header),
+*:has(.custom-header),
+div:has(> .custom-header),
+div:has(.custom-header),
+header:has(> .custom-header),
+header:has(.custom-header) {
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    min-height: auto !important;
+}
+
+/* Дополнительные правила для всех возможных контейнеров RTD */
+.wy-nav-top,
+.wy-nav-top > *,
+div[role="banner"],
+div[role="banner"] > *,
+header[role="banner"],
+header[role="banner"] > * {
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    min-height: auto !important;
 }
 
 /* Убеждаемся, что header может быть sticky независимо от родительских контейнеров */
 body > .custom-header,
 body > * > .custom-header,
+body > * > * > .custom-header,
 .wy-body-for-nav > .custom-header,
-.wy-grid-for-nav > .custom-header {
+.wy-body-for-nav > * > .custom-header,
+.wy-grid-for-nav > .custom-header,
+.wy-grid-for-nav > * > .custom-header,
+.wy-nav-content-wrap > .custom-header,
+.wy-nav-content-wrap > * > .custom-header,
+.wy-nav-content-wrap > * > * > .custom-header,
+.wy-nav-content > .custom-header,
+.rst-content > .custom-header,
+.rst-content > * > .custom-header,
+.custom-header {
+    display: block !important;
+    visibility: visible !important;
+    position: -webkit-sticky !important;
     position: sticky !important;
     top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1000 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    will-change: transform !important;
+    transform: translateZ(0) !important;
+    -webkit-transform: translateZ(0) !important;
+    margin: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
 }
 
 /* Убеждаемся, что наше левое меню видно */
@@ -299,16 +545,29 @@ body .floating-toc-page {
    ============================================ */
 
 .custom-header {
-    background: var(--bg-white);
-    border-bottom: 1px solid var(--border-color);
+    background: var(--bg-white) !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    position: -webkit-sticky !important;
     position: sticky !important;
+    height: 65px !important;
     top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
     z-index: 1000 !important;
     padding: 14px 0 !important;
     display: block !important;
     width: 100% !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    max-width: 100% !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
     margin: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    will-change: transform !important;
+    transform: translateZ(0) !important;
+    -webkit-transform: translateZ(0) !important;
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
 }
 
 .custom-header .header-container {
@@ -336,18 +595,20 @@ body .floating-toc-page {
 }
 
 .custom-header .search-input {
-    padding: 0.5rem 1rem 0.5rem 2.5rem;
+    padding: 9px 30px 9px 38px;
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
-    font-size: 0.9rem;
-    width: 300px;
+    font-size: 16px;
+    font-family: 'Roboto-Regular', sans-serif !important;
+    width: 320px;
+    outline: none;
+    box-shadow: none !important;
     transition: var(--transition);
 }
 
 .custom-header .search-input:focus {
     outline: none;
     border-color: var(--primary-blue);
-    box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.1);
 }
 
 .custom-header .header-left {
@@ -397,6 +658,7 @@ body .floating-toc-page {
 .custom-header .dropdown-arrow img {
     width: 12px;
     height: 12px;
+    margin-top: 4px;
     transition: transform 0.3s ease;
 }
 
@@ -405,6 +667,22 @@ body .floating-toc-page {
 body.left-nav-open .custom-header .dropdown-arrow img,
 body.left-nav-open .dropdown-arrow img {
     transform: rotate(180deg);
+}
+
+.custom-header .logo-link-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-dark);
+}
+
+.custom-header .logo-link-main span {
+    margin-left: 20px;
+    color: #1D1D1B;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1;
 }
 
 .custom-header .logo {
@@ -416,6 +694,7 @@ body.left-nav-open .dropdown-arrow img {
     font-family: 'Roboto-Regular', sans-serif !important;
     font-size: 18px;
     font-weight: 400;
+    line-height: 1;
     color: #56738F;
 }
 
@@ -434,6 +713,7 @@ body.left-nav-open .dropdown-arrow img {
     padding: 0.5rem 1.5rem;
     background: var(--primary-blue-dark);
     color: white;
+    height: 37px;
     border: none;
     border-radius: var(--border-radius);
     cursor: pointer;
@@ -487,6 +767,14 @@ body.left-nav-open .document-wrapper {
 @media (min-width: 1281px) and (max-width: 1920px) {
     /* Левое меню может открываться и закрываться через JavaScript */
 
+    .wy-body-for-nav {
+        margin: 0 !important;
+        margin-bottom: 0 !important;
+        padding: 0 !important;
+        padding-bottom: 0 !important;
+        height: auto !important;
+        min-height: 100vh !important;
+    }
     
     .left-nav {
         position: fixed !important;
@@ -519,13 +807,22 @@ body.left-nav-open .document-wrapper {
     }
 
     .rst-content {
-        padding-left: 1rem !important;
+        padding-left: 0rem !important;
     }
 
     
 }
 
 @media (max-width: 1500px) and (min-width: 1280px) {
+    .wy-body-for-nav {
+        margin: 0 !important;
+        margin-bottom: 0 !important;
+        padding: 0 !important;
+        padding-bottom: 0 !important;
+        height: auto !important;
+        min-height: 100vh !important;
+    }
+
     .document-wrapper {
         padding: 32px 360px 32px 16px !important;
     }
@@ -1038,6 +1335,9 @@ body.left-nav-open .document-wrapper {
     max-width: 100%;
     padding: 2rem 1rem;
     min-height: calc(100vh - 200px);
+    margin: 0 !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 2rem !important;
 }
 
 /* Стили для контента Sphinx */
@@ -1059,7 +1359,7 @@ body.left-nav-open .document-wrapper {
     margin-bottom: 10px;
     padding-bottom: 0rem;
     border-bottom: none !important;
-    scroll-margin-top: 80px; /* Отступ для sticky header + небольшой запас для видимости */
+    scroll-margin-top: 80px !important; /* Отступ для прокрутки - заголовок будет на 80px от верха */
 }
 
 .document h2 {
@@ -1068,7 +1368,7 @@ body.left-nav-open .document-wrapper {
     color: var(--text-dark);
     margin-top: 30px;
     margin-bottom: 15px;
-    scroll-margin-top: 80px; /* Отступ для sticky header + небольшой запас для видимости */
+    scroll-margin-top: 80px !important; /* Отступ для прокрутки - заголовок будет на 80px от верха */
 }
 
 .document h3 {
@@ -1077,7 +1377,7 @@ body.left-nav-open .document-wrapper {
     color: var(--text-dark);
     margin-top: 20px;
     margin-bottom: 10px;
-    scroll-margin-top: 80px; /* Отступ для sticky header + небольшой запас для видимости */
+    scroll-margin-top: 80px !important; /* Отступ для прокрутки - заголовок будет на 80px от верха */
 }
 
 .document h4 {
@@ -1086,7 +1386,7 @@ body.left-nav-open .document-wrapper {
     color: var(--text-dark);
     margin-top: 20px;
     margin-bottom: 10px;
-    scroll-margin-top: 80px; /* Отступ для sticky header + небольшой запас для видимости */
+    scroll-margin-top: 80px !important; /* Отступ для прокрутки - заголовок будет на 80px от верха */
 }
 
 .document h5,
@@ -1096,7 +1396,7 @@ body.left-nav-open .document-wrapper {
     color: var(--text-dark);
     margin-top: 20px;
     margin-bottom: 10px;
-    scroll-margin-top: 80px; /* Отступ для sticky header + небольшой запас для видимости */
+    scroll-margin-top: 80px !important; /* Отступ для прокрутки - заголовок будет на 80px от верха */
 }
 
 .document p {
@@ -1174,6 +1474,15 @@ body.left-nav-open .document-wrapper {
     margin-bottom: 30px;
     line-height: 1.5;
     font-family: 'Courier New', Courier, monospace !important;
+    cursor: pointer;
+    position: relative;
+    scroll-margin-top: 80px !important; /* Отступ для прокрутки - элемент будет на 80px от верха */
+}
+
+.document figcaption:hover,
+.document .caption:hover,
+.document p.caption:hover {
+    color: var(--primary-blue) !important;
 }
 
 /* Обертка для таблиц с горизонтальной прокруткой */
@@ -1190,6 +1499,7 @@ body.left-nav-open .document-wrapper {
     border-collapse: collapse;
     margin: 0 !important;
     border: 1px solid #E0E6EB;
+    border-radius: var(--border-radius) !important;
     background: transparent;
     font-size: 17px;
     table-layout: fixed;
@@ -1360,20 +1670,23 @@ body.left-nav-open .document-wrapper {
 .floating-toc-page {
     position: fixed;
     top: 64px;
-    right: 1rem;
+
+    right: 0rem;
     width: 320px;
     max-height: calc(100vh - 64px);
     height: auto;
     background: var(--bg-white);
-    border-bottom-left-radius: var(--border-radius);
+    border-bottom-left-radius: 0 !important;
     z-index: 99;
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    margin-top: 20px;
 }
 
 .floating-toc-page .floating-toc-content {
-    padding: 1rem;
+    padding: 0rem !important;
+
     overflow-y: auto;
     max-height: calc(100vh - 64px);
 }
@@ -1381,6 +1694,7 @@ body.left-nav-open .document-wrapper {
 .floating-toc-page .floating-toc-content a {
     text-decoration: none;
     font-size: 17px;
+    line-height: 1;
 }
 
 /* Стили для стандартного TOC от Sphinx */
@@ -1402,7 +1716,7 @@ body.left-nav-open .document-wrapper {
 }
 
 .floating-toc-page li {
-    margin-bottom: 0.5rem;
+    margin: 0;
 }
 
 .floating-toc-page a {
@@ -1411,6 +1725,7 @@ body.left-nav-open .document-wrapper {
     font-size: 0.9rem;
     display: block;
     padding: 7px 20px !important;
+    line-height: 1;
     transition: var(--transition);
 }
 
@@ -1459,8 +1774,8 @@ body.left-nav-open .document-wrapper {
 
 .floating-toc-page ul ul {
     list-style: none;
-    margin-top: 0.25rem;
-    padding-left: 1rem;
+    margin: 0;
+    padding-left: 20px !important;
 }
 
 .floating-toc-list ul a {
@@ -1472,6 +1787,7 @@ body.left-nav-open .document-wrapper {
     font-size: 0.85rem;
     color: var(--text-dark);
     padding: 7px 20px !important;
+    line-height: 1;
 }
 
 /* Активный элемент первого уровня с индикатором */
@@ -1508,7 +1824,7 @@ body.left-nav-open .document-wrapper {
 .floating-toc-page ul > li > ul > li > a.active::before {
     content: '';
     position: absolute;
-    left: -16px;
+    left: -20px;
     top: 0;
     height: 100%;
     width: 4px;
@@ -1518,7 +1834,7 @@ body.left-nav-open .document-wrapper {
 .floating-toc-page ul > li > ul > li > ul > li a.active::before {
     content: '';
     position: absolute;
-    left: -32px;
+    left: -40px;
     top: 0;
     height: 100%;
     width: 4px;
@@ -1535,117 +1851,128 @@ body.left-nav-open .document-wrapper {
    ============================================ */
 
 .custom-footer {
-    background: #EDF0F2;
-    border-top: 1px solid var(--border-color);
-    padding: 45px 0 2rem;
-    margin-top: 4rem;
+    background: #EDF0F2 !important;
+    width: 100% !important;
+    height:auto !important;
+    border-top: 1px solid var(--border-color) !important;
+    padding: 0 0 0 !important;
     display: block !important;
-    position: relative;
-    z-index: 1;
-    clear: both;
-    width: 100%;
-    height: auto;
-    min-height: 300px;
+    visibility: visible !important;
 }
 
 .custom-footer .footer-container {
-    display: flex;
-    max-width: 1400px;
-    height: 205px;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 auto;
-    padding: 0 2rem;
+    display: flex !important;
+    max-width: 1400px !important;
+    height: auto !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    margin-left: 20px !important;
+    margin-right: 0 !important;
+    padding-right: 1rem !important;
+    padding-bottom: 20px !important;
 }
 
 .custom-footer .footer-logo {
-    margin-bottom: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 25px;
+    margin-bottom: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    gap: 25px !important;
+    height: 100% !important;
 }
 
 .custom-footer .footer-logo button {
-    width: 130px;
-    padding: 12px 0px;
+    width: 130px !important;
+    padding: 12px 0px !important;
 }
 
 .custom-footer .footer-logo-img {
-    height: 40px;
-    width: auto;
+    justify-self: start !important;
+    height: 25px !important;
+    width: 200px !important;
+    object-fit: contain !important;
 }
 
 .custom-footer .footer-content {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin-bottom: 2rem;
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 2rem !important;
+    margin-bottom: 0 !important;
+    height: auto !important;
+    align-items: flex-start !important;
 }
 
 .custom-footer .footer-title {
     font-family: 'Roboto-Bold', sans-serif !important;
-    font-size: 15px;
-    color: var(--text-dark);
-    margin-bottom: 22px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-size: 15px !important;
+    color: var(--text-dark) !important;
+    margin-bottom: 22px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
 }
 
 .custom-footer .footer-links {
-    list-style: none;
+    list-style: none !important;
+    margin-bottom: 0px !important;
 }
 
 .custom-footer .footer-links li {
-    margin-bottom: 10px;
+    margin-bottom: 10px !important;
+}
+.custom-footer .footer-links li:last-child {
+    margin-bottom: 0px !important;
 }
 
 .custom-footer .footer-links a {
-    color: #56738F;
-    text-decoration: none;
-    font-size: 16px;
-    transition: var(--transition);
+    color: #56738F !important;
+    text-decoration: none !important;
+    font-size: 16px !important;
+    line-height: 1 !important;
+    transition: var(--transition) !important;
 }
 
 .custom-footer .footer-links a:hover {
-    text-decoration: underline;
+    text-decoration: underline !important;
 }
 
 .custom-footer .footer-social {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
+    display: flex !important;
+    gap: 1rem !important;
+    margin-bottom: 0 !important;
 }
 
 .custom-footer .social-icon {
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--bg-white);
-    border-radius: 50%;
-    color: var(--text-dark);
-    text-decoration: none;
-    font-size: 0.85rem;
-    transition: var(--transition);
+    width: 32px !important;
+    height: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent !important;
+    border-radius: 50% !important;
+    color: var(--text-dark) !important;
+    text-decoration: none !important;
+    font-size: 0.85rem !important;
+    transition: var(--transition) !important;
 }
 
 .custom-footer .social-icon:hover {
-    color: var(--text-dark);
+    color: var(--text-dark) !important;
 }
 
 .custom-footer .footer-bottom {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 95px;
-    border-top: 1px solid var(--border-color);
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 85px !important;
+    border-top: 1px solid var(--border-color) !important;
 }
 
 .custom-footer .footer-copyright {
-    color: var(--text-light);
-    font-size: 0.9rem;
+    color: var(--text-light) !important;
+    font-size: 0.9rem !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 .floating { 
@@ -1726,6 +2053,7 @@ readthedocs-flyout {
     }
     .custom-header .search-input {
         width: 200px;
+        padding-right: 20px;
     }
 }
 
@@ -1894,6 +2222,7 @@ button#burgerToggle {
 
     .custom-header .search-input {
         width: 250px;
+        padding-right: 25px;
     }
 }
 
@@ -2106,8 +2435,12 @@ button#burgerToggle {
 }
 
 /* Правое меню для диапазона 768px - 1280px - не занимает всю высоту, как при 768px */
-@media (min-width: 768px) and (max-width: 1280px) {
+@media (min-width: 425px) and (max-width: 1280px) {
     .floating-toc-page {
+        width: 440px !important;
+        padding: 24px 35px !important;
+        border-bottom-left-radius: var(--border-radius) !important;
+        margin-top: 0 !important;
         max-height: 80vh !important;
         height: auto !important;
     }
@@ -2126,6 +2459,9 @@ button#burgerToggle {
         top: 60px !important;
         max-height: calc(100vh - 64px) !important;
         height: auto !important;
+        padding: 0 !important;
+        border-bottom-left-radius: 0 !important;
+        margin-top: 0 !important;
         transition: right 0.3s ease !important;
     }
 
@@ -2145,6 +2481,7 @@ button#burgerToggle {
         min-height: calc(100vh - 60px) !important;
         z-index: 10000 !important;
         transition: right 0.3s ease !important;
+        margin-top: 0 !important;
     }
 
     .floating-toc-page .floating-toc-content {
@@ -2176,12 +2513,92 @@ button#burgerToggle {
 
 /* Отступ справа для правого меню до 1440px */
 @media (min-width: 1281px) and (max-width: 1440px) {
+    .wy-body-for-nav {
+        margin: 0 !important;
+        margin-bottom: 0 !important;
+        padding: 0 !important;
+        padding-bottom: 0 !important;
+        height: auto !important;
+        min-height: 100vh !important;
+    }
+
     .document-wrapper {
         padding-right: 200px;
     }
+    .footer-container {
+        
+    }
+}
+
+/* Фиксированный отступ для больших экранов > 1920px */
+@media (min-width: 1921px) {
+    .wy-body-for-nav {
+        margin: 0 !important;
+        margin-bottom: 0 !important;
+        padding: 0 !important;
+        padding-bottom: 0 !important;
+        height: auto !important;
+        min-height: 100vh !important;
+    }
 
     .custom-footer .footer-container {
-        padding-right: 360px;
+        margin-left: 250px;
+    }
+}
+
+/* Отступ справа для floating TOC - до 768px (если нужно) */
+@media (max-width: 767px) {
+    .custom-footer .footer-container {
+        padding-right: 1rem !important;
+    }
+}
+
+/* Отступ справа для floating TOC - возвращаем с 1281px и выше, чтобы не налазило на контент */
+@media (min-width: 1281px) {
+    .wy-body-for-nav {
+        margin: 0 !important;
+        margin-bottom: 0 !important;
+        padding: 0 !important;
+        padding-bottom: 0 !important;
+        height: auto !important;
+        min-height: 100vh !important;
+    }
+
+    /* Footer: убираем отступ справа и распределяем элементы равномерно */
+    .custom-footer .footer-container {
+        padding-right: 1rem !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        justify-content: space-between !important;
+        max-width: calc(100% - 360px) !important; /* Учитываем отступ для контента */
+    }
+}
+
+/* Адаптивный отступ слева для footer в диапазоне 1280px - 1920px */
+@media (min-width: 1281px) and (max-width: 1920px) {
+    .wy-body-for-nav {
+        margin: 0 !important;
+        margin-bottom: 0 !important;
+        padding: 0 !important;
+        padding-bottom: 0 !important;
+        height: auto !important;
+        min-height: 100vh !important;
+    }
+
+    .custom-footer .footer-container {
+        margin-left: calc((100vw - 1280px) * 0.390625); /* Плавно от 0px до 250px */
+    }
+}
+
+@media (min-width: 1631px) and (max-width: 1920px) {
+    .custom-footer .footer-content {
+        margin-right: 200px;
+    }
+}
+
+@media (min-width: 1281px) and (max-width: 1631px) {
+    .custom-footer .footer-content {
+        margin-right: 150px;
     }
 }
 
@@ -2208,7 +2625,7 @@ button#burgerToggle {
         flex-shrink: 0;
         display: flex;
         flex-direction: column;
-        gap: 25px;
+        gap: 15px;
     }
 
     .custom-footer .footer-content {
@@ -2223,29 +2640,162 @@ button#burgerToggle {
     }
 }
 
-@media (max-width: 768px) {
+@media (min-width: 1281px) and (max-width: 1440px) {
     .custom-footer .footer-container {
-        flex-direction: column;
-        align-items: flex-start;
-        margin-left: 0;
-        padding: 1.5rem 0.75rem;
-        height: auto;
+        margin-left: 120px !important;
+        padding-bottom: 30px !important;
+    }
+    .custom-footer .footer-logo {
+        margin-right: 50px;
+    }
+    .custom-footer .footer-logo img {
+        width: 200px !important;
+        height: 25px !important;
+        object-fit: contain;
+    }
+    .footer-title {
+        line-height: 1 !important;
+        margin-bottom: 15px !important;
+    }
+    .custom-footer .footer-links a {
+        font-size: 12px !important;
+    }
+}
+
+@media (min-width: 1281px) and (max-width: 1428px) {
+    .custom-footer .footer-container {
+        height: auto !important;
+        padding-bottom: 30px !important;
+    }
+    .custom-footer {
+        padding-bottom: 0rem !important;
+    }
+    .footer-content {
+        margin-right: 170px !important;
+    }
+}
+
+/* Адаптивность для карточек в диапазоне 960px - 1280px */
+@media (min-width: 960px) and (max-width: 1280px) {
+    /* Footer: убираем отступ справа и распределяем элементы равномерно */
+    .custom-footer .footer-container {
+        padding-right: 1rem !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        justify-content: space-between !important;
     }
 
     .custom-footer .footer-logo {
-        margin-bottom: 1rem;
-        width: 100%;
+        margin-left: 20px;
+    }
+}
+
+/* Уменьшаем размер шрифта в футере для диапазона 768px - 925px */
+@media (min-width: 768px) and (max-width: 925px) {
+    .custom-footer .footer-title {
+        font-size: 13px !important;
+    }
+
+    .custom-footer .footer-links a {
+        font-size: 14px !important;
+    }
+
+    .custom-footer .footer-copyright {
+        font-size: 0.8rem !important;
+    }
+}
+@media (min-width: 1280px) and (max-width: 1330px) {
+    .footer-content {
+        margin-right: 130px !important;
+    }
+    .custom-footer .footer-links a {
+        font-size: 11px !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 960px) {
+    .custom-footer .footer-logo > img {
+        width: 200px !important;
+        height: 25px !important;
+    }
+    .custom-footer .footer-logo {
+        margin-right: 30px;
+    }
+}
+
+/* КРИТИЧЕСКИЙ ПРАВИЛО: Отступ справа убран для диапазона 768px-1280px */
+@media (min-width: 768px) and (max-width: 1280px) {
+    .custom-footer .footer-container {
+        padding-right: 0rem !important;
+        padding-bottom: 30px !important;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 882px) {
+    .custom-footer .footer-links a {
+        font-size: 12px !important;
+    }
+
+}
+
+@media (max-width: 768px) and (min-width: 320px) {
+    .custom-footer .footer-container {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        margin-left: 0;
+        padding: 1.5rem 0.75rem;
+        height: auto !important;
+        gap: 0 !important;
+    }
+
+    .custom-footer .footer-logo {
+        margin-bottom: 1.5rem !important;
+        width: 100% !important;
         margin-right: 0;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        height: auto !important;
     }
 
     .custom-footer .footer-content {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        width: 100%;
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+        width: 100% !important;
+        display: grid !important;
+        height: auto !important;
+        align-items: flex-start !important;
+    }
+
+    /* Фиксированное расстояние от последней строки меню до линии отбивки */
+    .custom-footer .footer-links {
+        margin-bottom: 20px !important;
     }
 
     .custom-footer .footer-social {
-        margin-bottom: 1rem;
+        margin-bottom: 0 !important;
+        gap: 0.75rem;
+    }
+
+    .custom-footer .social-icon {
+        width: 22px !important;
+        height: 22px !important;
+    }
+}
+
+@media (max-width: 425px) {
+    .custom-footer .footer-logo-img,
+    .custom-footer .footer-logo > img,
+    .custom-footer .footer-logo img {
+        width: 120px !important;
+        height: auto !important;
+        object-fit: contain !important;
+    }
+    .custom-footer .footer-logo button {
+        width: 85px !important;
+        height: 31px !important;
+        padding: 0 !important;
     }
 }
 
@@ -2272,6 +2822,8 @@ button#burgerToggle {
     #floatingTocPage.active {
         z-index: 10002 !important;
         pointer-events: auto !important;
+        padding: 24px 35px !important;
+        border-bottom-left-radius: 8px !important;
     }
     
     #floatingTocPage.active * {
@@ -2292,6 +2844,15 @@ button#burgerToggle {
 }
 
 @media (min-width: 1281px) {
+    .wy-body-for-nav {
+        margin: 0 !important;
+        margin-bottom: 0 !important;
+        padding: 0 !important;
+        padding-bottom: 0 !important;
+        height: auto !important;
+        min-height: 100vh !important;
+    }
+
     .left-nav-overlay {
         display: none !important;
     }
@@ -2354,3 +2915,23 @@ button#burgerToggle {
     width: 100% !important;
 }
 
+/* Адаптивность для карточек в диапазоне 1281px - 1630px */
+@media (min-width: 1281px) and (max-width: 1630px) {
+    .wy-body-for-nav {
+        margin: 0 !important;
+        margin-bottom: 0 !important;
+        padding: 0 !important;
+        padding-bottom: 0 !important;
+        height: auto !important;
+        min-height: 100vh !important;
+    }
+
+    /* Footer: убираем отступ справа и распределяем элементы равномерно */
+    .custom-footer .footer-container {
+        padding-right: 1rem !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        justify-content: space-between !important;
+        max-width: calc(100% - 360px) !important;
+    }
+}

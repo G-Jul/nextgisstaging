@@ -12,7 +12,7 @@
 </head>
 <body class="homepage">
     <div class="homepage-wrapper">
-        <header class="homepage-header">
+        <header class="custom-header">
             <div class="header-container">
                 <div class="header-left">
 
@@ -20,7 +20,7 @@
                         <img src="{{ pathto('_static/images/logo.svg', 1) }}" alt="NextGIS" class="logo">
                         <span>NextGIS</span>
                     </a>
-                    <a href="#" class="logo-link">
+                    <a href="#" class="logo-link" id="logoLink">
                         <span class="logo-text">Документация</span>
                     </a>
                 </div>
@@ -569,7 +569,7 @@
         <footer class="homepage-footer">
             <div class="footer-container">
                 <div class="footer-logo">
-                    <img src="{{ pathto('_static/images/logo-large-footer.svg', 1) }}" alt="NextGIS" class="footer-logo-img">
+                    <img src="{{ pathto('_static/images/logo-large-footer.svg', 1) }}" alt="NextGIS" class="footer-logo-img" id="footer-logo-img">
                     <button class="btn-login">Войти</button>
                     <div class="footer-social">
                         <a href="#" class="social-icon"><img src="{{ pathto('_static/icons/Social_X.svg', 1) }}" alt=""></a>
@@ -618,7 +618,7 @@
         </footer>
     </div>
 
-    <aside class="floating-toc" id="floatingToc">
+    <aside class="floating-toc-page flot-toc-pag" id="floatingTocPage">
         <div class="floating-toc-content">
             <ul class="floating-toc-list">
                 <li><a href="#section-need">Мне нужно</a></li>
