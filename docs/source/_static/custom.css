@@ -304,7 +304,7 @@ body .floating-toc-page {
     position: sticky !important;
     top: 0 !important;
     z-index: 1000 !important;
-    padding: 1rem 0;
+    padding: 14px 0 !important;
     display: block !important;
     width: 100% !important;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -779,6 +779,7 @@ body.left-nav-open .document-wrapper {
     cursor: pointer;
     z-index: 10;
 }
+
 
 /* Стрелка поворачивается при открытии (все уровни) */
 .left-nav-content [class*="toctree-l"].current > a .nav-arrow-icon,
@@ -1369,6 +1370,7 @@ body.left-nav-open .document-wrapper {
 
 .floating-toc-page .floating-toc-content a {
     text-decoration: none;
+    font-size: 17px;
 }
 
 /* Стили для стандартного TOC от Sphinx */
