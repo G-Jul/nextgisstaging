@@ -330,6 +330,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 clickedLink.classList.add('active');
                 
+                // Сбрасываем флаг через короткое время, чтобы обновление при скролле работало
+                setTimeout(() => {
+                    userClickedLink = null;
+                }, 500);
+                
                 if (!targetId || targetId === '#') {
                     const linkText = clickedLink.textContent.trim();
                     const sections = document.querySelectorAll('.section, .subsection');
@@ -370,7 +375,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         clickTimeout = setTimeout(() => {
                             userClickedLink = null;
                             clickTimeout = null;
-                        }, 1000);
+                        }, 400);
                     } else {
                         const linkText = clickedLink.textContent.trim();
                         const sections = document.querySelectorAll('.section, .subsection');
@@ -409,7 +414,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         clickTimeout = setTimeout(() => {
                             userClickedLink = null;
                             clickTimeout = null;
-                        }, 800);
+                        }, 400);
                     }
                 } else if (!targetId || targetId === '#') {
                     console.log('[Homepage Right Menu] No target ID, scrolling to top');
@@ -430,16 +435,21 @@ document.addEventListener('DOMContentLoaded', function() {
         const sections = document.querySelectorAll('.section, .subsection');
         
         function updateActiveSection() {
+            console.log('[Homepage TOC] updateActiveSection called, userClickedLink:', !!userClickedLink);
+            
             if (userClickedLink) {
+                console.log('[Homepage TOC] SKIP: userClickedLink is set');
                 return;
             }
             
-            const headerHeight = document.querySelector('.homepage-header')?.offsetHeight || 80;
+            const headerHeight = document.querySelector('.custom-header')?.offsetHeight || document.querySelector('.homepage-header')?.offsetHeight || 80;
             const isHomepage = document.body.classList.contains('homepage');
             const scrollPosition = isHomepage ? 
                 (document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset || 0) :
                 (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0);
             const viewportTop = scrollPosition + headerHeight + 50;
+            
+            console.log('[Homepage TOC] Update:', { scroll: Math.round(scrollPosition), header: headerHeight });
             
             let activeSection = null;
             let activeSectionTop = -Infinity;
@@ -634,35 +644,45 @@ document.addEventListener('DOMContentLoaded', function() {
             if (activeSection) {
                 const sectionId = activeSection.getAttribute('id');
                 const allTocLinks = Array.from(floatingTocPage.querySelectorAll('a'));
+                let foundMatch = false;
                 allTocLinks.forEach(link => {
                     link.classList.remove('active');
-                    const linkHref = link.getAttribute('href');
+                    const linkHref = link.getAttribute('href') || '';
                     if (linkHref === '#' + sectionId || linkHref === sectionId || 
                         (linkHref && linkHref.replace('#', '') === sectionId)) {
                         link.classList.add('active');
+                        foundMatch = true;
+                        console.log('[Homepage TOC] ✓ Active:', sectionId, link.textContent.trim().substring(0, 40));
                     }
                 });
+                if (!foundMatch) {
+                    console.log('[Homepage TOC] ✗ No match for section:', sectionId);
+                }
             } else {
                 const isHomepage = document.body.classList.contains('homepage');
                 const currentScroll = isHomepage ? 
                     (document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset || 0) :
                     (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0);
+                const allTocLinks = Array.from(floatingTocPage.querySelectorAll('a'));
+                allTocLinks.forEach(link => link.classList.remove('active'));
+                
                 if (currentScroll < 200) {
-                    const allTocLinks = Array.from(floatingTocPage.querySelectorAll('a'));
-                    allTocLinks.forEach(link => link.classList.remove('active'));
                     const firstLink = allTocLinks[0];
                     if (firstLink) {
                         firstLink.classList.add('active');
+                        console.log('[Homepage TOC] ✓ First link (top):', firstLink.textContent.trim().substring(0, 40));
                     }
+                } else {
+                    console.log('[Homepage TOC] ✗ No active section, scroll:', Math.round(currentScroll));
                 }
             }
         }
         
         let ticking = false;
         const isHomepage = document.body.classList.contains('homepage');
-        const scrollElement = isHomepage ? document.body : window;
         
-        scrollElement.addEventListener('scroll', function() {
+        // Для главной страницы слушаем скролл и на window, и на document.body
+        function handleScroll() {
             if (!ticking) {
                 window.requestAnimationFrame(function() {
                     updateActiveSection();
@@ -670,7 +690,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 ticking = true;
             }
-        });
+        }
+        
+        window.addEventListener('scroll', handleScroll);
+        if (isHomepage) {
+            document.body.addEventListener('scroll', handleScroll);
+            document.documentElement.addEventListener('scroll', handleScroll);
+        }
         
         setTimeout(() => {
             updateActiveSection();

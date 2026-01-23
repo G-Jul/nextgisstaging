@@ -2949,3 +2949,10 @@ button#burgerToggle {
         max-width: calc(100% - 360px) !important;
     }
 }
+
+@media (min-width: 1921px) and (max-width: 2560px) {
+
+    .custom-footer .footer-content {
+        margin-right: 200px !important;
+    }
+}

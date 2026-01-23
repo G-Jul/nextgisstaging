@@ -274,6 +274,10 @@
                     finalLink.addEventListener('click', function(e) {
                         const target = e.target;
                         const isExpanded = item.classList.contains('expanded');
+                        const linkText = finalLink.textContent.trim().substring(0, 50);
+                        const href = finalLink.getAttribute('href');
+                        
+                        console.log('[Left Menu Current] Link clicked (with submenu):', linkText, 'href:', href, 'isExpanded:', isExpanded);
                         
                         if (target === arrowIcon || 
                             target.classList.contains('nav-arrow-icon') || 
@@ -281,30 +285,34 @@
                             target.classList.contains('toctree-expand') ||
                             target.closest('.nav-arrow-icon') ||
                             target.closest('.toctree-expand')) {
+                            console.log('[Left Menu Current] Click on arrow icon, ignoring');
                             return;
                         }
-                        
-                        const href = finalLink.getAttribute('href');
                         
                         if (!isExpanded) {
                             e.preventDefault();
                             e.stopPropagation();
+                            console.log('[Left Menu Current] Expanding item:', linkText);
                             item.classList.add('expanded');
                             
                             if (href && !href.startsWith('#')) {
                                 const leftNav = document.getElementById('leftNav');
                                 if (leftNav) {
+                                    console.log('[Left Menu Current] Removing current from all items (expanding, non-hash)');
                                     leftNav.querySelectorAll('[class*="toctree-l"]').forEach(menuItem => {
                                         menuItem.classList.remove('current');
                                     });
                                 }
+                                console.log('[Left Menu Current] Adding current to item (expanding, non-hash):', linkText);
                                 item.classList.add('current');
                                 
                                 if (leftNav) {
                                     leftNav.dataset.userClicked = 'true';
+                                    console.log('[Left Menu Current] Set userClicked to true (expanding, non-hash)');
                                     setTimeout(() => {
                                         if (leftNav) {
                                             leftNav.dataset.userClicked = 'false';
+                                            console.log('[Left Menu Current] Set userClicked to false (expanding, non-hash)');
                                         }
                                     }, 2000);
                                 }
@@ -322,38 +330,63 @@
                                         top: Math.max(0, offsetPosition),
                                         behavior: 'smooth'
                                     });
+                                    
+                                    // Обновляем правый TOC после завершения прокрутки
+                                    requestAnimationFrame(() => {
+                                        setTimeout(() => {
+                                            if (window.updateActiveHeading) {
+                                                console.log('[Left Menu Current] Calling updateActiveHeading after scroll (expanded, hash)');
+                                                window.updateActiveHeading();
+                                            }
+                                        }, 200);
+                                    });
                                 }
                                 
                                 const leftNav = document.getElementById('leftNav');
                                 if (leftNav) {
+                                    console.log('[Left Menu Current] Removing current from all items (expanded, hash)');
                                     leftNav.querySelectorAll('[class*="toctree-l"]').forEach(menuItem => {
                                         menuItem.classList.remove('current');
                                     });
                                 }
+                                console.log('[Left Menu Current] Adding current to item (expanded, hash):', linkText);
                                 item.classList.add('current');
                                 
                                 if (leftNav) {
                                     leftNav.dataset.userClicked = 'true';
+                                    console.log('[Left Menu Current] Set userClicked to true (expanded, hash)');
                                     setTimeout(() => {
                                         if (leftNav) {
                                             leftNav.dataset.userClicked = 'false';
+                                            console.log('[Left Menu Current] Set userClicked to false (expanded, hash)');
+                                            // Обновляем правый TOC после сброса флага
+                                            if (window.updateActiveHeading) {
+                                                console.log('[Left Menu Current] Calling updateActiveHeading after userClicked reset (expanded, hash)');
+                                                requestAnimationFrame(() => {
+                                                    window.updateActiveHeading();
+                                                });
+                                            }
                                         }
-                                    }, 2000);
+                                    }, 400);
                                 }
                             } else if (href && !href.startsWith('#')) {
                                 const leftNav = document.getElementById('leftNav');
                                 if (leftNav) {
+                                    console.log('[Left Menu Current] Removing current from all items (expanded, non-hash)');
                                     leftNav.querySelectorAll('[class*="toctree-l"]').forEach(menuItem => {
                                         menuItem.classList.remove('current');
                                     });
                                 }
+                                console.log('[Left Menu Current] Adding current to item (expanded, non-hash):', linkText);
                                 item.classList.add('current');
                                 
                                 if (leftNav) {
                                     leftNav.dataset.userClicked = 'true';
+                                    console.log('[Left Menu Current] Set userClicked to true (expanded, non-hash)');
                                     setTimeout(() => {
                                         if (leftNav) {
                                             leftNav.dataset.userClicked = 'false';
+                                            console.log('[Left Menu Current] Set userClicked to false (expanded, non-hash)');
                                         }
                                     }, 2000);
                                 }
@@ -367,6 +400,8 @@
                 } else {
                     finalLink.addEventListener('click', function(e) {
                         const href = finalLink.getAttribute('href');
+                        const linkText = finalLink.textContent.trim().substring(0, 50);
+                        console.log('[Left Menu Current] Link clicked (no submenu):', linkText, 'href:', href);
                         
                         if (href && href.startsWith('#')) {
                             e.preventDefault();
@@ -380,6 +415,18 @@
                                     top: Math.max(0, offsetPosition),
                                     behavior: 'smooth'
                                 });
+                                
+                                // Обновляем правый TOC после завершения прокрутки
+                                setTimeout(() => {
+                                    if (window.updateActiveHeading) {
+                                        console.log('[Left Menu Current] Calling updateActiveHeading after scroll (no submenu)');
+                                        requestAnimationFrame(() => {
+                                            setTimeout(() => {
+                                                window.updateActiveHeading();
+                                            }, 200);
+                                        });
+                                    }
+                                }, 200);
                             } else {
                                 window.scrollTo({
                                     top: 0,
@@ -395,19 +442,30 @@
                         
                         const leftNav = document.getElementById('leftNav');
                         if (leftNav) {
+                            console.log('[Left Menu Current] Removing current from all items before adding to:', linkText);
                             leftNav.querySelectorAll('[class*="toctree-l"]').forEach(menuItem => {
-                                        menuItem.classList.remove('current');
-                                    });
-                                }
-                                item.classList.add('current');
-                                
-                                if (leftNav) {
-                            leftNav.dataset.userClicked = 'true';
-                            setTimeout(() => {
-                                if (leftNav) {
-                                    leftNav.dataset.userClicked = 'false';
-                                }
-                            }, 2000);
+                                menuItem.classList.remove('current');
+                            });
+                            console.log('[Left Menu Current] Adding current to item:', linkText);
+                            item.classList.add('current');
+                            
+                            if (leftNav) {
+                                leftNav.dataset.userClicked = 'true';
+                                console.log('[Left Menu Current] Set userClicked to true for:', linkText);
+                                setTimeout(() => {
+                                    if (leftNav) {
+                                        leftNav.dataset.userClicked = 'false';
+                                        console.log('[Left Menu Current] Set userClicked to false for:', linkText);
+                                        // Обновляем правый TOC после сброса флага
+                                        if (window.updateActiveHeading) {
+                                            console.log('[Left Menu Current] Calling updateActiveHeading after userClicked reset (no submenu)');
+                                            requestAnimationFrame(() => {
+                                                window.updateActiveHeading();
+                                            });
+                                        }
+                                    }
+                                }, 400);
+                            }
                         }
                     });
                 }
@@ -417,37 +475,85 @@
         processMenuItems(leftNav);
         
         function removeCurrentFromParents() {
+            console.log('[Left Menu Current] removeCurrentFromParents called');
             const leftNav = document.getElementById('leftNav');
-            if (!leftNav) return;
+            if (!leftNav) {
+                console.log('[Left Menu Current] leftNav not found');
+                return;
+            }
             
             const currentItems = leftNav.querySelectorAll('[class*="toctree-l"].current');
+            console.log('[Left Menu Current] Found current items:', currentItems.length);
             
-            currentItems.forEach(currentItem => {
+            currentItems.forEach((currentItem, index) => {
+                const link = currentItem.querySelector('a');
+                const linkText = link ? link.textContent.trim().substring(0, 50) : 'no link';
+                console.log('[Left Menu Current] Processing current item #' + index + ':', linkText);
+                
                 const classList = Array.from(currentItem.classList);
                 const levelClass = classList.find(cls => cls.startsWith('toctree-l'));
-                if (!levelClass) return;
+                if (!levelClass) {
+                    console.log('[Left Menu Current] No level class found for item #' + index);
+                    return;
+                }
                 
                 const currentLevel = parseInt(levelClass.replace('toctree-l', ''));
+                console.log('[Left Menu Current] Item #' + index + ' level:', currentLevel);
                 
                 if (currentLevel > 1) {
                     let parent = currentItem.parentElement;
-                    while (parent && parent !== leftNav) {
+                    let parentDepth = 0;
+                    while (parent && parent !== leftNav && parentDepth < 10) {
                         const parentItem = parent.closest('[class*="toctree-l"]');
                         if (parentItem && parentItem !== currentItem) {
-                            parentItem.classList.remove('current');
+                            const parentLink = parentItem.querySelector('a');
+                            const parentLinkText = parentLink ? parentLink.textContent.trim().substring(0, 50) : 'no link';
+                            
+                            // Проверяем, есть ли у родителя ЛЮБОЙ потомок с классом current
+                            // (включая текущий элемент и любые другие текущие элементы)
+                            const allCurrentItems = leftNav.querySelectorAll('[class*="toctree-l"].current');
+                            let hasCurrentDescendant = false;
+                            
+                            for (let i = 0; i < allCurrentItems.length; i++) {
+                                const currentDescendant = allCurrentItems[i];
+                                // Проверяем, является ли этот current элемент потомком parentItem
+                                if (parentItem.contains(currentDescendant) && currentDescendant !== parentItem) {
+                                    hasCurrentDescendant = true;
+                                    break;
+                                }
+                            }
+                            
+                            if (!hasCurrentDescendant) {
+                                console.log('[Left Menu Current] Removing current from parent:', parentLinkText);
+                                parentItem.classList.remove('current');
+                            } else {
+                                console.log('[Left Menu Current] Keeping current on parent (has current descendant):', parentLinkText);
+                            }
                             if (!parentItem.classList.contains('expanded')) {
                                 parentItem.classList.add('expanded');
                             }
                         }
                         parent = parent.parentElement;
+                        parentDepth++;
                     }
+                } else {
+                    console.log('[Left Menu Current] Item #' + index + ' is level 1, no parent to process');
                 }
             });
         }
         
-        setTimeout(removeCurrentFromParents, 100);
-        setTimeout(removeCurrentFromParents, 500);
-        setTimeout(removeCurrentFromParents, 1000);
+        setTimeout(function() {
+            console.log('[Left Menu Current] Calling removeCurrentFromParents (100ms)');
+            removeCurrentFromParents();
+        }, 100);
+        setTimeout(function() {
+            console.log('[Left Menu Current] Calling removeCurrentFromParents (500ms)');
+            removeCurrentFromParents();
+        }, 500);
+        setTimeout(function() {
+            console.log('[Left Menu Current] Calling removeCurrentFromParents (1000ms)');
+            removeCurrentFromParents();
+        }, 1000);
         
         function updateCurrentFromScroll() {
             const leftNav = document.getElementById('leftNav');
@@ -491,15 +597,52 @@
             
             if (activeHeading) {
                 const headingId = activeHeading.id;
-                if (headingId) {
+                const headingText = activeHeading.textContent.trim();
+                const headingTextShort = headingText.substring(0, 50);
+                console.log('[Left Menu Current] updateCurrentFromScroll: active heading found:', headingTextShort, 'id:', headingId);
+                
+                if (headingId || headingText) {
+                    console.log('[Left Menu Current] updateCurrentFromScroll: removing current from all items');
                     leftNav.querySelectorAll('[class*="toctree-l"]').forEach(menuItem => {
                         menuItem.classList.remove('current');
                     });
                     
-                    const menuLink = leftNav.querySelector(`a[href="#${headingId}"], a[href*="#${headingId}"]`);
+                    let menuLink = null;
+                    let foundBy = '';
+                    
+                    // ПРИОРИТЕТ 1: По ID заголовка
+                    if (headingId) {
+                        menuLink = leftNav.querySelector(`a[href="#${headingId}"], a[href*="#${headingId}"]`);
+                        if (menuLink) {
+                            foundBy = 'heading ID';
+                        }
+                    }
+                    
+                    // ПРИОРИТЕТ 2: По тексту заголовка (если не нашли по ID)
+                    if (!menuLink && headingText) {
+                        const allMenuLinks = leftNav.querySelectorAll('a[href^="#"]');
+                        for (let link of allMenuLinks) {
+                            const linkText = link.textContent.trim();
+                            // Сравниваем тексты (убираем лишние пробелы и приводим к нижнему регистру для сравнения)
+                            const normalizedHeadingText = headingText.toLowerCase().replace(/\s+/g, ' ').trim();
+                            const normalizedLinkText = linkText.toLowerCase().replace(/\s+/g, ' ').trim();
+                            
+                            if (normalizedHeadingText === normalizedLinkText || 
+                                normalizedHeadingText.includes(normalizedLinkText) ||
+                                normalizedLinkText.includes(normalizedHeadingText)) {
+                                menuLink = link;
+                                foundBy = 'heading text';
+                                break;
+                            }
+                        }
+                    }
+                    
                     if (menuLink) {
                         const menuItem = menuLink.closest('[class*="toctree-l"]');
+                        const linkText = menuLink.textContent.trim().substring(0, 50);
+                        console.log('[Left Menu Current] updateCurrentFromScroll: found menu link by', foundBy + ':', linkText);
                         if (menuItem) {
+                            console.log('[Left Menu Current] updateCurrentFromScroll: adding current to menu item:', linkText);
                             menuItem.classList.add('current');
                             let parent = menuItem.parentElement;
                             while (parent && parent !== leftNav) {
@@ -509,11 +652,20 @@
                                 }
                                 parent = parent.parentElement;
                             }
+                        } else {
+                            console.log('[Left Menu Current] updateCurrentFromScroll: menu item not found for link');
                         }
+                    } else {
+                        console.log('[Left Menu Current] updateCurrentFromScroll: menu link not found for heading id:', headingId, 'text:', headingTextShort);
                     }
+                } else {
+                    console.log('[Left Menu Current] updateCurrentFromScroll: heading has no id or text');
                 }
+            } else {
+                console.log('[Left Menu Current] updateCurrentFromScroll: no active heading found');
             }
             
+            console.log('[Left Menu Current] updateCurrentFromScroll: calling removeCurrentFromParents');
             removeCurrentFromParents();
         }
         
@@ -522,10 +674,16 @@
             if (scrollTimeout) {
                 clearTimeout(scrollTimeout);
             }
-            scrollTimeout = setTimeout(updateCurrentFromScroll, 100);
+            scrollTimeout = setTimeout(function() {
+                console.log('[Left Menu Current] Scroll event triggered updateCurrentFromScroll');
+                updateCurrentFromScroll();
+            }, 100);
         });
         
-        setTimeout(updateCurrentFromScroll, 500);
+        setTimeout(function() {
+            console.log('[Left Menu Current] Initial updateCurrentFromScroll call (500ms)');
+            updateCurrentFromScroll();
+        }, 500);
     }
     
     function initFloatingToc() {
@@ -711,8 +869,39 @@
                 headings = Array.from(allHeadings).filter(h => h.id);
             }
             
+            // Функция для нормализации текста (удаление спецсимволов, нормализация пробелов)
+            function normalizeText(text) {
+                if (!text) return '';
+                return text
+                    .replace(/[\u200B-\u200D\uFEFF]/g, '') // Удаляем невидимые символы
+                    .replace(/[\u00AD]/g, '') // Удаляем мягкие переносы
+                    .replace(/[\u2028\u2029]/g, ' ') // Заменяем разделители строк на пробелы
+                    .replace(/\s+/g, ' ') // Нормализуем множественные пробелы
+                    .trim();
+            }
+            
             function updateActiveHeading() {
                 if (userClickedLink) {
+                    return;
+                }
+                
+                const leftNav = document.getElementById('leftNav');
+                if (leftNav && leftNav.dataset.userClicked === 'true') {
+                    requestAnimationFrame(() => {
+                        setTimeout(function() {
+                            if (leftNav && leftNav.dataset.userClicked === 'false') {
+                                updateActiveHeading();
+                            } else if (leftNav && leftNav.dataset.userClicked === 'true') {
+                                requestAnimationFrame(() => {
+                                    setTimeout(function() {
+                                        if (leftNav && leftNav.dataset.userClicked === 'false') {
+                                            updateActiveHeading();
+                                        }
+                                    }, 200);
+                                });
+                            }
+                        }, 200);
+                    });
                     return;
                 }
                 
@@ -732,50 +921,74 @@
                 }
                 
                 const headerHeight = document.querySelector('.custom-header')?.offsetHeight || 64;
-                const scrollPosition = window.pageYOffset;
+                const scrollPosition = window.pageYOffset || window.scrollY;
                 const viewportTop = scrollPosition + headerHeight + 100;
+                const viewportTopRect = headerHeight + 100;
                 
                 let activeHeading = null;
                 let activeHeadingTop = -Infinity;
+                let activeHeadingDistance = Infinity;
                 
                 const allHeadings = document.querySelectorAll('.document h1, .document h2, .document h3, .document h4, .document h5, .document h6, .rst-content h1, .rst-content h2, .rst-content h3, .rst-content h4, .rst-content h5, .rst-content h6');
                 const currentHeadings = Array.from(allHeadings).filter(h => {
-                    return !h.closest('.custom-footer') && !h.closest('footer');
+                    return !h.closest('.custom-footer') && !h.closest('footer') && h.offsetParent !== null;
                 });
                 
-                if (scrollPosition < 150 && currentHeadings.length > 0) {
+                // Если скролл в самом верху, всегда используем первый заголовок
+                if (scrollPosition < 200 && currentHeadings.length > 0) {
                     activeHeading = currentHeadings[0];
-                    activeHeadingTop = currentHeadings[0].offsetTop;
+                    const rect = activeHeading.getBoundingClientRect();
+                    activeHeadingTop = rect.top + scrollPosition;
                 } else {
-                    currentHeadings.forEach(heading => {
-                        const headingTop = heading.offsetTop;
-                        const headingHeight = heading.offsetHeight;
-                        const headingBottom = headingTop + headingHeight;
+                    // Используем getBoundingClientRect для более точного определения позиции
+                    currentHeadings.forEach((heading, index) => {
+                        const rect = heading.getBoundingClientRect();
+                        const headingTop = rect.top + scrollPosition;
+                        const headingTopViewport = rect.top;
+                        const headingBottomViewport = rect.bottom;
+                        const headingId = heading.id || heading.getAttribute('id') || '';
+                        const headingText = heading.textContent.trim();
                         
-                        if (viewportTop >= headingTop && viewportTop < headingBottom) {
-                            if (headingTop >= activeHeadingTop) {
+                        // Проверяем, находится ли заголовок в области видимости (с учетом отступа для header)
+                        if (headingTopViewport <= viewportTopRect && headingBottomViewport >= headerHeight) {
+                            // Заголовок виден в viewport
+                            const distance = Math.abs(headingTopViewport - viewportTopRect);
+                            if (distance < activeHeadingDistance) {
                                 activeHeading = heading;
                                 activeHeadingTop = headingTop;
+                                activeHeadingDistance = distance;
                             }
                         } else if (headingTop <= viewportTop && headingTop > activeHeadingTop) {
+                            // Заголовок находится выше viewport, но ближе к нужной позиции
                             activeHeading = heading;
                             activeHeadingTop = headingTop;
+                            activeHeadingDistance = viewportTop - headingTop;
                         }
                     });
                     
+                    // Если не нашли заголовок в viewport, ищем ближайший заголовок выше
                     if (!activeHeading) {
                         currentHeadings.forEach(heading => {
-                            const headingTop = heading.offsetTop;
+                            const rect = heading.getBoundingClientRect();
+                            const headingTop = rect.top + scrollPosition;
+                            const headingTopViewport = rect.top;
+                            
                             if (headingTop <= viewportTop && headingTop > activeHeadingTop) {
-                                activeHeading = heading;
-                                activeHeadingTop = headingTop;
+                                const distance = viewportTop - headingTop;
+                                if (distance < activeHeadingDistance) {
+                                    activeHeading = heading;
+                                    activeHeadingTop = headingTop;
+                                    activeHeadingDistance = distance;
+                                }
                             }
                         });
                     }
                     
+                    // Если все еще не нашли, используем первый заголовок
                     if (!activeHeading && scrollPosition < 250 && currentHeadings.length > 0) {
                         activeHeading = currentHeadings[0];
-                        activeHeadingTop = currentHeadings[0].offsetTop;
+                        const rect = activeHeading.getBoundingClientRect();
+                        activeHeadingTop = rect.top + scrollPosition;
                     }
                 }
                 
@@ -797,50 +1010,266 @@
                     }
                     
                     const headingText = activeHeading.textContent.trim();
+                    const headingIndex = currentHeadings.indexOf(activeHeading);
                     
                     tocLinks.forEach(l => l.classList.remove('active'));
                     
                     let foundLink = false;
+                    let matchedLinkIndex = -1;
                     
-                    // Ищем соответствующую ссылку в TOC
-                    tocLinks.forEach(link => {
-                        const linkHref = link.getAttribute('href');
-                        const linkText = link.textContent.trim();
-                        
-                        if (!linkHref) return;
-                        
-                        // Нормализуем href - извлекаем только якорь
-                        let anchorId = null;
-                        if (linkHref.startsWith('#')) {
-                            anchorId = linkHref.substring(1).trim();
-                        } else if (linkHref.includes('#')) {
-                            anchorId = linkHref.split('#').pop().trim();
-                        }
-                        
-                        if (headingId && (anchorId === headingId || linkHref === '#' + headingId || linkHref === headingId)) {
-                            link.classList.add('active');
+                    // Специальная логика: если скролл вверху и активный заголовок - первый, активируем первую ссылку
+                    if (scrollPosition < 200 && headingIndex === 0 && tocLinks.length > 0) {
+                        const firstLink = tocLinks[0];
+                        if (firstLink) {
+                            firstLink.classList.add('active');
                             foundLink = true;
+                            matchedLinkIndex = 0;
+                            console.log('[Right TOC] ✓ First link (top scroll):', firstLink.textContent.trim().substring(0, 40));
                         }
-                        else if (!foundLink && linkText === headingText) {
-                            link.classList.add('active');
-                            foundLink = true;
-                        }
-                        else if (!foundLink && linkHref.includes(headingText)) {
-                            link.classList.add('active');
-                            foundLink = true;
-                        }
-                        else if (!foundLink && linkHref === '#' && currentHeadings.indexOf(activeHeading) === 0 && tocLinks.indexOf(link) === 0) {
-                            link.classList.add('active');
-                            foundLink = true;
-                        }
-                        else if (!foundLink && (linkHref === '#' || !linkHref || linkHref.trim() === '') && currentHeadings.indexOf(activeHeading) === 0) {
-                            if (linkText === headingText || linkText.includes(headingText) || headingText.includes(linkText)) {
+                    }
+                    
+                    const currentHash = window.location.hash ? window.location.hash.substring(1) : null;
+                    
+                    console.log('[Right TOC] Active:', {
+                        heading: headingText.substring(0, 50),
+                        id: headingId || '(no id)',
+                        scroll: Math.round(scrollPosition),
+                        linksCount: tocLinks.length
+                    });
+                    
+                    // ПРИОРИТЕТ 1: По ID заголовка
+                    if (headingId) {
+                        tocLinks.forEach((link, linkIndex) => {
+                            if (foundLink) return;
+                            
+                            const linkHref = link.getAttribute('href') || '';
+                            if (linkHref === null || linkHref === undefined) return;
+                            
+                            let anchorId = null;
+                            if (linkHref.startsWith('#')) {
+                                anchorId = linkHref.substring(1).trim();
+                            } else if (linkHref.includes('#')) {
+                                anchorId = linkHref.split('#').pop().trim();
+                            }
+                            
+                            let matches = (anchorId === headingId || linkHref === '#' + headingId || linkHref === headingId);
+                            
+                            // Если не совпало, проверяем наличие якоря - но ТОЛЬКО если якорь является самим заголовком или находится непосредственно в нем
+                            // УБИРАЕМ проверку targetElement.contains(activeHeading), так как она слишком широкая и дает ложные совпадения
+                            if (!matches && anchorId) {
+                                const targetElement = document.getElementById(anchorId);
+                                if (targetElement) {
+                                    // Якорь должен быть самим заголовком или находиться непосредственно в заголовке
+                                    const isSame = targetElement === activeHeading;
+                                    const isInHeading = activeHeading.contains(targetElement);
+                                    
+                                    if (isSame || isInHeading) {
+                                        matches = true;
+                                        console.log('[Right TOC] ID match details:', {
+                                            headingId: headingId,
+                                            anchorId: anchorId,
+                                            linkIndex: linkIndex,
+                                            isSame: isSame,
+                                            isInHeading: isInHeading
+                                        });
+                                    }
+                                }
+                            }
+                            
+                            if (matches) {
                                 link.classList.add('active');
                                 foundLink = true;
+                                matchedLinkIndex = linkIndex;
+                                console.log('[Right TOC] ✓ Matched by ID:', linkIndex, link.textContent.trim().substring(0, 40));
+                            }
+                        });
+                    }
+                    
+                    // ПРИОРИТЕТ 2: По тексту заголовка
+                    if (!foundLink && headingText) {
+                        const normalizedHeadingText = normalizeText(headingText);
+                        
+                        tocLinks.forEach((link, linkIndex) => {
+                            if (foundLink) return;
+                            
+                            const linkHref = link.getAttribute('href') || '';
+                            const linkText = link.textContent.trim();
+                            const normalizedLinkText = normalizeText(linkText);
+                            
+                            const textMatch = normalizedLinkText === normalizedHeadingText;
+                            const textMatchCaseInsensitive = normalizedLinkText.toLowerCase() === normalizedHeadingText.toLowerCase();
+                            const textContains = normalizedLinkText.includes(normalizedHeadingText) || normalizedHeadingText.includes(normalizedLinkText);
+                            
+                            const minLength = Math.min(normalizedLinkText.length, normalizedHeadingText.length);
+                            const compareLength = Math.min(50, minLength);
+                            const textStartsWith = compareLength >= 20 && (
+                                normalizedLinkText.substring(0, compareLength) === normalizedHeadingText.substring(0, compareLength) ||
+                                normalizedLinkText.toLowerCase().substring(0, compareLength) === normalizedHeadingText.toLowerCase().substring(0, compareLength)
+                            );
+                            
+                            const headingStartsWithLink = normalizedLinkText.length > 10 && normalizedHeadingText.toLowerCase().startsWith(normalizedLinkText.toLowerCase());
+                            const linkStartsWithHeading = normalizedHeadingText.length > 10 && normalizedLinkText.toLowerCase().startsWith(normalizedHeadingText.toLowerCase());
+                            
+                            const significantTextMatch = minLength >= 15 && (
+                                normalizedLinkText.substring(0, Math.min(40, normalizedLinkText.length)) === normalizedHeadingText.substring(0, Math.min(40, normalizedHeadingText.length)) ||
+                                normalizedLinkText.toLowerCase().substring(0, Math.min(40, normalizedLinkText.length)) === normalizedHeadingText.toLowerCase().substring(0, Math.min(40, normalizedHeadingText.length))
+                            );
+                            
+                            // Специальная проверка для первой ссылки при скролле вверху
+                            const isFirstHeadingLink = (linkHref === '#' || !linkHref || linkHref.trim() === '') && headingIndex === 0 && linkIndex === 0;
+                            
+                            const isEmptyHrefMatch = (linkHref === '#' || !linkHref || linkHref.trim() === '') && (
+                                normalizedLinkText === normalizedHeadingText || 
+                                normalizedLinkText.includes(normalizedHeadingText) || 
+                                normalizedHeadingText.includes(normalizedLinkText) ||
+                                normalizedLinkText.toLowerCase() === normalizedHeadingText.toLowerCase()
+                            );
+                            
+                            let anchorNearHeading = false;
+                            if (linkHref && linkHref.startsWith('#')) {
+                                const anchorId = linkHref.substring(1).trim();
+                                if (anchorId) {
+                                    const anchorElement = document.getElementById(anchorId);
+                                    if (anchorElement) {
+                                        if (anchorElement === activeHeading || activeHeading.contains(anchorElement)) {
+                                            anchorNearHeading = true;
+                                        } else {
+                                            const headingRect = activeHeading.getBoundingClientRect();
+                                            const anchorRect = anchorElement.getBoundingClientRect();
+                                            const distance = Math.abs(headingRect.top - anchorRect.top);
+                                            if (distance < 30 && Math.abs(headingRect.left - anchorRect.left) < 50) {
+                                                anchorNearHeading = true;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            if (textMatch || textMatchCaseInsensitive || textContains || textStartsWith || headingStartsWithLink || linkStartsWithHeading || significantTextMatch || anchorNearHeading || isFirstHeadingLink || isEmptyHrefMatch) {
+                                link.classList.add('active');
+                                foundLink = true;
+                                matchedLinkIndex = linkIndex;
+                                console.log('[Right TOC] ✓ Matched by text:', linkIndex, linkText.substring(0, 40));
+                            }
+                        });
+                    }
+                    
+                    // ПРИОРИТЕТ 3: По позиции заголовка в списке
+                    if (!foundLink && activeHeading) {
+                        const headingIndex = currentHeadings.indexOf(activeHeading);
+                        
+                        if (headingIndex >= 0 && headingIndex < tocLinks.length) {
+                            const linkByIndex = tocLinks[headingIndex];
+                            if (linkByIndex) {
+                                const linkHref = linkByIndex.getAttribute('href') || '';
+                                if (linkHref && linkHref !== '#') {
+                                    linkByIndex.classList.add('active');
+                                    foundLink = true;
+                                    matchedLinkIndex = headingIndex;
+                                    console.log('[Right TOC] ✓ Matched by position:', headingIndex);
+                                }
                             }
                         }
-                    });
+                        
+                        if (!foundLink && headingIndex >= 0) {
+                            let closestLinkIndex = -1;
+                            let minDistance = Infinity;
+                            
+                            tocLinks.forEach((link, linkIndex) => {
+                                const linkHref = link.getAttribute('href') || '';
+                                if (linkHref === null || linkHref === undefined) return;
+                                
+                                const distance = Math.abs(headingIndex - linkIndex);
+                                if (distance < minDistance) {
+                                    minDistance = distance;
+                                    closestLinkIndex = linkIndex;
+                                }
+                            });
+                            
+                            if (closestLinkIndex >= 0 && minDistance <= 5) {
+                                const closestLink = tocLinks[closestLinkIndex];
+                                const closestLinkHref = closestLink.getAttribute('href') || '';
+                                if (closestLinkHref && closestLinkHref !== '#') {
+                                    closestLink.classList.add('active');
+                                    foundLink = true;
+                                    matchedLinkIndex = closestLinkIndex;
+                                    console.log('[Right TOC] ✓ Matched by closest position:', closestLinkIndex, 'dist:', minDistance);
+                                }
+                            }
+                        }
+                    }
+                    
+                    // ПРИОРИТЕТ 4: По хэшу в URL (fallback)
+                    if (!foundLink && currentHash) {
+                        tocLinks.forEach((link, linkIndex) => {
+                            if (foundLink) return;
+                            
+                            const linkHref = link.getAttribute('href') || '';
+                            if (!linkHref) return;
+                            
+                            let anchorId = null;
+                            if (linkHref.startsWith('#')) {
+                                anchorId = linkHref.substring(1).trim();
+                            } else if (linkHref.includes('#')) {
+                                anchorId = linkHref.split('#').pop().trim();
+                            }
+                            
+                            if (anchorId && anchorId === currentHash) {
+                                link.classList.add('active');
+                                foundLink = true;
+                                matchedLinkIndex = linkIndex;
+                                console.log('[Right TOC] ✓ Matched by hash (fallback):', linkIndex);
+                            }
+                        });
+                    }
+                    
+                    if (!foundLink) {
+                        console.log('[Right TOC] ✗ No match found');
+                    }
+                } else {
+                    // Если нет активного заголовка, но скролл вверху - активируем первую ссылку
+                    if (scrollPosition < 200 && tocLinks.length > 0) {
+                        tocLinks.forEach(l => l.classList.remove('active'));
+                        const firstLink = tocLinks[0];
+                        if (firstLink) {
+                            firstLink.classList.add('active');
+                            console.log('[Right TOC] ✓ Activated first link (top of page)');
+                        }
+                    }
+                    
+                    const currentHash = window.location.hash ? window.location.hash.substring(1) : null;
+                    if (currentHash) {
+                        let foundByHash = false;
+                        tocLinks.forEach((link, linkIndex) => {
+                            if (foundByHash) return;
+                            
+                            const linkHref = link.getAttribute('href');
+                            if (!linkHref) return;
+                            
+                            let anchorId = null;
+                            if (linkHref.startsWith('#')) {
+                                anchorId = linkHref.substring(1).trim();
+                            } else if (linkHref.includes('#')) {
+                                anchorId = linkHref.split('#').pop().trim();
+                            }
+                            
+                            if (anchorId && anchorId === currentHash) {
+                                link.classList.add('active');
+                                foundByHash = true;
+                                console.log('[Right TOC] ✓ Link found by hash (no heading):', {
+                                    index: linkIndex,
+                                    text: link.textContent.trim().substring(0, 60),
+                                    href: linkHref
+                                });
+                            }
+                        });
+                        
+                        if (!foundByHash) {
+                            console.log('[Right TOC] ✗ No link found by hash either');
+                        }
+                    }
                 }
+                
             }
             
             let ticking = false;
@@ -854,6 +1283,9 @@
                 }
             });
             
+            // Делаем функцию доступной глобально для вызова из других мест
+            window.updateActiveHeading = updateActiveHeading;
+            
             // Обновляем при загрузке страницы
             setTimeout(() => {
                 updateActiveHeading();
@@ -865,6 +1297,13 @@
             setTimeout(() => {
                 updateActiveHeading();
             }, 1000);
+            
+            // Обновляем при изменении хэша
+            window.addEventListener('hashchange', function() {
+                setTimeout(function() {
+                    updateActiveHeading();
+                }, 300);
+            });
         }
     }
 
@@ -2042,6 +2481,20 @@
                         top: targetScroll,
                         behavior: 'smooth'
                     });
+                    
+                    // Обновляем активный элемент в правом меню после прокрутки
+                    setTimeout(function() {
+                        if (window.updateActiveHeading) {
+                            window.updateActiveHeading();
+                        }
+                    }, 600);
+                } else {
+                    // Даже если не прокручиваем, обновляем активный элемент
+                    setTimeout(function() {
+                        if (window.updateActiveHeading) {
+                            window.updateActiveHeading();
+                        }
+                    }, 100);
                 }
             }
             
@@ -2109,6 +2562,14 @@
         makeHeadingsClickable();
         makeCaptionsClickable();
         handleHashOnLoad();
+        
+        // Обновляем активный элемент в правом меню после изменения хэша
+        setTimeout(function() {
+            const floatingTocPage = document.getElementById('floatingTocPage');
+            if (floatingTocPage && window.updateActiveHeading) {
+                window.updateActiveHeading();
+            }
+        }, 500);
     });
     
     // Обработка хэша при полной загрузке страницы (только один раз)
