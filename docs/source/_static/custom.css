@@ -1112,13 +1112,14 @@ body.left-nav-open .document-wrapper {
 
 /* Стили для элементов второго уровня (toctree-l2) */
 .left-nav-content .toctree-l2 {
-    background-color: #fafafa;
+    background-color: transparent;
     overflow: visible !important;
     position: relative;
 }
 
+/* Убираем background с li, чтобы он не распространялся на вложенные элементы */
 .left-nav-content .toctree-l2.current {
-    background-color: #E4F3FF !important;
+    background-color: transparent !important;
 }
 
 .left-nav-content .toctree-l2 > a {
@@ -1139,12 +1140,13 @@ body.left-nav-open .document-wrapper {
 }
 
 /* Фон развёрнутых подзаголовков выделенного меню */
+/* Убираем background с li, чтобы он не распространялся на вложенные элементы */
 .left-nav-content [class*="toctree-l"].current.expanded > ul > li {
-    background-color: #F0F2F4 !important;
+    background-color: transparent !important;
 }
 
 .left-nav-content [class*="toctree-l"].expanded > ul > li {
-    background-color: #E4F3FF !important;
+    background-color: transparent !important;
 }
 
 .left-nav-content [class*="toctree-l"].expanded > ul > li > a {
@@ -1175,9 +1177,19 @@ body.left-nav-open .document-wrapper {
 
 /* Стили для элементов третьего уровня (toctree-l3) */
 .left-nav-content .toctree-l3 {
-    background-color: #fafafa;
+    background-color: transparent;
     overflow: visible !important;
     position: relative;
+}
+
+/* Убеждаемся, что toctree-l3 внутри toctree-l2.current не наследуют background */
+.left-nav-content .toctree-l2.current .toctree-l3 {
+    background-color: transparent !important;
+}
+
+/* Убеждаемся, что ссылки toctree-l3 внутри toctree-l2.current имеют правильный background */
+.left-nav-content .toctree-l2.current .toctree-l3 > a {
+    background-color: #fafafa !important;
 }
 
 .left-nav-content .toctree-l3 > a {
@@ -1198,8 +1210,9 @@ body.left-nav-open .document-wrapper {
 
 
 /* Текущая страница третьего уровня */
+/* Убираем background с li, чтобы он не распространялся на вложенные элементы */
 .left-nav-content .toctree-l3.current {
-    background-color: #E4F3FF !important;
+    background-color: transparent !important;
 }
 
 .left-nav-content .toctree-l3.current > a {
@@ -1230,9 +1243,10 @@ body.left-nav-open .document-wrapper {
     background-color: #F0F2F4 !important;
 }
 
+/* Убираем background с li, чтобы он не распространялся на вложенные элементы */
 .left-nav-content [class*="toctree-l"].current.expanded > ul > li:not(.current),
 .left-nav-content [class*="toctree-l"].expanded > ul > li:not(.current) {
-    background-color: #F0F2F4 !important;
+    background-color: transparent !important;
 }
 
 .left-nav-content [class*="toctree-l"].current.expanded > ul > li:not(.current) > a,
