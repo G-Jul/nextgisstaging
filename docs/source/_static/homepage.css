@@ -715,6 +715,10 @@ body.left-nav-open .custom-header .dropdown-arrow img,
     object-fit: contain;
 }
 
+.card-type-3 .card-icon-small img {
+    margin-bottom: 10px;
+}
+
 .card-type-2 .card-title {
     font-family: 'Roboto-Bold', sans-serif !important;
     font-size: 20px;
@@ -761,7 +765,7 @@ body.left-nav-open .custom-header .dropdown-arrow img,
 .card-type-2 .card-links a {
     color: var(--primary-blue);
     text-decoration: none;
-    font-size: 0.85rem;
+    font-size: 16px;
 }
 
 .card-type-2 .card-links a:hover {
@@ -794,15 +798,16 @@ body.left-nav-open .custom-header .dropdown-arrow img,
 }
 
 .card-type-3 .card-title{
-    font-family: 'Roboto-Bold', sans-serif !important;
+    font-family: 'Roboto-Medium', sans-serif !important;
     font-size: 20px;
-    font-weight: 700;
+    margin-bottom: 10px;
+    font-weight: 300;
 }
 
 .card-type-3 .card-description{
     color: var(--text-light);
     font-size: 16px;
-    margin-bottom: 0px;
+    margin-bottom: 14px;
 }
 
 .card-type-3 .card-description a{
@@ -822,8 +827,8 @@ body.left-nav-open .custom-header .dropdown-arrow img,
 
 .card-links a{
     color: var(--text-dark);
-    font-weight: 600;
     text-decoration: none;
+    font-size: 16px;
 }
 
 .text-under-line a{
@@ -832,7 +837,6 @@ body.left-nav-open .custom-header .dropdown-arrow img,
 
 .card-links a:hover{
     color: var(--primary-blue-dark);
-    font-weight: 600;
 }
 
 /* ============================================
