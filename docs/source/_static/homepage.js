@@ -302,6 +302,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('[Homepage Right Menu] Found TOC links:', tocLinks.length);
         let userClickedLink = null;
         let clickTimeout = null;
+        let scrollTimeout = null;
         
         tocLinks.forEach((link, index) => {
             console.log('[Homepage Right Menu] Setting up click handler for link #' + index + ':', link.getAttribute('href'));
@@ -317,11 +318,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.log('[Homepage Right Menu] preventDefault() called');
                 }
                 
-                userClickedLink = clickedLink;
-                
+                // Очищаем предыдущие таймауты
                 if (clickTimeout) {
                     clearTimeout(clickTimeout);
                 }
+                if (scrollTimeout) {
+                    clearTimeout(scrollTimeout);
+                }
+                
+                userClickedLink = clickedLink;
                 
                 const allTocLinks = Array.from(floatingTocPage.querySelectorAll('a'));
                 allTocLinks.forEach(l => {
@@ -329,11 +334,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 
                 clickedLink.classList.add('active');
-                
-                // Сбрасываем флаг через короткое время, чтобы обновление при скролле работало
-                setTimeout(() => {
-                    userClickedLink = null;
-                }, 500);
                 
                 if (!targetId || targetId === '#') {
                     const linkText = clickedLink.textContent.trim();
@@ -372,10 +372,20 @@ document.addEventListener('DOMContentLoaded', function() {
                         });
                         console.log('[Homepage Right Menu] window.scrollTo called with position:', finalPosition);
                         
-                        clickTimeout = setTimeout(() => {
+                        // Блокируем обновление active класса до завершения прокрутки
+                        // Smooth scroll обычно занимает ~500-1000ms, добавляем запас
+                        scrollTimeout = setTimeout(() => {
                             userClickedLink = null;
+                            scrollTimeout = null;
+                        }, 1200);
+                        
+                        // Дополнительная блокировка на случай быстрой прокрутки
+                        clickTimeout = setTimeout(() => {
+                            if (!scrollTimeout) {
+                                userClickedLink = null;
+                            }
                             clickTimeout = null;
-                        }, 400);
+                        }, 600);
                     } else {
                         const linkText = clickedLink.textContent.trim();
                         const sections = document.querySelectorAll('.section, .subsection');
@@ -403,18 +413,38 @@ document.addEventListener('DOMContentLoaded', function() {
                                 behavior: 'smooth'
                             });
                             console.log('[Homepage Right Menu] window.scrollTo called (by text)');
+                            
+                            // Блокируем обновление active класса до завершения прокрутки
+                            scrollTimeout = setTimeout(() => {
+                                userClickedLink = null;
+                                scrollTimeout = null;
+                            }, 1200);
+                            
+                            clickTimeout = setTimeout(() => {
+                                if (!scrollTimeout) {
+                                    userClickedLink = null;
+                                }
+                                clickTimeout = null;
+                            }, 600);
                         } else {
                             console.log('[Homepage Right Menu] Section not found by text, scrolling to top');
                             window.scrollTo({
                                 top: 0,
                                 behavior: 'smooth'
                             });
+                            
+                            scrollTimeout = setTimeout(() => {
+                                userClickedLink = null;
+                                scrollTimeout = null;
+                            }, 1200);
+                            
+                            clickTimeout = setTimeout(() => {
+                                if (!scrollTimeout) {
+                                    userClickedLink = null;
+                                }
+                                clickTimeout = null;
+                            }, 600);
                         }
-                        
-                        clickTimeout = setTimeout(() => {
-                            userClickedLink = null;
-                            clickTimeout = null;
-                        }, 400);
                     }
                 } else if (!targetId || targetId === '#') {
                     console.log('[Homepage Right Menu] No target ID, scrolling to top');
@@ -422,10 +452,18 @@ document.addEventListener('DOMContentLoaded', function() {
                         top: 0,
                         behavior: 'smooth'
                     });
-                    clickTimeout = setTimeout(() => {
+                    
+                    scrollTimeout = setTimeout(() => {
                         userClickedLink = null;
+                        scrollTimeout = null;
+                    }, 1200);
+                    
+                    clickTimeout = setTimeout(() => {
+                        if (!scrollTimeout) {
+                            userClickedLink = null;
+                        }
                         clickTimeout = null;
-                    }, 800);
+                    }, 600);
                 } else {
                     console.log('[Homepage Right Menu] Target ID is not a hash:', targetId);
                 }
@@ -438,7 +476,17 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('[Homepage TOC] updateActiveSection called, userClickedLink:', !!userClickedLink);
             
             if (userClickedLink) {
-                console.log('[Homepage TOC] SKIP: userClickedLink is set');
+                console.log('[Homepage TOC] SKIP: userClickedLink is set, keeping active on:', userClickedLink.getAttribute('href'));
+                // Убеждаемся, что выбранный элемент остается активным
+                const allTocLinks = Array.from(floatingTocPage.querySelectorAll('a'));
+                allTocLinks.forEach(l => {
+                    if (l !== userClickedLink) {
+                        l.classList.remove('active');
+                    }
+                });
+                if (!userClickedLink.classList.contains('active')) {
+                    userClickedLink.classList.add('active');
+                }
                 return;
             }
             
@@ -679,6 +727,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         let ticking = false;
+        let scrollEndTimeout = null;
         const isHomepage = document.body.classList.contains('homepage');
         
         // Для главной страницы слушаем скролл и на window, и на document.body
@@ -689,6 +738,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     ticking = false;
                 });
                 ticking = true;
+            }
+            
+            // Если пользователь кликнул на ссылку, сбрасываем таймаут завершения прокрутки
+            if (userClickedLink) {
+                if (scrollEndTimeout) {
+                    clearTimeout(scrollEndTimeout);
+                }
+                // Ждем завершения прокрутки (когда скролл прекратится на 200ms)
+                scrollEndTimeout = setTimeout(() => {
+                    if (userClickedLink) {
+                        // Даем еще немного времени для стабилизации позиции
+                        setTimeout(() => {
+                            userClickedLink = null;
+                            scrollEndTimeout = null;
+                        }, 300);
+                    }
+                }, 200);
             }
         }
         
@@ -853,4 +919,209 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         initMobileSearch();
     }
+    
+    // Обработчики кликов на заголовки главной страницы
+    function setupHomepageHeadingClickHandlers() {
+        // Удаляем старые обработчики, если они есть
+        if (window._homepageHeadingClickHandler) {
+            document.removeEventListener('click', window._homepageHeadingClickHandler, true);
+            document.removeEventListener('contextmenu', window._homepageHeadingContextMenuHandler, true);
+        }
+        
+        // Обработчик обычного клика
+        window._homepageHeadingClickHandler = function(e) {
+            // Проверяем, что мы на главной странице
+            if (!document.body.classList.contains('homepage')) {
+                return;
+            }
+            
+            // Проверяем, что клик был на заголовке
+            let heading = e.target;
+            let foundHeading = null;
+            
+            // Проверяем сам элемент
+            if (heading && heading.tagName && /^H[1-6]$/.test(heading.tagName) && heading.closest('.homepage-main, .section, .subsection')) {
+                foundHeading = heading;
+            } else {
+                // Ищем в родителях
+                let current = heading;
+                let depth = 0;
+                while (current && current !== document.body && depth < 10) {
+                    if (current.tagName && /^H[1-6]$/.test(current.tagName) && current.closest('.homepage-main, .section, .subsection')) {
+                        foundHeading = current;
+                        break;
+                    }
+                    current = current.parentElement;
+                    depth++;
+                }
+            }
+            
+            if (!foundHeading || !foundHeading.closest('.homepage-main, .section, .subsection')) {
+                return;
+            }
+            
+            heading = foundHeading;
+            
+            // Пропускаем клики на дочерние элементы (например, ссылки)
+            if (e.target !== heading && e.target.closest('a')) {
+                return;
+            }
+            
+            // Ищем id заголовка или родительского элемента (section/subsection)
+            let id = heading.id;
+            if (!id || id.trim() === '') {
+                // Ищем id в родительских элементах (section или subsection)
+                const section = heading.closest('.section, .subsection');
+                if (section && section.id) {
+                    id = section.id;
+                } else {
+                    return;
+                }
+            }
+            
+            // Обработка Ctrl/Cmd + клик
+            if (e.ctrlKey || e.metaKey) {
+                e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                const url = new URL(window.location);
+                url.hash = id;
+                const linkUrl = url.href;
+                navigator.clipboard.writeText(linkUrl).then(function() {
+                    // Ссылка скопирована
+                }).catch(function(err) {
+                    console.error('Failed to copy link:', err);
+                    // Fallback для старых браузеров
+                    const textArea = document.createElement('textarea');
+                    textArea.value = linkUrl;
+                    textArea.style.position = 'fixed';
+                    textArea.style.opacity = '0';
+                    textArea.style.left = '-9999px';
+                    document.body.appendChild(textArea);
+                    textArea.focus();
+                    textArea.select();
+                    try {
+                        document.execCommand('copy');
+                    } catch (err2) {
+                        console.error('Fallback copy failed:', err2);
+                    }
+                    document.body.removeChild(textArea);
+                });
+                return false;
+            }
+            
+            // Обычный клик - прокрутка к заголовку
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            
+            const url = new URL(window.location);
+            url.hash = id;
+            window.history.pushState({}, '', url);
+            
+            // Прокрутка с учетом header - заголовок должен быть на 80px от верха экрана
+            const scrollToHeading = function() {
+                // Пересчитываем позицию, так как DOM мог измениться
+                const rect = heading.getBoundingClientRect();
+                const elementPosition = rect.top + window.pageYOffset;
+                const offsetPosition = elementPosition - 80;
+                
+                window.scrollTo({
+                    top: Math.max(0, offsetPosition),
+                    behavior: 'smooth'
+                });
+            };
+            
+            // Небольшая задержка для обновления DOM
+            setTimeout(function() {
+                scrollToHeading();
+            }, 10);
+            
+            return false;
+        };
+        
+        // Обработчик правого клика
+        window._homepageHeadingContextMenuHandler = function(e) {
+            // Проверяем, что мы на главной странице
+            if (!document.body.classList.contains('homepage')) {
+                return;
+            }
+            
+            // Проверяем, что клик был на заголовке
+            let heading = e.target;
+            let foundHeading = null;
+            
+            // Проверяем сам элемент
+            if (heading && heading.tagName && /^H[1-6]$/.test(heading.tagName) && heading.closest('.homepage-main, .section, .subsection')) {
+                foundHeading = heading;
+            } else {
+                // Ищем в родителях
+                let current = heading;
+                let depth = 0;
+                while (current && current !== document.body && depth < 10) {
+                    if (current.tagName && /^H[1-6]$/.test(current.tagName) && current.closest('.homepage-main, .section, .subsection')) {
+                        foundHeading = current;
+                        break;
+                    }
+                    current = current.parentElement;
+                    depth++;
+                }
+            }
+            
+            if (!foundHeading || !foundHeading.closest('.homepage-main, .section, .subsection')) {
+                return;
+            }
+            
+            heading = foundHeading;
+            
+            // Ищем id заголовка или родительского элемента (section/subsection)
+            let id = heading.id;
+            if (!id || id.trim() === '') {
+                // Ищем id в родительских элементах (section или subsection)
+                const section = heading.closest('.section, .subsection');
+                if (section && section.id) {
+                    id = section.id;
+                } else {
+                    return;
+                }
+            }
+            
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            
+            const url = new URL(window.location);
+            url.hash = id;
+            const linkUrl = url.href;
+            
+            navigator.clipboard.writeText(linkUrl).then(function() {
+                // Ссылка скопирована
+            }).catch(function(err) {
+                console.error('Failed to copy link:', err);
+                // Fallback для старых браузеров
+                const textArea = document.createElement('textarea');
+                textArea.value = linkUrl;
+                textArea.style.position = 'fixed';
+                textArea.style.opacity = '0';
+                textArea.style.left = '-9999px';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                } catch (err2) {
+                    console.error('Fallback copy failed:', err2);
+                }
+                document.body.removeChild(textArea);
+            });
+            return false;
+        };
+        
+        // Добавляем обработчики на уровне документа с capture phase
+        document.addEventListener('click', window._homepageHeadingClickHandler, true);
+        document.addEventListener('contextmenu', window._homepageHeadingContextMenuHandler, true);
+    }
+    
+    // Инициализируем обработчики заголовков
+    setupHomepageHeadingClickHandlers();
 });
