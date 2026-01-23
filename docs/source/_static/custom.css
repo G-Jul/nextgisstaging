@@ -1120,6 +1120,7 @@ body.left-nav-open .document-wrapper {
 /* Убираем background с li, чтобы он не распространялся на вложенные элементы */
 .left-nav-content .toctree-l2.current {
     background-color: transparent !important;
+    position: relative;
 }
 
 .left-nav-content .toctree-l2 > a {
@@ -1137,6 +1138,19 @@ body.left-nav-open .document-wrapper {
 
 .left-nav-content .toctree-l2.current > a {
     background-color: #E4F3FF !important;
+}
+
+/* Псевдоэлемент на ссылке для покрытия области отступа слева (покрывает весь отступ, включая область под индикатором) */
+.left-nav-content .toctree-l2.current > a::after {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+    background-color: #E4F3FF;
+    z-index: 0;
+    pointer-events: none;
 }
 
 /* Фон развёрнутых подзаголовков выделенного меню */
@@ -1217,6 +1231,19 @@ body.left-nav-open .document-wrapper {
 
 .left-nav-content .toctree-l3.current > a {
     background-color: #E4F3FF !important;
+}
+
+/* Псевдоэлемент на ссылке для покрытия области отступа слева (покрывает весь отступ, включая область под индикатором) */
+.left-nav-content .toctree-l3.current > a::after {
+    content: '';
+    position: absolute;
+    left: -40px;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    background-color: #E4F3FF;
+    z-index: 0;
+    pointer-events: none;
 }
 
 /* Скрытие подменю по умолчанию для всех уровней */
