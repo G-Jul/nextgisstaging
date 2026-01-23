@@ -529,6 +529,11 @@
     }
     
     function initFloatingToc() {
+        // Не инициализируем для главной страницы - там своя логика в homepage.js
+        if (document.body && document.body.classList.contains('homepage')) {
+            return;
+        }
+        
         const floatingTocPage = document.getElementById('floatingTocPage');
         
         if (floatingTocPage) {
@@ -866,6 +871,11 @@
     // Адаптивность: скрытие плавающего меню на планшете
     
     function handleResize() {
+        // Не применяем эту логику к главной странице - там своя логика в homepage.js
+        if (document.body && document.body.classList.contains('homepage')) {
+            return;
+        }
+        
         const width = window.innerWidth;
         const floatingTocPage = document.getElementById('floatingTocPage');
         

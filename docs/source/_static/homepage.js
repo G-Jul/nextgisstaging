@@ -1,5 +1,6 @@
 
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('[Homepage] DOMContentLoaded event fired');
     // Левое навигационное меню
     
     const leftNav = document.getElementById('leftNav');
@@ -285,20 +286,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Плавающее меню содержания (десктоп)
     
-    const floatingTocPage = document.getElementById('floatingTocPage');
-    
-    if (floatingTocPage) {
+    function initRightMenu() {
+        console.log('[Homepage Right Menu] initRightMenu called');
+        const floatingTocPage = document.getElementById('floatingTocPage');
+        console.log('[Homepage Right Menu] floatingTocPage found:', !!floatingTocPage);
+        
+        if (!floatingTocPage) {
+            console.log('[Homepage Right Menu] floatingTocPage not found, retrying in 100ms');
+            setTimeout(initRightMenu, 100);
+            return;
+        }
+        
+        console.log('[Homepage Right Menu] Initializing right menu handlers');
         const tocLinks = Array.from(floatingTocPage.querySelectorAll('a'));
+        console.log('[Homepage Right Menu] Found TOC links:', tocLinks.length);
         let userClickedLink = null;
         let clickTimeout = null;
         
-        tocLinks.forEach(link => {
+        tocLinks.forEach((link, index) => {
+            console.log('[Homepage Right Menu] Setting up click handler for link #' + index + ':', link.getAttribute('href'));
             link.addEventListener('click', function(e) {
+                console.log('[Homepage Right Menu] Link clicked:', this.getAttribute('href'));
+                console.log('[Homepage Right Menu] Event default prevented:', e.defaultPrevented);
                 const clickedLink = this;
                 let targetId = clickedLink.getAttribute('href');
+                console.log('[Homepage Right Menu] Target ID from href:', targetId);
                 
                 if (targetId && targetId !== '#') {
                     e.preventDefault();
+                    console.log('[Homepage Right Menu] preventDefault() called');
                 }
                 
                 userClickedLink = clickedLink;
@@ -327,33 +343,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 
                 if (targetId && targetId.startsWith('#')) {
+                    console.log('[Homepage Right Menu] Looking for target element:', targetId);
                     const targetElement = document.querySelector(targetId);
+                    console.log('[Homepage Right Menu] Target element found:', !!targetElement);
                     if (targetElement) {
-                        const headerHeight = document.querySelector('.custom-header')?.offsetHeight || 64;
+                        const headerHeight = document.querySelector('.custom-header')?.offsetHeight || 65;
+                        console.log('[Homepage Right Menu] Header height:', headerHeight);
                         
-                        let targetPosition = 0;
-                        let element = targetElement;
+                        // Используем getBoundingClientRect для более точного расчета
+                        const rect = targetElement.getBoundingClientRect();
+                        const scrollTop = window.pageYOffset || window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+                        const calculatedPosition = rect.top + scrollTop - headerHeight - 20;
+                        console.log('[Homepage Right Menu] Element rect.top:', rect.top);
+                        console.log('[Homepage Right Menu] Current scrollTop:', scrollTop);
+                        console.log('[Homepage Right Menu] Calculated position:', calculatedPosition);
                         
-                        while (element && element !== document.body) {
-                            targetPosition += element.offsetTop;
-                            element = element.offsetParent;
-                        }
-                        
-                        targetPosition = Math.max(0, targetPosition - headerHeight - 20);
-                        
-                        const isHomepage = document.body.classList.contains('homepage');
-                        
-                        if (isHomepage && document.body.scrollHeight > window.innerHeight) {
-                            document.body.scrollTo({
-                                top: targetPosition,
-                                behavior: 'smooth'
-                            });
-                        } else {
-                            window.scrollTo({
-                                top: targetPosition,
-                                behavior: 'smooth'
-                            });
-                        }
+                        // Всегда используем window.scrollTo для главной страницы
+                        const finalPosition = Math.max(0, calculatedPosition);
+                        console.log('[Homepage Right Menu] Final scroll position:', finalPosition);
+                        window.scrollTo({
+                            top: finalPosition,
+                            behavior: 'smooth'
+                        });
+                        console.log('[Homepage Right Menu] window.scrollTo called with position:', finalPosition);
                         
                         clickTimeout = setTimeout(() => {
                             userClickedLink = null;
@@ -374,16 +386,20 @@ document.addEventListener('DOMContentLoaded', function() {
                         
                         if (foundSection) {
                             const headerHeight = document.querySelector('.custom-header')?.offsetHeight || 64;
+                            console.log('[Homepage Right Menu] Found section by text, header height:', headerHeight);
                             
                             const rect = foundSection.getBoundingClientRect();
                             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                             const targetPosition = rect.top + scrollTop - headerHeight - 20;
+                            console.log('[Homepage Right Menu] Calculated target position (by text):', targetPosition);
                             
                             window.scrollTo({
                                 top: Math.max(0, targetPosition),
                                 behavior: 'smooth'
                             });
+                            console.log('[Homepage Right Menu] window.scrollTo called (by text)');
                         } else {
+                            console.log('[Homepage Right Menu] Section not found by text, scrolling to top');
                             window.scrollTo({
                                 top: 0,
                                 behavior: 'smooth'
@@ -396,6 +412,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         }, 800);
                     }
                 } else if (!targetId || targetId === '#') {
+                    console.log('[Homepage Right Menu] No target ID, scrolling to top');
                     window.scrollTo({
                         top: 0,
                         behavior: 'smooth'
@@ -404,6 +421,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         userClickedLink = null;
                         clickTimeout = null;
                     }, 800);
+                } else {
+                    console.log('[Homepage Right Menu] Target ID is not a hash:', targetId);
                 }
             });
         });
@@ -659,36 +678,55 @@ document.addEventListener('DOMContentLoaded', function() {
         
         updateActiveSection();
     }
-
-    const burgerToggle = document.getElementById('burgerToggle');
-    function createOverlay() {
-        let overlay = document.querySelector('.left-nav-overlay');
-        if (!overlay) {
-            overlay = document.createElement('div');
-            overlay.className = 'left-nav-overlay';
-            document.body.appendChild(overlay);
-        }
-        return overlay;
-    }
     
-    if (burgerToggle) {
+    // Инициализируем правое меню
+    initRightMenu();
+
+    function initBurgerMenu() {
+        console.log('[Homepage Burger Menu] initBurgerMenu called');
+        const burgerToggle = document.getElementById('burgerToggle');
+        console.log('[Homepage Burger Menu] burgerToggle found:', !!burgerToggle);
+        
+        if (!burgerToggle) {
+            console.log('[Homepage Burger Menu] burgerToggle not found, retrying in 100ms');
+            setTimeout(initBurgerMenu, 100);
+            return;
+        }
+        
+        function createOverlay() {
+            let overlay = document.querySelector('.left-nav-overlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.className = 'left-nav-overlay';
+                document.body.appendChild(overlay);
+                console.log('[Homepage Burger Menu] Created overlay');
+            }
+            return overlay;
+        }
+        
         // Получаем floatingTocPage из глобальной области или находим заново
         const floatingTocPage = document.getElementById('floatingTocPage');
+        console.log('[Homepage Burger Menu] floatingTocPage found:', !!floatingTocPage);
         
         if (floatingTocPage) {
             const overlay = createOverlay();
+            console.log('[Homepage Burger Menu] Setting up burger toggle click handler');
             
             burgerToggle.addEventListener('click', function(e) {
+                console.log('[Homepage Burger Menu] Burger toggle clicked');
                 e.preventDefault();
                 e.stopPropagation();
                 
                 const isActive = floatingTocPage.classList.contains('active');
+                console.log('[Homepage Burger Menu] Menu is active:', isActive);
                 
                 if (isActive) {
+                    console.log('[Homepage Burger Menu] Closing menu');
                     floatingTocPage.classList.remove('active');
                     overlay.classList.remove('active');
                     burgerToggle.classList.remove('active');
                 } else {
+                    console.log('[Homepage Burger Menu] Opening menu');
                     floatingTocPage.classList.add('active');
                     overlay.classList.add('active');
                     burgerToggle.classList.add('active');
@@ -696,6 +734,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             
             overlay.addEventListener('click', function() {
+                console.log('[Homepage Burger Menu] Overlay clicked, closing menu');
                 floatingTocPage.classList.remove('active');
                 overlay.classList.remove('active');
                 burgerToggle.classList.remove('active');
@@ -706,35 +745,50 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (!floatingTocPage.contains(e.target) && 
                         !burgerToggle.contains(e.target) &&
                         e.target !== overlay) {
+                        console.log('[Homepage Burger Menu] Click outside menu, closing');
                         floatingTocPage.classList.remove('active');
                         overlay.classList.remove('active');
                         burgerToggle.classList.remove('active');
                     }
                 }
             });
+        } else {
+            console.log('[Homepage Burger Menu] floatingTocPage not found, cannot initialize burger menu');
         }
     }
+    
+    // Инициализируем бургер-меню
+    initBurgerMenu();
 
     function handleResize() {
         const width = window.innerWidth;
+        console.log('[Homepage Right Menu] handleResize called, width:', width);
         
         const floatingTocPage = document.getElementById('floatingTocPage');
+        const burgerToggle = document.getElementById('burgerToggle');
+        console.log('[Homepage Right Menu] floatingTocPage found:', !!floatingTocPage);
+        console.log('[Homepage Right Menu] burgerToggle found:', !!burgerToggle);
+        
         if (width <= 1280) {
             if (floatingTocPage && !floatingTocPage.classList.contains('active')) {
+                console.log('[Homepage Right Menu] Hiding menu (width <= 1280)');
                 floatingTocPage.style.display = 'none';
             }
         } else {
             if (floatingTocPage) {
+                console.log('[Homepage Right Menu] Showing menu (width > 1280)');
                 floatingTocPage.style.display = 'flex';
                 floatingTocPage.classList.remove('active');
             }
             if (burgerToggle) {
+                console.log('[Homepage Right Menu] Hiding burger toggle (width > 1280)');
                 burgerToggle.style.display = 'none';
             }
         }
     }
     
     window.addEventListener('resize', handleResize);
+    console.log('[Homepage Right Menu] Calling handleResize on load');
     handleResize();
 
     function moveSearchToLeftMenu() {
