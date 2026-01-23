@@ -544,12 +544,26 @@ body .floating-toc-page {
    Хедер для внутренних страниц
    ============================================ */
 
+/* Header для внутренних страниц - фиксированная высота 65px */
+body:not(.homepage) .custom-header,
+body:not(.homepage) > .custom-header,
+body:not(.homepage) > * > .custom-header,
+.wy-body-for-nav .custom-header,
+.wy-body-for-nav > .custom-header,
+.wy-grid-for-nav .custom-header,
+.wy-grid-for-nav > .custom-header,
+.wy-nav-content-wrap .custom-header,
+.wy-nav-content-wrap > .custom-header,
+.wy-nav-content .custom-header,
+.rst-content .custom-header {
+    height: 65px !important;
+}
+
 .custom-header {
     background: var(--bg-white) !important;
     border-bottom: 1px solid var(--border-color) !important;
     position: -webkit-sticky !important;
     position: sticky !important;
-    height: 65px !important;
     top: 0 !important;
     left: 0 !important;
     right: 0 !important;
