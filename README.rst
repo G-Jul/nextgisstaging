@@ -1,18 +1,12 @@
-Тестовая ветка для нового дизайна
-==================================
+Вёрстка нового дизайна от верстальщика
+======================================
 
-Ветка new_design - копия ветки rtd. 
-Загружены шрифты: Lato-Bold, Lato-Regular, RobotoSlab-Bold, RobotoSlab-Regular
+Ветка new_design_start - копия ветки new_design. 
+В ней свёрстан дизайн, страницы, по которым принимали (которые были в макете):
 
-Пример внутренней страницы - annotation.rst
+* Главная тестовая https://g-jul.readthedocs.io/en/latest/index.html#
+* Внутренняя тестовая https://g-jul.readthedocs.io/en/latest/usage.html
 
+После этого добавлены другие страницы и скриншоты, на которых можно посмотреть реализацию нового дизайна.
 
-Template for the Read the Docs tutorial
-=======================================
-
-This GitHub template includes fictional Python library
-with some basic Sphinx docs.
-
-Read the tutorial here:
-
-https://docs.readthedocs.io/en/stable/tutorial/
+Эта ветка архивная, для сравнения, чтобы можно было собрать документацию в этом изначальном варианте.
