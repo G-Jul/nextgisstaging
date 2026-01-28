@@ -1,4 +1,6 @@
 Тестирование CSS
 ================
 
-admonitions
+.. toctree::
+
+   admonitions
