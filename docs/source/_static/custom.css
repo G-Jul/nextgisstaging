@@ -1622,26 +1622,48 @@ body.left-nav-open .document-wrapper {
     overflow: hidden;
     box-shadow: var(--card-shadow);
     border: 1px solid var(--border-color);
-}
-
-/* Стили для note (Примечание) */
-.document .admonition.note {
-    background: #E8F4F8;
     padding: 10px 40px 25px 10px;
 }
 
-.document .admonition.note .admonition-title {
+
+/* Для русской версии скрываем оригинальный заголовок */
+.document .admonition.note .admonition-title,
+.document .admonition.warning .admonition-title,
+.document .admonition.important .admonition-title,
+.document .admonition.seealso .admonition-title {
     background: transparent;
-    color: var(--text-dark) !important;
+    color: transparent;
     font-weight: 600;
-    font-size: 0;
     margin: 0;
     display: flex;
     align-items: center;
     gap: 7.5px;
 }
 
-/* Добавляем иконку через ::before */
+/* Скрываем стандартную иконку, если она есть */
+.document .admonition.note .admonition-title img,
+.document .admonition.note .admonition-title .icon,
+.document .admonition.warning .admonition-title img,
+.document .admonition.warning .admonition-title .icon,
+.document .admonition.important .admonition-title img,
+.document .admonition.important .admonition-title .icon,
+.document .admonition.seealso .admonition-title img,
+.document .admonition.seealso .admonition-title .icon {
+    display: none !important;
+}
+
+
+
+
+
+/* Стили для note (Примечание) */
+/* Цвет фона */
+.document .admonition.note {
+    background: #E8F4F8;
+
+}
+
+/* Добавляем иконку Примечания через ::before */
 .document .admonition.note .admonition-title::before {
     content: '';
     width: 20px;
@@ -1660,12 +1682,6 @@ body.left-nav-open .document-wrapper {
     font-size: 17px;
     font-weight: 600;
     color: var(--text-dark) !important;
-}
-
-/* Скрываем стандартную иконку, если она есть */
-.document .admonition.note .admonition-title img,
-.document .admonition.note .admonition-title .icon {
-    display: none !important;
 }
 
 /* Стили для содержимого примечания */
@@ -1717,6 +1733,121 @@ body.left-nav-open .document-wrapper {
 }
 
 
+/* Стили для warning (Предупреждение) */
+.document .admonition.warning {
+    background: #FFEBCD;
+    padding: 10px 40px 25px 10px;
+}
+
+
+/* Добавляем иконку через ::before */
+.document .admonition.warning .admonition-title::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-image: url('../_static/icons/note-icon.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+/* Заменяем текст "warning" на "Предупреждение" через ::after */
+.document .admonition.warning .admonition-title::after {
+    content: 'Предупреждение';
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text-dark) !important;
+}
+
+
+/* Стили для содержимого предупреждения */
+.document .admonition.warning p {
+    margin: 0px 50px 0px;
+    font-size: 17px;
+    line-height: normal;
+    color: #513737;
+    font-weight: 500;
+}
+
+
+/*Стили для important (Важно)*/
+
+.document .admonition.important {
+    background: #dbfaf4;
+    padding: 10px 40px 25px 10px;
+}
+
+/* Добавляем иконку через ::before */
+.document .admonition.important .admonition-title::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-image: url('../_static/icons/note-icon.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+/* Заменяем текст "important" через ::after */
+.document .admonition.important .admonition-title::after {
+    content: 'Важно';
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text-dark) !important;
+}
+
+
+/* Стили для содержимого */
+.document .admonition.important p {
+    margin: 0px 50px 0px;
+    font-size: 17px;
+    line-height: normal;
+    color: #4e3751;
+    font-weight: 500;
+}
+
+
+/* Стили для seealso (См. также) */
+.document .admonition.seealso {
+    background: #d6ffcd;
+    padding: 10px 40px 25px 10px;
+}
+
+
+/* Добавляем иконку через ::before */
+.document .admonition.seealso .admonition-title::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-image: url('../_static/icons/note-icon.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+/* Заменяем текст "seealso"  через ::after */
+.document .admonition.seealso .admonition-title::after {
+    content: 'См. также';
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text-dark) !important;
+}
+
+
+/* Стили для содержимого предупреждения */
+.document .admonition.seealso p {
+    margin: 0px 50px 0px;
+    font-size: 17px;
+    line-height: normal;
+    color: #3c5137;
+    font-weight: 500;
+}
 
 /* ============================================
    Плавающее меню содержания страницы справа
