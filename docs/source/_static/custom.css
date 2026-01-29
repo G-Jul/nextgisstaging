@@ -265,6 +265,7 @@ div[role="navigation"] ~ hr {
   visibility: visible;
 }
 
+
 /* Иконка ссылки справа от заголовка 
 
 .document .headerlink::before {
@@ -280,7 +281,8 @@ div[role="navigation"] ~ hr {
 */
 /* hide the original ¶ character */
 .document .headerlink {
-  font-size: 0;
+  font-size: 0px;
+  color: transparent;
 }
 
 
