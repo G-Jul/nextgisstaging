@@ -115,7 +115,7 @@ h4::after,
 h5::after,
 h6::after {
     margin-top: 5px;
-    content: none;
+    content: '';
     display: inline-block;
     width: 15px;
     height: 15px;
