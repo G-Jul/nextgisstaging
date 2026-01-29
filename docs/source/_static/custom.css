@@ -1492,13 +1492,15 @@ body.left-nav-open .document-wrapper {
 /* Картинки на 100% ширины с 425px */
 @media (max-width: 425px) {
     .document img {
-        width: 100% !important;
         max-width: 100% !important;
+        width: auto;
+        height: auto;
     }
 
     .document figure img {
-        width: 100% !important;
         max-width: 100% !important;
+        width: auto;
+        height: auto;
     }
 }
 
