@@ -1439,7 +1439,7 @@ body.left-nav-open .document-wrapper {
     font-family: 'Roboto-Bold', sans-serif !important;
     font-size: 21px;
     color: var(--text-dark);
-    margin-top: 20px;
+    margin-top: 0px;
     margin-bottom: 10px;
     scroll-margin-top: 80px !important; /* Отступ для прокрутки - заголовок будет на 80px от верха */
 }
@@ -2134,7 +2134,7 @@ body.left-nav-open .document-wrapper {
     max-width: 1400px !important;
     height: auto !important;
     justify-content: space-between !important;
-    align-items: flex-start !important;
+    align-items: baseline !important;
     margin-left: 20px !important;
     margin-right: 0 !important;
     padding-right: 1rem !important;
@@ -2145,9 +2145,11 @@ body.left-nav-open .document-wrapper {
     margin-bottom: 0 !important;
     display: flex !important;
     flex-direction: column !important;
+    align-items: baseline;
     justify-content: flex-start !important;
     gap: 25px !important;
     height: 100% !important;
+    padding-top: 0;
 }
 
 .custom-footer .footer-logo button {
@@ -2160,21 +2162,22 @@ body.left-nav-open .document-wrapper {
     height: 25px !important;
     width: 200px !important;
     object-fit: contain !important;
+    align-self: baseline;
 }
 
 .custom-footer .footer-content {
-    display: grid !important;
+    display: flex !important;
     grid-template-columns: repeat(3, 1fr) !important;
     gap: 2rem !important;
     margin-bottom: 0 !important;
     height: auto !important;
-    align-items: flex-start !important;
+    align-items: baseline !important;
 }
 
 .custom-footer .footer-column{
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: baseline;
   min-width: 0;           /* important for wrapping behavior */
 }
 
