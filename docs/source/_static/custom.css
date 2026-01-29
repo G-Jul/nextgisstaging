@@ -1428,7 +1428,7 @@ body.left-nav-open .document-wrapper {
 
 .document h3 {
     font-family: 'Roboto-Bold', sans-serif !important;
-    font-size: 28px;
+    font-size: 21px;
     color: var(--text-dark);
     margin-top: 20px;
     margin-bottom: 10px;
@@ -1437,7 +1437,7 @@ body.left-nav-open .document-wrapper {
 
 .document h4 {
     font-family: 'Roboto-Bold', sans-serif !important;
-    font-size: 28px;
+    font-size: 21px;
     color: var(--text-dark);
     margin-top: 20px;
     margin-bottom: 10px;
@@ -1447,7 +1447,7 @@ body.left-nav-open .document-wrapper {
 .document h5,
 .document h6 {
     font-family: 'Roboto-Bold', sans-serif !important;
-    font-size: 28px;
+    font-size: 21px;
     color: var(--text-dark);
     margin-top: 20px;
     margin-bottom: 10px;
