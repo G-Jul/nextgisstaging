@@ -50,6 +50,16 @@ html_theme_options = {
     'titles_only': False
 }
 
+numfig = True
+
+numfig_format = {
+    'figure': u'Рис. %s.', 
+    'table': u'Таблица %s.', 
+    'code-block': u'Listing %s.'}
+
+illufig_format = {'illustrate': u'Рис. %s (%s).'}
+
+
 # Передаем время сборки в шаблоны для cache busting
 html_context = {
     'build_time': int(time.time())
