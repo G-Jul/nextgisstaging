@@ -11,4 +11,6 @@
 
 .. tip:: Для английской версии тайтлы адмонишенсов заменять не надо.
 
-.. admonition:: Рандомный адмонишн.
+.. admonition:: Generic admonitions has a title
+
+   A content follows under the blank line.
