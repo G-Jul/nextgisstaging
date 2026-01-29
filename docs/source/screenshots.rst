@@ -17,7 +17,6 @@
 Для этой картинки задан размер 10 см
 
 .. figure:: _static/connect_panel_ru_2.png
-   :align: center
    :alt: Панель модуля расширения NextGIS Connect
    :width: 10cm
    
