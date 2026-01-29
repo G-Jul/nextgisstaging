@@ -1478,15 +1478,24 @@ body.left-nav-open .document-wrapper {
     text-decoration: underline;
 }
 
+/*===================
+     Изображения
+=====================*/
+
+
+/* Используется для картинок внутри текста */
 .document img {
-    width: 80%;
     max-width: 100%;
+    width: auto;
     height: auto;
-    border: 1px solid var(--primary-blue-dark);
-    border-radius: 5px;
-    box-shadow: var(--card-shadow);
     margin: 20px 0px 10px 0px;
-    display: block;
+}
+
+.document img.inline,
+.document a.reference img {
+  display: inline; /* внутри текста */
+  margin: 0;
+  vertical-align: baseline; /* вровень со строкой */
 }
 
 /* Картинки на 100% ширины с 425px */
@@ -1509,16 +1518,19 @@ body.left-nav-open .document-wrapper {
     margin: 20px 0;
 }
 
+/* Основыне изображения - через директиву ..figure:: */
+
 .document figure img {
-    width: 80%;
+    width: auto;
     max-width: 100%;
     height: auto;
     border: 1px solid var(--primary-blue-dark);
     border-radius: 5px;
     box-shadow: var(--card-shadow);
-    margin: 0 0 10px 0;
-    display: block;
+    margin: 0 0 10px 0;;
 }
+
+
 
 .document figcaption,
 .document .caption,
@@ -1541,6 +1553,11 @@ body.left-nav-open .document-wrapper {
 .document p.caption:hover {
     color: var(--primary-blue) !important;
 }
+
+/*===========
+   Таблицы 
+==============*/
+
 
 /* Обертка для таблиц с горизонтальной прокруткой */
 .document .table-wrapper {
