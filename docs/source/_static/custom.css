@@ -1616,6 +1616,9 @@ body.left-nav-open .document-wrapper {
    Admonitions (Примечания, предупреждения и т.д.)
    ============================================ */
 
+/* ---------
+   Для всех 
+   ---------*/
 .document .admonition {
     margin: 30px 0;
     border-radius: var(--border-radius);
@@ -1634,18 +1637,27 @@ body.left-nav-open .document-wrapper {
     margin: 0;
     display: flex;
     align-items: center;
-    gap: 7.5px;
+    gap: 0;
     white-space: nowrap;
     overflow: hidden;
+    padding-left: 50px;
+    box-sizing: border-box;
 }
 
-/*скрываем заголовок для русской версии*/
+.document .admonition .admonition-title::before{
+  margin-right: 7.5px;    /* works with text nodes AND ::after */
+}
+
+/* ------------------------------------------------
+   Специфические типы: note, warning, important etc 
+   ------------------------------------------------*/
 .document .admonition.note .admonition-title,
 .document .admonition.warning .admonition-title,
 .document .admonition.important .admonition-title,
 .document .admonition.seealso .admonition-title,
 .document .admonition.tip .admonition-title {
-    font-size: 0 !important; 
+    font-size: 0 !important; /*скрываем заголовок для русской версии*/
+    padding-left: 0px; /* отступ */
 }
 
 
@@ -1668,7 +1680,7 @@ body.left-nav-open .document-wrapper {
     flex-shrink: 0;
 }
 
-/* Стили для содержимого примечания */
+/* Стили для содержимого */
 .document .admonition p {
     margin: 0px 50px 0px;
     font-size: 17px;
@@ -1677,9 +1689,11 @@ body.left-nav-open .document-wrapper {
     font-weight: 500;
 }
 
+/* ---------------
+   Отдельные типы 
+   ---------------*/
 
-
-/* Стили для note (Примечание) */
+/* ----- Стили для note (Примечание) ----- */
 /* Цвет фона */
 .document .admonition.note {
     background: #E8F4F8;
@@ -1753,7 +1767,7 @@ body.left-nav-open .document-wrapper {
 }
 
 
-/* Стили для warning (Предупреждение) */
+/* ----- Стили для warning (Предупреждение) ----- */
 /* Цвет фона */
 .document .admonition.warning {
     background: #FFEBCD;
@@ -1790,7 +1804,7 @@ body.left-nav-open .document-wrapper {
 }
 
 
-/*Стили для important (Важно)*/
+/* ----- Стили для important (Важно) ----- */
 /* Цвет фона */
 .document .admonition.important {
     background: #dbfaf4;
@@ -1826,10 +1840,10 @@ body.left-nav-open .document-wrapper {
 }
 
 
-/* Стили для seealso (См. также) */
+/* ----- Стили для seealso (См. также) ----- */
 /* Цвет фона */
 .document .admonition.seealso {
-    background: #d6ffcd;
+    background: #cdffdc;
     padding: 10px 40px 25px 10px;
 }
 
@@ -1855,13 +1869,13 @@ body.left-nav-open .document-wrapper {
 }
 
 /* Стили для содержимого см. также */
-/* Цвет фона */
 .document .admonition.seealso p {
     margin: 0px 50px 0px;
     color: #3c5137;
 }
 
-/* Стили для Tip Совет */
+/* ----- Стили для tip Совет ----- */
+/* Цвет фона */
 .document .admonition.tip {
     background: #cdddff;
     padding: 10px 40px 25px 10px;
@@ -1882,13 +1896,13 @@ body.left-nav-open .document-wrapper {
 
 /* Заменяем текст "tip"  через ::after */
 .document .admonition.tip .admonition-title::after {
-    content: 'См. также';
+    content: 'Совет';
     font-size: 17px;
     font-weight: 600;
     color: var(--text-dark) !important;
 }
 
-/* Стили для содержимого см. также */
+/* Стили для содержимого совета */
 .document .admonition.tip p {
     margin: 0px 50px 0px;
     color: #3b3751;
