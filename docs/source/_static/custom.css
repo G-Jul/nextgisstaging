@@ -249,7 +249,7 @@ div[role="navigation"] ~ hr {
 .document h5::after,
 .document h6::after {
     margin-top: 5px;
-    content: '';
+    content: none !important;
     display: inline-block;
     width: 10px;
     height: 10px;
@@ -282,16 +282,20 @@ div[role="navigation"] ~ hr {
     opacity: 1 !important;
 }
 
-/* Скрытие стандартного headerlink, так как весь заголовок будет кликабельным */
-.headerlink {
-    display: none !important;
-    visibility: hidden !important;
-    font-size: 0 !important;
-    width: 0 !important;
-    height: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
+.document .headerlink {
+  visibility: hidden;
+  font-size: 0.8em;
 }
+
+.document h1:hover .headerlink,
+.document h2:hover .headerlink,
+.document h3:hover .headerlink,
+.document h4:hover .headerlink,
+.document h5:hover .headerlink,
+.document h6:hover .headerlink {
+  visibility: visible;
+}
+
 
 /* Скрытие виджета выбора версии RTD (правый нижний угол) */
 .rst-versions,
