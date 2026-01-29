@@ -265,7 +265,7 @@ div[role="navigation"] ~ hr {
   visibility: visible;
 }
 
-/* Иконка ссылки справа от заголовка */
+/* Иконка ссылки справа от заголовка 
 
 .document .headerlink::before {
   content: '';
@@ -277,7 +277,7 @@ div[role="navigation"] ~ hr {
   background-repeat: no-repeat;
   vertical-align: baseline;
 }
-
+*/
 /* hide the original ¶ character */
 .document .headerlink {
   font-size: 0;

@@ -127,7 +127,7 @@ h6::after {
     flex-shrink: 0;
     opacity: 0;
     transition: opacity 0.2s ease;
-    margin-left: 20px;
+    margin-left: 5px;
 }
 
 h1:hover::after,
