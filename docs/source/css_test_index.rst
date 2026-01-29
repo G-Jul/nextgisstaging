@@ -5,3 +5,4 @@
 
    admonitions
    screenshots
+   headers
