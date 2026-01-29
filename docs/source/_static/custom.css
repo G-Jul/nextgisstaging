@@ -251,9 +251,9 @@ div[role="navigation"] ~ hr {
     margin-top: 5px;
     content: '';
     display: inline-block;
-    width: 20px;
-    height: 20px;
-    min-width: 20px;
+    width: 10px;
+    height: 10px;
+    min-width: 10px;
     background-image: url('icons/header-link.svg');
     background-size: contain;
     background-repeat: no-repeat;
