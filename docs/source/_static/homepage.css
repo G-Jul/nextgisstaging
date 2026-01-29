@@ -115,11 +115,11 @@ h4::after,
 h5::after,
 h6::after {
     margin-top: 5px;
-    content: '';
+    content: none;
     display: inline-block;
-    width: 20px;
-    height: 20px;
-    min-width: 20px;
+    width: 15px;
+    height: 15px;
+    min-width: 10px;
     background-image: url('./icons/header-link.svg');
     background-size: contain;
     background-repeat: no-repeat;

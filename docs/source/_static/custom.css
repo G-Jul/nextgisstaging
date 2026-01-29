@@ -224,7 +224,7 @@ div[role="navigation"] ~ hr {
     border: none !important;
 }
 
-/* Делаем заголовки кликабельными */
+/* Делаем заголовки кликабельными 
 .document h1,
 .document h2,
 .document h3,
@@ -239,52 +239,22 @@ div[role="navigation"] ~ hr {
     align-items: center;
     gap: 20px;
     width: 100%;
-}
+}*/
 
-/* Иконка ссылки справа от заголовка */
-.document h1::after,
-.document h2::after,
-.document h3::after,
-.document h4::after,
-.document h5::after,
-.document h6::after {
-    margin-top: 5px;
-    content: none !important;
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    min-width: 10px;
-    background-image: url('icons/header-link.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    flex-shrink: 0;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    margin-left: 0;
-}
 
-.document h1:hover::after,
-.document h2:hover::after,
-.document h3:hover::after,
-.document h4:hover::after,
-.document h5:hover::after,
-.document h6:hover::after {
-    opacity: 1;
-}
-
-.document h1:hover,
+/*.document h1:hover,
 .document h2:hover,
 .document h3:hover,
 .document h4:hover,
 .document h5:hover,
 .document h6:hover {
     opacity: 1 !important;
-}
+} */
 
 .document .headerlink {
-  visibility: hidden;
-  font-size: 0.8em;
+    visibility: hidden;
+    font-size: 0.8em;
+    margin-left: 6px;
 }
 
 .document h1:hover .headerlink,
@@ -294,6 +264,24 @@ div[role="navigation"] ~ hr {
 .document h5:hover .headerlink,
 .document h6:hover .headerlink {
   visibility: visible;
+}
+
+/* Иконка ссылки справа от заголовка */
+
+.document .headerlink::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url('icons/header-link.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  vertical-align: baseline;
+}
+
+/* hide the original ¶ character */
+.document .headerlink {
+  font-size: 0;
 }
 
 
@@ -2194,6 +2182,7 @@ body.left-nav-open .document-wrapper {
     text-transform: uppercase !important;
     letter-spacing: 0.5px !important;
 }
+
 
 .custom-footer .footer-links {
     list-style: none !important;
