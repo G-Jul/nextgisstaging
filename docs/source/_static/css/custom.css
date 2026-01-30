@@ -1201,13 +1201,15 @@ body.left-nav-open .document-wrapper {
 
 .left-nav-content .toctree-l1 > a,
 .left-nav-content .toctree-l2 > a,
-.left-nav-content .toctree-l3 > a {
+.left-nav-content .toctree-l3 > a,
+.left-nav-content .toctree-l4 > a {
     padding: 7px 62px 8px 20px !important;
 }
 
 .left-nav-content .toctree-l1 > a:hover,
 .left-nav-content .toctree-l2 > a:hover,
-.left-nav-content .toctree-l3 > a:hover {
+.left-nav-content .toctree-l3 > a:hover,
+.left-nav-content .toctree-l4 > a:hover {
     background-color: #E4F3FF;
 }
 
