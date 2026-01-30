@@ -1204,6 +1204,7 @@ body.left-nav-open .document-wrapper {
 .left-nav-content .toctree-l3 > a,
 .left-nav-content .toctree-l4 > a {
     padding: 7px 62px 8px 20px !important;
+    line-height: 1.2;
 }
 
 .left-nav-content .toctree-l1 > a:hover,
