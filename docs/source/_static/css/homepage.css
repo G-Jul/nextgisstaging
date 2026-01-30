@@ -60,7 +60,7 @@ select {
 /* Подключение локальных шрифтов Roboto */
 @font-face {
     font-family: 'Roboto-Regular';
-    src: url('fonts/Roboto-Regular.ttf') format('truetype');
+    src: url('../fonts/Roboto-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -68,7 +68,7 @@ select {
 
 @font-face {
     font-family: 'Roboto-Bold';
-    src: url('fonts/Roboto-Bold.ttf') format('truetype');
+    src: url('../fonts/Roboto-Bold.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -76,7 +76,7 @@ select {
 
 @font-face {
     font-family: 'Roboto-Medium';
-    src: url('fonts/Roboto-Medium.ttf') format('truetype');
+    src: url('../fonts/Roboto-Medium.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -120,7 +120,7 @@ h6::after {
     width: 15px;
     height: 15px;
     min-width: 10px;
-    background-image: url('./icons/header-link.svg');
+    background-image: url('../icons/header-link.svg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

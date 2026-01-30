@@ -25,7 +25,7 @@
 /* Подключение локальных шрифтов Roboto */
 @font-face {
     font-family: 'Roboto-Regular';
-    src: url('fonts/Roboto-Regular.ttf') format('truetype');
+    src: url('../fonts/Roboto-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -33,7 +33,7 @@
 
 @font-face {
     font-family: 'Roboto-Bold';
-    src: url('fonts/Roboto-Bold.ttf') format('truetype');
+    src: url('../fonts/Roboto-Bold.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -41,7 +41,7 @@
 
 @font-face {
     font-family: 'Roboto-Medium';
-    src: url('fonts/Roboto-Medium.ttf') format('truetype');
+    src: url('../fonts/Roboto-Medium.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -273,7 +273,7 @@ div[role="navigation"] ~ hr {
   display: inline-block;
   width: 16px;
   height: 16px;
-  background-image: url('icons/header-link.svg');
+  background-image: url('../icons/header-link.svg');
   background-size: contain;
   background-repeat: no-repeat;
   vertical-align: baseline;
@@ -1684,7 +1684,7 @@ body.left-nav-open .document-wrapper {
     content: '';
     width: 20px;
     height: 20px;
-    background-image: url('../_static/icons/note-icon.svg');
+    background-image: url('../icons/note-icon.svg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -1717,7 +1717,7 @@ body.left-nav-open .document-wrapper {
     content: '';
     width: 20px;
     height: 20px;
-    background-image: url('../_static/icons/note-icon.svg');
+    background-image: url('../icons/note-icon.svg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -1792,7 +1792,7 @@ body.left-nav-open .document-wrapper {
     content: '';
     width: 20px;
     height: 20px;
-    background-image: url('../_static/icons/note-icon.svg');
+    background-image: url('../icons/note-icon.svg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -1828,7 +1828,7 @@ body.left-nav-open .document-wrapper {
     content: '';
     width: 20px;
     height: 20px;
-    background-image: url('../_static/icons/note-icon.svg');
+    background-image: url('../icons/note-icon.svg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -1864,7 +1864,7 @@ body.left-nav-open .document-wrapper {
     content: '';
     width: 20px;
     height: 20px;
-    background-image: url('../_static/icons/note-icon.svg');
+    background-image: url('../icons/note-icon.svg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -1898,7 +1898,7 @@ body.left-nav-open .document-wrapper {
     content: '';
     width: 20px;
     height: 20px;
-    background-image: url('../_static/icons/note-icon.svg');
+    background-image: url('..icons/note-icon.svg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

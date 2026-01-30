@@ -38,8 +38,8 @@ html_static_path = ['_static']
 html_theme = 'sphinx_rtd_theme'
 
 html_css_files = [
-    'custom.css',
-    'homepage.css',
+    'css/custom.css',
+    'css/homepage.css',
 ]
 
 html_theme_options = {
