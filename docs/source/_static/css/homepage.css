@@ -793,18 +793,20 @@ body.left-nav-open .custom-header .dropdown-arrow img,
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    margin-top: auto;
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 
 .tag {
     display: inline-block;
     padding: 0.25rem 0.75rem;
-    background: #D1D9E0;
+/*    background: #feffff;*/
     color: var(--text-dark);
     border-radius: 6px;
+    border: var(--border-color) 1px solid;
     font-size: 14px;
     font-weight: 600;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
 }
 
 .card-type-2 .card-description {
