@@ -266,6 +266,32 @@ div[role="navigation"] ~ hr {
 }
 
 
+
+/* Figure caption permalink */
+.document figcaption .headerlink {
+  visibility: hidden !important;
+  font-size: 0 !important;          /* hide the glyph */
+  color: transparent !important;
+}
+
+/* Icon shown on hover */
+.document figure:hover figcaption .headerlink {
+  visibility: visible !important;
+}
+
+/* SVG icon for the caption permalink */
+.document figcaption .headerlink::before {
+  content: '';
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-left: 6px;
+  background: url('../icons/header-link.svg') center/contain no-repeat;
+  vertical-align: baseline;
+}
+
+
+
 /* Иконка ссылки справа от заголовка 
 
 .document .headerlink::before {
@@ -1567,7 +1593,7 @@ body.left-nav-open .document-wrapper {
     margin: 20px 0;
 }
 
-/* Основыне изображения - через директиву ..figure:: */
+/* Основные изображения - через директиву ..figure:: */
 
 .document figure img {
     width: auto;
@@ -1581,7 +1607,7 @@ body.left-nav-open .document-wrapper {
 
 
 
-.document figcaption,
+/*.document figcaption,*/
 .document .caption,
 .document p.caption {
     font-style: italic;
@@ -1601,6 +1627,27 @@ body.left-nav-open .document-wrapper {
 .document .caption:hover,
 .document p.caption:hover {
     color: var(--primary-blue) !important;
+}
+
+.document figcaption a.reference {
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+}
+
+/* optional “headerlink-like” icon */
+.document figcaption a.reference::after {
+  content: '';
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-left: 6px;
+  background: url('../icons/header-link.svg') center/contain no-repeat;
+  opacity: 0;
+}
+
+.document figure:hover figcaption a.reference::after {
+  opacity: 1;
 }
 
 /*===========
