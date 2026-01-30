@@ -801,11 +801,11 @@ body.left-nav-open .custom-header .dropdown-arrow img,
     display: inline-block;
     padding: 0.25rem 0.75rem;
 /*    background: #feffff;*/
-    color: var(--text-dark);
+    color: var(--text-light);
     border-radius: 6px;
     border: var(--border-color) 1px solid;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
     box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
 }
 
