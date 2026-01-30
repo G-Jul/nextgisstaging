@@ -524,7 +524,10 @@ body .left-nav-wrapper {
 
 body .left-nav {
     display: block !important;
+    scrollbar-width: none; 
 }
+
+
 
 /* Убеждаемся, что наше плавающее меню видно */
 body .floating-toc-page {
@@ -532,6 +535,8 @@ body .floating-toc-page {
     position: fixed !important;
     z-index: 998 !important;
 }
+
+
 
 /* ============================================
    Хедер для внутренних страниц
@@ -898,7 +903,7 @@ body.left-nav-open .document-wrapper {
 }
 
 .left-nav-content {
-    padding: 20px 13px 10px 0 !important;
+    padding: 20px 0px 10px 0 !important;
     overflow-x: visible !important;
     overflow-y: visible !important;
 }
