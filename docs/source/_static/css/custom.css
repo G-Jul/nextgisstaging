@@ -1274,6 +1274,57 @@ body.left-nav-open .document-wrapper {
     background-color: #F0F2F4 !important;
 }
 
+
+/* Стили для элементов четвертого уровня (toctree-l4) */
+.left-nav-content .toctree-l4 {
+    background-color: transparent;
+    overflow: visible !important;
+    position: relative;
+}
+
+/* Убеждаемся, что toctree-l4 внутри toctree-l3.current не наследуют background */
+.left-nav-content .toctree-l3.current .toctree-l4 {
+    background-color: transparent !important;
+}
+
+/* Убеждаемся, что ссылки toctree-l4 внутри toctree-l3.current имеют правильный background */
+.left-nav-content .toctree-l3.current .toctree-l4 > a {
+    background-color: #fafafa !important;
+}
+
+.left-nav-content .toctree-l4 > a {
+    color: var(--text-dark);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 1.5rem 7px 4.5rem;
+    padding-right: 2.5rem; /* Место для стрелки */
+    font-family: 'Roboto-Regular', sans-serif !important;
+    font-size: 14px;
+    transition: var(--transition);
+    position: relative;
+    background-color: #fafafa;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ============================================
    Кастомные breadcrumbs
    ============================================ */

@@ -42,6 +42,10 @@ html_css_files = [
     'css/homepage.css',
 ]
 
+html_js_files = [
+    'css/custom.js',
+]
+
 html_theme_options = {
     'collapse_navigation': False,
     'sticky_navigation': True,

@@ -180,6 +180,6 @@
 {% block scripts %}
     {{ super() }}
     {%- if pagename != 'index' -%}
-    <script src="{{ pathto('_static/custom.js', 1) }}?v={{ build_time|default(1) }}"></script>
+    <script src="{{ pathto('../css/custom.js', 1) }}?v={{ build_time|default(1) }}"></script>
     {%- endif -%}
 {% endblock %}
