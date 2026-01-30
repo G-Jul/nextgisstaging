@@ -639,6 +639,7 @@ body.left-nav-open .custom-header .dropdown-arrow img,
 
 .card-par {
     text-align: center;
+    margin-top: auto;
 }
 
 .section {
@@ -786,15 +787,16 @@ body.left-nav-open .custom-header .dropdown-arrow img,
     height: 25px;
     color: var(--text-dark);
     margin-bottom: 10px;
-    flex-grow: 1;
+    flex-grow: 0;
 }
 
 .card-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 15px;
+    margin-bottom: auto;
+    justify-content: center;
 }
 
 .tag {
