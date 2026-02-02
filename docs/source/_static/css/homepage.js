@@ -925,7 +925,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Удаляем старые обработчики, если они есть
         if (window._homepageHeadingClickHandler) {
             document.removeEventListener('click', window._homepageHeadingClickHandler, true);
-            document.removeEventListener('contextmenu', window._homepageHeadingContextMenuHandler, true);
         }
         
         // Обработчик обычного клика
@@ -1119,7 +1118,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Добавляем обработчики на уровне документа с capture phase
         document.addEventListener('click', window._homepageHeadingClickHandler, true);
-        document.addEventListener('contextmenu', window._homepageHeadingContextMenuHandler, true);
     }
     
     // Инициализируем обработчики заголовков

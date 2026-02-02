@@ -2003,7 +2003,6 @@
         // Удаляем старые обработчики, если они есть
         if (window._headingClickHandler) {
             document.removeEventListener('click', window._headingClickHandler, true);
-            document.removeEventListener('contextmenu', window._headingContextMenuHandler, true);
         }
         
         // Обработчик обычного клика
@@ -2173,7 +2172,6 @@
         
         // Добавляем обработчики на уровне документа с capture phase
         document.addEventListener('click', window._headingClickHandler, true);
-        document.addEventListener('contextmenu', window._headingContextMenuHandler, true);
     }
     
     // Делаем подписи к картинкам кликабельными
