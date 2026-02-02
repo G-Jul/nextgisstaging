@@ -67,6 +67,14 @@
         }
     }
     
+/* get the anchor id from Sphinx permalinks */
+
+    function getSphinxAnchorId(heading) {
+        const hl = heading.querySelector('a.headerlink[href^="#"]');
+        if (hl) return hl.getAttribute('href').slice(1);
+        return heading.closest('section[id]')?.id || heading.id || null;
+    }
+
     function addLeftNav() {
         const oldNav = document.getElementById('leftNav');
         if (oldNav && oldNav.parentElement) {
@@ -1943,7 +1951,8 @@
             if (heading.dataset.clickableAdded) return;
             heading.dataset.clickableAdded = 'true';
             
-            // Убеждаемся, что у заголовка есть id
+/*           Этот кусок добавлял новые ID для заголовков, что ломало правый сайдбар. Убираем. Вместо этого используем ID пермалинка.
+         // Убеждаемся, что у заголовка есть id
             // Проверяем, есть ли валидный id (не пустая строка)
             let currentId = heading.getAttribute('id');
             if (!currentId || currentId.trim() === '') {
@@ -1994,10 +2003,14 @@
             // Проверяем, что id не пустой
             if (!currentId || currentId.trim() === '') {
                 return;
-            }
+            }  */
         });
     }
-    
+   
+
+
+
+
     // Обработчик кликов на заголовках через делегирование событий
     function setupHeadingClickHandlers() {
         // Удаляем старые обработчики, если они есть
@@ -2039,7 +2052,7 @@
                 return;
             }
             
-            const id = heading.id;
+            const id = getSphinxAnchorId(heading);
             if (!id || id.trim() === '') {
                 return;
             }
@@ -2134,7 +2147,7 @@
             
             heading = foundHeading;
             
-            const id = heading.id;
+            const id = getSphinxAnchorId(heading);
             if (!id || id.trim() === '') {
                 return;
             }
