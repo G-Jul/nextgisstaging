@@ -776,7 +776,7 @@ body.left-nav-open .dropdown-arrow img {
     position: fixed;
     left: -400px;
     top: 64px;
-    width: 400px;
+    width: 350px !important;
     height: calc(100vh - 64px);
     background: var(--bg-white);
     box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
@@ -831,12 +831,12 @@ body.left-nav-open .document-wrapper {
 
     /* Отступ слева для контента когда меню ОТКРЫТО, чтобы контент не налазил на меню */
     body.left-nav-open .document-wrapper {
-        padding-left: 420px !important; /* 400px (ширина меню) + 20px (отступ) */
+        padding-left: 390px !important; /* 400px (ширина меню) + 20px (отступ) */
     }
 
     /* Отступ слева для контента когда меню ЗАКРЫТО, чтобы было место для меню */
     body:not(.left-nav-open) .document-wrapper {
-        padding-left: 420px !important; /* 400px (ширина меню) + 20px (отступ) */
+        padding-left: 390px !important; /* 400px (ширина меню) + 20px (отступ) */
     }
 
     /* Отступ справа для контента, чтобы правое меню не налазило на контент */
@@ -895,12 +895,12 @@ body.left-nav-open .document-wrapper {
 
     /* Отступ слева для контента когда меню ОТКРЫТО, чтобы контент не налазил на меню */
     body.left-nav-open .document-wrapper {
-        padding-left: 420px !important; /* 400px (ширина меню) + 20px (отступ) */
+        padding-left: 390px !important; /* 400px (ширина меню) + 20px (отступ) */
     }
 
     /* Отступ слева для контента когда меню ЗАКРЫТО, чтобы было место для меню */
     body:not(.left-nav-open) .document-wrapper {
-        padding-left: 420px !important; /* 400px (ширина меню) + 20px (отступ) */
+        padding-left: 390px !important; /* 400px (ширина меню) + 20px (отступ) */
     }
 
     /* Отступ справа для контента, чтобы правое меню не налазило на контент */
@@ -1110,7 +1110,7 @@ body.left-nav-open .document-wrapper {
 /* Стрелка для раскрывающихся элементов - используем иконку (все уровни) */
 .left-nav-content [class*="toctree-l"] > a .nav-arrow-icon {
     position: absolute;
-    right: 1.5rem;
+    right: 0.5rem;
     width: 32px;
     height: 32px;
     display: flex;
