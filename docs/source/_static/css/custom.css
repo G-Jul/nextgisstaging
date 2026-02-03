@@ -942,6 +942,18 @@ body.left-nav-open .document-wrapper {
     overflow-y: visible !important;
 }
 
+/* Left sidebar TOC captions only */
+.left-nav p.caption,
+.left-nav .caption {
+    font-family: 'Roboto-Bold', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #969cab;
+    padding: 20px 10px 10px 10px;
+}
+
 /* Стили для меню RTD (wy-menu) */
 .left-nav-content .wy-menu,
 .left-nav-content .wy-menu-vertical,
