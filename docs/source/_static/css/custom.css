@@ -952,6 +952,7 @@ body.left-nav-open .document-wrapper {
     text-transform: uppercase;
     color: #969cab;
     padding: 20px 10px 10px 10px;
+    margin-bottom: 0 !important;
 }
 
 /* Стили для меню RTD (wy-menu) */
