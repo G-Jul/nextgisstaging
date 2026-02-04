@@ -1343,7 +1343,7 @@ body.left-nav-open .document-wrapper {
 /* Показываем подменю для текущего элемента и раскрытых (все уровни) */
 .left-nav-content [class*="toctree-l"].current > ul,
 .left-nav-content [class*="toctree-l"].expanded > ul {
-    max-height: 1000px;
+    max-height: 9000px; /*чтобы не залезало под следующий пункт*/
     opacity: 1;
 }
 
