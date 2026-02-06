@@ -115,8 +115,7 @@ h2::after,
 h3::after,
 /*h4::after,*/
 h5::after,
-h6::after,
-.subsection-title::after {
+h6::after {
     margin-top: 5px;
     content: '';
     display: inline-block;
@@ -130,7 +129,12 @@ h6::after,
     flex-shrink: 0;
     opacity: 0;
     transition: opacity 0.2s ease;
-    margin-left: 1px;
+
+}
+
+.subsection-title::after,
+.section-title::after {
+    margin-left: 6px;
 }
 
 h1:hover::after,
@@ -780,9 +784,7 @@ body.left-nav-open .custom-header .dropdown-arrow img,
     object-fit: contain;
 }
 
-.card-type-3 .card-icon-small img {
-    margin-bottom: 10px;
-}
+
 
 .card-type-2 .card-title {
     font-family: 'Roboto-Bold', sans-serif !important;
@@ -815,9 +817,9 @@ body.left-nav-open .custom-header .dropdown-arrow img,
     box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
 }
 
-.card-type-2 .card-description {
+.card-type-2 .card-par {
     font-size: 16px;
-    color: var(--text-light);
+/*    color: var(--text-light);*/
     margin: 0.5rem 0;
 }
 
@@ -840,11 +842,15 @@ body.left-nav-open .custom-header .dropdown-arrow img,
     text-decoration: underline;
 }
 
+
+/*Карточки раздела Дополнительные ресурсы*/
 .cards-type-3 {
     grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
 }
 
-
+.card-type-3 .card-icon-small img {
+    margin-bottom: 10px;
+}
 
 .card-type-3 {
     box-shadow: none;
@@ -875,7 +881,7 @@ body.left-nav-open .custom-header .dropdown-arrow img,
 
 .card-type-3 .card-description{
     color: var(--text-light);
-    font-size: 16px;
+    font-size: 16px !important;
     margin-bottom: 14px;
 }
 
@@ -900,9 +906,9 @@ body.left-nav-open .custom-header .dropdown-arrow img,
     font-size: 16px;
 }
 
-.text-under-line a{
+/*.text-under-line a{
     text-decoration: underline;
-}
+}*/
 
 .card-links a:hover{
     color: var(--primary-blue-dark);
