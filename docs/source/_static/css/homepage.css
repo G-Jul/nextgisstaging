@@ -108,6 +108,8 @@ body {
     scrollbar-gutter: stable;
 }
 
+/*Только заголовки подразделов, заголовки карточек см. card-title*/
+
 h1::after,
 h2::after,
 h3::after,
@@ -138,6 +140,7 @@ h5:hover::after,
 h6:hover::after {
     opacity: 1;
 }
+
 
 
 h4:hover .headerlink {
@@ -1249,7 +1252,8 @@ body.left-nav-open .custom-header .dropdown-arrow img,
 
 .homepage-footer .footer-title {
     font-family: 'Roboto-Bold', sans-serif !important;
-    font-size: 15px;
+    font-size: 17px;
+    font-weight: 700;
     color: var(--text-dark);
     margin-bottom: 22px;
     text-transform: uppercase;
