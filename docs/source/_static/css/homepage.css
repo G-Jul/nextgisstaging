@@ -986,32 +986,37 @@ body.left-nav-open .custom-header .dropdown-arrow img,
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease, padding 0.3s ease;
-    padding: 0 1.5rem;
+/*    padding: 0 1.5rem;*/
 }
 
 .faq-category-content.active {
     max-height: 280px !important;
-    padding: 1rem 1.5rem;
+/*    padding: 1rem 1.5rem;*/
+    padding: 1rem 0;
 }
 
 .faq-item {
-    padding: 5px 20px;
+/*    padding: 5px 20px;*/
+    padding: 5px 3rem;
 }
 
 .faq-item:last-child {
     border-bottom: none;
 }
 
+.faq-item:hover {
+    background-color:#E4F3FF;
+}
+
+
 .faq-question {
-    color: var(--text-dark) !important;
+    color: var(--text-dark);
     text-decoration: none !important;
     font-size: 20px;
     transition: var(--transition);
 }
 
-.faq-question:hover {
-    text-decoration: underline;
-}
+
 
 /* ============================================
    Плавающее меню содержания справа
