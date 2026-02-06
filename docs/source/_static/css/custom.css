@@ -253,7 +253,7 @@ div[role="navigation"] ~ hr {
 
 .document .headerlink {
     visibility: hidden;
-    margin-left: 6px;
+    margin-left: 0px !important;
 }
 
 .document h1:hover .headerlink,

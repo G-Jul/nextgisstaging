@@ -115,7 +115,8 @@ h2::after,
 h3::after,
 /*h4::after,*/
 h5::after,
-h6::after {
+h6::after,
+.subsection-title::after {
     margin-top: 5px;
     content: '';
     display: inline-block;
@@ -129,7 +130,7 @@ h6::after {
     flex-shrink: 0;
     opacity: 0;
     transition: opacity 0.2s ease;
-    margin-left: 5px;
+    margin-left: 1px;
 }
 
 h1:hover::after,
