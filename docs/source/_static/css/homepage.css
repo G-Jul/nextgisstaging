@@ -687,6 +687,21 @@ body.left-nav-open .custom-header .dropdown-arrow img,
     flex-shrink: 0;
 }
 
+
+
+/*Убираем подчёркивание текста на карточках*/
+.card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.card-link:hover,
+.card-link:focus,
+.card-link:active {
+  text-decoration: none;
+}
+
+
 /* ============================================
    Карточки типа 1 (большие с иконками)
    ============================================ */
@@ -712,6 +727,8 @@ body.left-nav-open .custom-header .dropdown-arrow img,
     box-shadow: none;
     background-color: var(--card-hover);
 }
+
+
 
 .card-type-1 {
     box-shadow: none;
