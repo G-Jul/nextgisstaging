@@ -293,16 +293,7 @@
                             </div>
 
                         </a>
-                        <a href="#" class="card card-type-1 card-link" title="Раздел в разработке">
-                            <div class="card-icon">
-                                <img src="{{ pathto('_static/icons/card-icon-mobile.svg', 1) }}" alt="">
-                            </div>
-                            <div class="card-type-1-text">
-                                <p class="card-title">NextGIS Mobile</p>
-                            <p class="card-description">Инструменты для мобильной разработки</p>
-                            </div>
 
-                        </a>
                         <a href="https://docs.nextgis.ru/qms_srv_dev/doc/api.html" class="card card-type-1 card-link">
                             <div class="card-icon">
                                 <img src="{{ pathto('_static/icons/card-icon-qms.svg', 1) }}" alt="">
@@ -374,15 +365,33 @@
                                 <span class="faq-toggle"><img src="{{ pathto('_static/icons/arrow_down_for_nav.svg', 1) }}" alt=""></span>
                             </button>
                             <div class="faq-category-content ">
+
                                 <div class="faq-item">
                                     <a href="https://docs.nextgis.ru/docs_ngcom/source/create_webgis.html#ngcom-webgis-signin" class="faq-question">Как войти в Веб ГИС?</a>
                                 </div>
+
                                 <div class="faq-item">
                                     <a href="https://docs.nextgis.ru/docs_ngweb/source/create_resource.html" class="faq-question">Как загрузить данные?</a>
                                 </div>
                                 <div class="faq-item">
                                     <a href="https://docs.nextgis.ru/docs_ngweb/source/webmaps_admin.html#ngw-map-create" class="faq-question">Как создать веб-карту?</a>
                                 </div>
+                                <div class="faq-item">
+                                    <a href="https://docs.nextgis.ru/docs_ngweb/source/layers_settings.html#ngweb-admin-layers-attr" class="faq-question">Как изменить подписи полей?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <a href="https://docs.nextgis.ru/docs_ngconnect/source/filter.html#ngc-find-id" class="faq-question">Как узнать ID ресурса?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <a href="https://docs.nextgis.ru/docs_ngweb/source/look.html" class="faq-question">Как изменить внешний вид Веб ГИС?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <a href="https://code.nextgis.com/readme" class="faq-question">Как сделать интерфейс, которого нет в стандартном варианте?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <a href="https://docs.nextgis.ru/docs_ngcom/source/embed_webmap.html" class="faq-question">Как встроить карту на сайт?</a>
+                                </div>
+
                             </div>
                         </div>
                         <div class="faq-category">
@@ -400,6 +409,9 @@
                                 </div>
                                 <div class="faq-item">
                                     <a href="https://docs.nextgis.ru/docs_ngcom/source/teams.html#ngcom-team-management" class="faq-question">Как добавить пользователя в свою команду?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <a href="https://docs.nextgis.ru/docs_ngcom/source/permissions.html" class="faq-question">Как настроить права доступа?</a>
                                 </div>
                             </div>
                         </div>
@@ -433,6 +445,9 @@
                                 <div class="faq-item">
                                     <a href="https://docs.nextgis.ru/docs_ngqgis/source/area.html" class="faq-question">Как узнать длину/площадь объекта?</a>
                                 </div>
+                                <div class="faq-item">
+                                    <a href="https://docs.nextgis.ru/docs_ngqgis/source/raster_op.html#ngqgis-terrain" class="faq-question">Как работать с ЦМР?</a>
+                                </div>
                             </div>
                         </div>
                         <div class="faq-category">
@@ -456,6 +471,59 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="faq-category">
+                            <button class="faq-category-header  ">
+                                <img src="{{ pathto('_static/icons/card-icon-collector.svg', 1) }}" alt="">
+                                <span class="faq-category-title">Сбор данных</span>
+                                <span class="faq-toggle"><img src="{{ pathto('_static/icons/arrow_down_for_nav.svg', 1) }}" alt=""></span>
+                            </button>
+                            <div class="faq-category-content ">
+                                <div class="faq-item">
+                                    <a href="https://docs.nextgis.ru/docs_ngcom/source/tracking.html#nextgis-mobile-nextgis-collector" class="faq-question">В каких приложениях можно записывать треки?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <a href="https://docs.nextgis.ru/docs_collector/source/auth.html" class="faq-question">Как зайти в приложение NextGIS Collector?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <a href="https://docs.nextgis.ru/docs_collector/source/operations.html" class="faq-question">Как подключиться к проекту?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <a href="https://docs.nextgis.ru/docs_ngweb/source/trackers.html" class="faq-question">Как показать трек на веб-карте?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <div class="faq-question">Как показать трек на веб-карте?
+                                        <ul class="card-links text-under-line">
+                                            <li><a href="https://docs.nextgis.ru/docs_ngtracker/source/setting_up.html#ngtr-set-send">Отправка треков в Веб ГИС</a></li>
+                                            <li><a href="https://docs.nextgis.ru/docs_ngmobile/source/ngw_integration.html#ngmobile-synchronization-layer-webgis">Синхронизация с Веб ГИС в Mobile</a></li>
+                                            <li><a href="https://docs.nextgis.ru/docs_collector/source/operations.html#ngcol-offline">Синхронизация в Collector</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="faq-category">
+                            <button class="faq-category-header  ">
+                                <img src="{{ pathto('_static/icons/lock.svg', 1) }}" alt="">
+                                <span class="faq-category-title">Настройка доступа</span>
+                                <span class="faq-toggle"><img src="{{ pathto('_static/icons/arrow_down_for_nav.svg', 1) }}" alt=""></span>
+                            </button>
+                            <div class="faq-category-content ">
+                                <div class="faq-item">
+                                    <a href="https://docs.nextgis.ru/docs_ngcom/source/permissions.html" class="faq-question">Как закрыть Веб ГИС от посторонних?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <a href="https://docs.nextgis.ru/docs_ngcom/source/permissions.html#ngcom-permissions-guest-webmap" class="faq-question" title="Раздел в разработке">Как открыть доступ к карте?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <a href="https://docs.nextgis.ru/docs_ngweb/source/look.html#ngw-res-export" class="faq-question">Как убрать кнопку экспорта?</a>
+                                </div>
+                                <div class="faq-item">
+                                    <a href="https://docs.nextgis.ru/docs_ngcom/source/permissions.html#ngcom-permissions-tab" class="faq-question">Как настроить права пользователей?</a>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
                     
                     
