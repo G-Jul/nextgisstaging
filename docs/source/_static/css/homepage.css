@@ -690,9 +690,12 @@ body.left-nav-open .custom-header .dropdown-arrow img,
 
 
 /*Убираем подчёркивание текста на карточках*/
-.card-link {
-  text-decoration: none;
-  color: inherit;
+.card-type-3 a
+.card-link,
+.card-link * {
+    text-decoration: none !important;
+    color: inherit;
+    border-bottom: none !important;
 }
 
 .card-link:hover,
@@ -855,9 +858,9 @@ body.left-nav-open .custom-header .dropdown-arrow img,
     font-size: 16px;
 }
 
-.card-type-2 .card-links a:hover {
+/*.card-type-2 .card-links a:hover {
     text-decoration: underline;
-}
+}*/
 
 
 /*Карточки раздела Дополнительные ресурсы*/
@@ -894,6 +897,7 @@ body.left-nav-open .custom-header .dropdown-arrow img,
     font-size: 20px;
     margin-bottom: 10px;
     font-weight: 300;
+    color:var(--text-dark)
 }
 
 .card-type-3 .card-description{
@@ -913,12 +917,12 @@ body.left-nav-open .custom-header .dropdown-arrow img,
     font-weight: 600;
 }
 
-.card-links{
+.card-type-3 .card-links{
     margin-left: 25px;
+    color: var(--primary-blue-dark)
 }
 
 .card-links a{
-    color: var(--text-dark);
     text-decoration: none;
     font-size: 16px;
 }
@@ -927,9 +931,11 @@ body.left-nav-open .custom-header .dropdown-arrow img,
     text-decoration: underline;
 }*/
 
-.card-links a:hover{
+.card-type-3 .card-links a:hover{
     color: var(--primary-blue-dark);
 }
+
+
 
 /* ============================================
    FAQ (Раскрывающиеся элементы)
@@ -1309,9 +1315,9 @@ body.left-nav-open .custom-header .dropdown-arrow img,
     transition: var(--transition);
 }
 
-.homepage-footer .footer-links a:hover {
+/*.homepage-footer .footer-links a:hover {
     text-decoration: underline;
-}
+}*/
 
 .homepage-footer .footer-social {
     display: flex;

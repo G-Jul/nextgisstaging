@@ -1577,9 +1577,9 @@ body.left-nav-open .document-wrapper {
     transition: var(--transition);
 }
 
-.document a:hover {
+/*.document a:hover {
     text-decoration: underline;
-}
+}*/
 
 /*===================
      Изображения
@@ -2336,9 +2336,9 @@ body.left-nav-open .document-wrapper {
     transition: var(--transition) !important;
 }
 
-.custom-footer .footer-links a:hover {
+/*.custom-footer .footer-links a:hover {
     text-decoration: underline !important;
-}
+}*/
 
 .custom-footer .footer-social {
     display: flex !important;
