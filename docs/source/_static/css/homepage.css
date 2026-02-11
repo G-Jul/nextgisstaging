@@ -167,6 +167,9 @@ h6 {
     cursor: pointer !important;
 }
 
+h4.subsection-title {
+    margin-bottom: 10px;
+}
 
 h1:hover,
 h2:hover,
@@ -772,6 +775,10 @@ body.left-nav-open .custom-header .dropdown-arrow img,
 /* ============================================
    Карточки типа 2 (маленькие с иконками и тегами)
    ============================================ */
+
+.cards-type-2.cards-grid{
+    margin-bottom: 20px;
+}
 
 .cards-type-2 {
     grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
