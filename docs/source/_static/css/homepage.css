@@ -791,7 +791,7 @@ body.left-nav-open .custom-header .dropdown-arrow img,
     align-items: center;
     width: 100%;
     max-width: 330px;
-    min-height: 220px;
+    min-height: 180px;
     margin-bottom: 24px;
     border: var(--border-color) 1px solid;
     padding: 15px;
