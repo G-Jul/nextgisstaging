@@ -5,10 +5,9 @@ import sys
 import time
 
 # -- Project information
-
-project = 'NextGIS'
-copyright = ''
-author = ''
+project = u'NextGIS'
+copyright = u'2011-{}, NextGIS'.format(date.today().year)
+author = u'Команда NextGIS'
 
 release = '0.1'
 version = '0.1.0'
