@@ -42,7 +42,7 @@
         <div class="header-container">
             <div class="header-left">
                 <a class="logo-link-main" href="${indexPath}">
-                    <img src="${staticPath}/images/logo.svg" alt="NextGIS" class="logo">
+                    <img src="${staticPath}/icons/logo.svg" alt="NextGIS" class="logo">
                     <span>NextGIS</span>
                 </a>
                 <a href="#" class="logo-link" id="logoLink">
