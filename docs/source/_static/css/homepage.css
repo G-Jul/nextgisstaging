@@ -1016,7 +1016,7 @@ body.left-nav-open .custom-header .dropdown-arrow img,
 }
 
 .faq-category-content.active {
-    max-height: 280px !important;
+    max-height: 600px !important;
 /*    padding: 1rem 1.5rem;*/
     padding: 1rem 0;
 }
