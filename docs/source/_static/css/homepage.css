@@ -1313,9 +1313,10 @@ body.left-nav-open .custom-header .dropdown-arrow img,
     line-height: 1 !important;
 }
 
+
 .homepage-footer .footer-links a {
     color: #56738F;
-    text-decoration: none;
+    text-decoration: none !important;
     font-size: 16px;
     line-height: 1 !important;
     transition: var(--transition);
