@@ -1004,16 +1004,19 @@ body.left-nav-open .document-wrapper {
 }
 
 /* Текущая страница (активная) */
-.left-nav-content .toctree-l1.current {
+.left-nav-content .toctree-l2.current {
     background-color: #E4F3FF !important;
 }
 
-.left-nav-content .toctree-l1.current > a {
+.left-nav-content .toctree-l2.current > a {
     color: var(--text-dark);
     background-color: #E4F3FF !important;
 
 }
 
+.left-nav-content .toctree-l1.current > a {
+    font-weight: bold;
+}
 
 
 /* Индикатор для первого уровня - только на ссылке, не на всем элементе с подменю */
