@@ -1872,39 +1872,39 @@ body.left-nav-open .document-wrapper {
 
 /* Адаптивность для примечаний на мобильных */
 @media (max-width: 768px) {
-    .document .admonition.note {
+    .document .admonition {
         padding: 10px 15px 15px 10px !important;
     }
 
-    .document .admonition.note p {
+    .document .admonition p {
         margin: 0px 10px 0px !important;
         font-size: 15px !important;
         line-height: 1.5 !important;
     }
 
-    .document .admonition.note .admonition-title {
+    .document .admonition .admonition-title {
         gap: 5px !important;
         font-size: 0 !important;
     }
 
     /* Скрываем оригинальный текст "Note" в заголовке */
-    .document .admonition.note .admonition-title {
+    .document .admonition .admonition-title {
         font-size: 0 !important;
     }
 
-    .document .admonition.note .admonition-title > * {
+    .document .admonition .admonition-title > * {
         display: none !important;
         font-size: 0 !important;
         visibility: hidden !important;
         opacity: 0 !important;
     }
 
-    .document .admonition.note .admonition-title::before {
+    .document .admonition .admonition-title::before {
         width: 16px !important;
         height: 16px !important;
     }
 
-    .document .admonition.note .admonition-title::after {
+    .document .admonition .admonition-title::after {
         font-size: 15px !important;
     }
 }
