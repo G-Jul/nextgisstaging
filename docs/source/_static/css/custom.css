@@ -1207,7 +1207,7 @@ body.left-nav-open .document-wrapper {
 }
 
 .left-nav-content [class*="toctree-l"].current.expanded > ul > li > a{
-    background-color: #F0F2F4 !important;
+    background-color: #E4F3FF !important;
 }
 
 .toctree-expand {
