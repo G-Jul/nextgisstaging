@@ -1017,6 +1017,7 @@ body.left-nav-open .document-wrapper {
 .left-nav-content .toctree-l1.current > a,
 .left-nav-content .toctree-l1.expanded > a {
     font-weight: 600;
+    background-color: #E4F3FF;
 }
 
 
