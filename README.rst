@@ -1,18 +1,76 @@
-Тестовая ветка для нового дизайна
-==================================
+NextGIS Documentation Theme / Staging
+=====================================
 
-Ветка new_design - копия ветки rtd. 
-Загружены шрифты: Lato-Bold, Lato-Regular, RobotoSlab-Bold, RobotoSlab-Regular
+Репозиторий содержит staging-версию документации NextGIS на базе Sphinx
+с кастомизированной темой, шаблонами и frontend-ассетами.
 
-Пример внутренней страницы - annotation.rst
+Назначение
+----------
 
+- разработка и проверка нового оформления документации;
+- локальная сборка Sphinx-документации;
+- сборка CSS/JS-ассетов для главной и внутренних страниц;
+- подготовка к публикации на Read the Docs.
 
-Template for the Read the Docs tutorial
-=======================================
+Структура проекта
+-----------------
 
-This GitHub template includes fictional Python library
-with some basic Sphinx docs.
+::
 
-Read the tutorial here:
+   .
+   ├── docs/
+   │   ├── source/              # исходники документации Sphinx
+   │   ├── src/                 # frontend-исходники (TS/SCSS)
+   │   ├── requirements.txt     # Python-зависимости
+   │   ├── package.json         # Node.js-зависимости и скрипты сборки
+   │   └── Makefile
+   ├── .readthedocs.yaml
+   └── README.rst
 
-https://docs.readthedocs.io/en/stable/tutorial/
+Локальная разработка
+--------------------
+
+Требования:
+
+- Python 3.10+
+- Node.js 18+
+- npm
+
+Установка зависимостей:
+
+.. code-block:: bash
+
+   cd docs
+   pip install -r requirements.txt
+   npm install
+
+Сборка ассетов:
+
+.. code-block:: bash
+
+   npm run build:assets
+
+Сборка документации:
+
+.. code-block:: bash
+
+   npm run build:docs
+
+Полная сборка:
+
+.. code-block:: bash
+
+   npm run build
+
+Результат сборки будет находиться в каталоге:
+
+.. code-block:: text
+
+   docs/build/
+
+Публикация
+----------
+
+Для сборки на Read the Docs используется конфигурация
+``.readthedocs.yaml`` в корне репозитория.
+

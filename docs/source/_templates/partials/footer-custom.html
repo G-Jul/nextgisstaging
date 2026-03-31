@@ -1,0 +1,107 @@
+<div class="ngs-footer" role="contentinfo">
+  <div class="ngs-footer__main">
+    <div class="ngs-footer__brand">
+      <a
+        href="{{ pathto('', 1) }}"
+        class="ngs-footer__logo-link"
+        aria-label="NextGIS"
+      >
+        <img
+          src="{{ pathto('_static/icons/logo-large-footer.svg', 1) }}"
+          alt="NextGIS"
+          class="ngs-footer__logo"
+        />
+      </a>
+
+      {% include "login.html" %}
+
+      <div class="ngs-footer__social" aria-label="{{ _('Social media') }}">
+        <a
+          href="https://x.com/nextgis"
+          class="ngs-footer__social-link"
+          aria-label="X"
+        >
+          <img src="{{ pathto('_static/icons/social_x.svg', 1) }}" alt="" />
+        </a>
+        <a
+          href="https://instagram.com/nextgis"
+          class="ngs-footer__social-link"
+          aria-label="Instagram"
+        >
+          <img
+            src="{{ pathto('_static/icons/social_instagram.svg', 1) }}"
+            alt=""
+          />
+        </a>
+        <a
+          href="https://github.com/nextgis/"
+          class="ngs-footer__social-link"
+          aria-label="GitHub"
+        >
+          <img
+            src="{{ pathto('_static/icons/social_github.svg', 1) }}"
+            alt=""
+          />
+        </a>
+        <a
+          href="https://youtube.com/@nextgis"
+          class="ngs-footer__social-link"
+          aria-label="YouTube"
+        >
+          <img
+            src="{{ pathto('_static/icons/social_youtube.svg', 1) }}"
+            alt=""
+          />
+        </a>
+        <a
+          href="https://discord.gg/nextgis"
+          class="ngs-footer__social-link"
+          aria-label="Discord"
+        >
+          <img
+            src="{{ pathto('_static/icons/social_discord.svg', 1) }}"
+            alt=""
+          />
+        </a>
+      </div>
+    </div>
+
+    <div class="ngs-footer__content">
+      <div class="ngs-footer__column">
+        <p class="ngs-footer__title">{{ _("Products") }}</p>
+        <ul class="ngs-footer__links">
+          <li><a href="/nextgis-web">NextGIS Web</a></li>
+          <li><a href="/nextgis-qgis">NextGIS QGIS</a></li>
+          <li><a href="/nextgis-mobile">NextGIS Mobile</a></li>
+          <li><a href="/datasets">NextGIS Data</a></li>
+        </ul>
+      </div>
+
+      <div class="ngs-footer__column">
+        <p class="ngs-footer__title">{{ _("Resources") }}</p>
+        <ul class="ngs-footer__links">
+          <li><a href="https://docs.nextgis.ru/">{{ _("API Documentation") }}</a></li>
+          <li><a href="https://events.nextgis.ru/">{{ _("Events") }}</a></li>
+          <li><a href="https://rutube.ru/u/nextgis/">{{ _("Videos") }}</a></li>
+          <li><a href="https://nextgis.ru/blog/">{{ _("Blog") }}</a></li>
+        </ul>
+      </div>
+
+      <div class="ngs-footer__column">
+        <p class="ngs-footer__title">{{ _("Support") }}</p>
+        <ul class="ngs-footer__links">
+          <li><a href="https://nextgis.ru/support">{{ _("Technical support") }}</a></li>
+          <li><a href="https://t.me/nextgis_ru">{{ _("Telegram community") }}</a></li>
+          <li>
+            <a href="https://nextgis.ru/support#consulting">{{ _("Consulting") }}</a>
+          </li>
+          <li><a href="https://nextgis.ru/contact">{{ _("Contacts") }}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="ngs-footer__bottom">
+    <p class="ngs-footer__copyright">© {{ copyright }}</p>
+  </div>
+</div>

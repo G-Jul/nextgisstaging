@@ -12,6 +12,27 @@ BUILDDIR      = build
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
+
+translations:
+	pybabel compile --directory=$(SOURCEDIR)/locale --domain=messages
+	pybabel compile --directory=$(SOURCEDIR)/locale --domain=sphinx
+
+init:
+	pip install -r requirements.txt
+	npm install
+
+assets:
+	npm run build:assets
+
+html: translations assets
+	$(SPHINXBUILD) -b html "$(SOURCEDIR)" "$(BUILDDIR)"
+
+dev-assets:
+	npm run dev
+
+clean:
+	npm run clean
+
 .PHONY: help Makefile
 
 # Catch-all target: route all unknown targets to Sphinx using the new
