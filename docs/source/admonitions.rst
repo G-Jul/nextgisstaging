@@ -11,6 +11,6 @@
 
 .. tip:: Для английской версии тайтлы адмонишенсов заменять не надо.
 
-.. admonition:: Generic admonitions has a title
+.. admonition:: Какой-то другой адмонишн
 
    A content follows under the blank line.

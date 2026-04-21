@@ -58,6 +58,12 @@ msgstr "Ресурсы"
 msgid "API Documentation"
 msgstr "API документация"
 
+msgid "Documentation"
+msgstr "Документация"
+
+msgid "About"
+msgstr "О нас"
+
 msgid "Events"
 msgstr "События"
 
