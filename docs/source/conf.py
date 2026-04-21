@@ -64,7 +64,7 @@ html_theme_options = {
     "search_bar_text": _("Search the docs..."),
     "logo": {
         "image_light": "_static/icons/logo.svg",
-        "image_dark": "_static/icons/logo.svg",
+        "image_dark": "_static/icons/small_logo_white.png",
         "text": _("NextGIS Documentation"),
         "alt_text": _("NextGIS Documentation - Home"),
     },
