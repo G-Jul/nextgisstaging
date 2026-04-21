@@ -1,24 +1,32 @@
-# Документация NextGIS: локальная разработка и сборка
+# NextGIS Documentation Theme / Staging
 
-Этот каталог содержит исходники документации на Sphinx и frontend-ассеты,
-которые используются шаблонами документации.
+Репозиторий содержит staging-версию документации NextGIS на базе Sphinx
+с кастомизированной темой, шаблонами и frontend-ассетами.
 
-## Что находится в каталоге
+## Назначение
+
+- разработка и проверка нового оформления документации;
+- локальная сборка Sphinx-документации;
+- сборка CSS/JS-ассетов для главной и внутренних страниц;
+- подготовка к публикации на Read the Docs.
+
+## Структура проекта
 
 ```text
-docs/
-├── source/              # исходники Sphinx (rst, шаблоны, _static)
-├── src/                 # исходники frontend-ассетов (TS/SCSS)
-├── build/               # результат локальной сборки документации
-├── requirements.txt     # Python-зависимости
-├── package.json         # Node.js-зависимости и npm-скрипты
-├── Makefile
-└── make.bat
+.
+├── docs/
+│   ├── source/              # исходники документации Sphinx
+│   ├── src/                 # frontend-исходники (TS/SCSS) - только тут править кастомные стили и скрипты
+│   ├── requirements.txt     # Python-зависимости
+│   ├── package.json         # Node.js-зависимости и скрипты сборки
+│   └── Makefile
+├── .readthedocs.yaml
+└── README.rst
 ```
 
-## Требования
+## Локальная разработка
 
-Для локальной разработки нужны:
+## Требования
 
 - Python 3.10+
 - Node.js 18+
@@ -27,6 +35,9 @@ docs/
 ## Установка зависимостей
 
 ```bash
+python -m venv ./env
+. ./env/bin/activate # Для Linux/MacOS пользователей
+. ./env/Scripts/activate # Для Windows пользователей
 cd docs
 pip install -r requirements-dev.txt
 npm install
@@ -100,25 +111,8 @@ sphinx-autobuild source build
 
 ```bash
 pybabel compile --directory=source/locale --domain=messages
+pybabel compile --directory=source/locale --domain=sphinx
 ```
-
-## Сборка через Makefile
-
-Для Linux/macOS можно использовать команды:
-
-```bash
-make init
-make assets
-make html
-make clean
-```
-
-Где:
-
-- `make init` — установка Python- и Node-зависимостей;
-- `make assets` — сборка frontend-ассетов;
-- `make html` — сборка HTML-документации;
-- `make clean` — очистка артефактов.
 
 ## Что важно помнить
 
@@ -132,7 +126,7 @@ make clean
 Сборка на Read the Docs настраивается через файл:
 
 ```text
-../.readthedocs.yaml
+./.readthedocs.yaml
 ```
 
 Для корректной публикации конфигурация Read the Docs должна учитывать не только
