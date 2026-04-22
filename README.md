@@ -121,6 +121,21 @@ pybabel compile --directory=source/locale --domain=sphinx
 - Каталог `build/` — результат сборки, его не нужно редактировать вручную.
 - Каталог `source/_static/dist/` — артефакты frontend-сборки, их тоже не нужно править вручную.
 
+## Картинки, зависящие от темы
+
+Чтобы в html для img указать какая картинка будет отображаться в темной или светлой теме следует делать так:
+
+```html
+<img
+  src="{{ pathto('_static/icons/logo-large-footer.svg', 1) }}"
+  data-src-light="{{ pathto('_static/icons/logo-large-footer.svg', 1) }}"
+  data-src-dark="{{ pathto('_static/icons/big_logo_white.svg', 1) }}"
+  alt="NextGIS"
+/>
+```
+
+Рекомендуется в `src` оставлять светлую версию как fallback без JavaScript;
+
 ## Публикация
 
 Сборка на Read the Docs настраивается через файл:

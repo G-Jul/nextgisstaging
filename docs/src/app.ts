@@ -27,7 +27,53 @@ function initExternalLinks(): void {
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+function syncThemeAwareImages(): void {
+  const isDarkTheme = document.documentElement.dataset.theme === "dark";
+  const images = document.querySelectorAll<HTMLImageElement>(
+    "img[data-src-light], img[data-src-dark]",
+  );
+
+  images.forEach((image) => {
+    const nextSrc = isDarkTheme
+      ? image.dataset.srcDark ?? image.dataset.srcLight ?? null
+      : image.dataset.srcLight ?? image.dataset.srcDark ?? null;
+
+    if (!nextSrc || image.getAttribute("src") === nextSrc) return;
+
+    image.setAttribute("src", nextSrc);
+  });
+}
+
+function initThemeAwareImages(): void {
+  syncThemeAwareImages();
+
+  const observer = new MutationObserver((mutations) => {
+    const changedTheme = mutations.some(
+      (mutation) =>
+        mutation.type === "attributes" &&
+        mutation.attributeName === "data-theme" &&
+        mutation.target === document.documentElement,
+    );
+
+    if (changedTheme) {
+      syncThemeAwareImages();
+    }
+  });
+
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
+}
+
+function initApp(): void {
   wrapTables();
   initExternalLinks();
-});
+  initThemeAwareImages();
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initApp, { once: true });
+} else {
+  initApp();
+}

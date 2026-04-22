@@ -19,6 +19,9 @@ html[data-theme="light"] {
   --ngs-border-muted: #d1d9e0;
   --ngs-focus: #0c65af;
   --ngs-shadow: rgba(29, 29, 27, 0.08);
+  --ngs-login-bg: #0c65af;
+  --ngs-login-bg-hover: #094f88;
+  --ngs-login-text: #ffffff;
 
   --ngs-success: #15803d;
   --ngs-success-bg: #dbede5;
@@ -213,6 +216,9 @@ html[data-theme="dark"] {
   --ngs-border-muted: #3c556c;
   --ngs-focus: #79bcf5;
   --ngs-shadow: rgba(2, 8, 18, 0.36);
+  --ngs-login-bg: #2f7fbe;
+  --ngs-login-bg-hover: #0c65af;
+  --ngs-login-text: #ffffff;
 
   --ngs-success: #5fc48d;
   --ngs-success-bg: #173426;
@@ -406,7 +412,9 @@ html[data-theme="dark"] {
   border-bottom: 1px solid var(--pst-color-border);
 }
 
-.btn-login {
+.btn-login,
+.btn-login:link,
+.btn-login:visited {
   margin-top: 22px;
   display: inline-flex;
   align-items: center;
@@ -416,8 +424,8 @@ html[data-theme="dark"] {
   padding: 0 20px;
   border: 1px solid transparent;
   border-radius: 6px;
-  background: var(--pst-color-primary);
-  color: var(--pst-color-primary-text);
+  background: var(--ngs-login-bg);
+  color: var(--ngs-login-text) !important;
   font-family: "Roboto-Bold", Arial, sans-serif;
   font-size: 15px;
   line-height: 1;
@@ -430,9 +438,10 @@ html[data-theme="dark"] {
 }
 
 .btn-login:hover,
-.btn-login:focus-visible {
-  background: var(--pst-color-primary-highlight);
-  color: var(--pst-color-primary-highlight-text);
+.btn-login:focus-visible,
+.btn-login:active {
+  background: var(--ngs-login-bg-hover);
+  color: var(--ngs-login-text) !important;
   text-decoration: none;
 }
 
